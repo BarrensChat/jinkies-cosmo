@@ -3,14 +3,61 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './header/header.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { RouterModule, Routes } from '@angular/router';
+import { MatSliderModule } from '@angular/material/slider';
+import { AngularHelperLinksComponent } from './angular-helper-links/angular-helper-links.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { DomainsComponent } from './pages/domains/domains.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { environment } from './../environments/environment';
+
+const appRoutes: Routes = [
+  { path: 'domains', component: DomainsComponent },
+  // { path: 'hero/:id',      component: HeroDetailComponent },
+  // {
+  //   path: 'heroes',
+  //   component: HeroListComponent,
+  //   data: { title: 'Heroes List' }
+  // },
+  // { path: '',
+  //   redirectTo: '/heroes',
+  //   pathMatch: 'full'
+  // },
+  { path: '**', component: PageNotFoundComponent }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    AngularHelperLinksComponent,
+    MainNavComponent,
+    DomainsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatSliderModule,
+    MatMenuModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: environment.tracing } // <-- debugging purposes only (console logs everything)
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]
