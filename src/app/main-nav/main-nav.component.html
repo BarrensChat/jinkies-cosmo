@@ -5,9 +5,8 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="domains">Domains For Sale</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item routerLink="/domains" routerLinkActive="active">Domains For Sale</a>
+      <a mat-list-item routerLink="/heroes" routerLinkActive="active">Heroes</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -23,8 +22,8 @@
       <span>moneyPrinterGoBrr</span>
     </mat-toolbar>
 
-
-
-    Add Content Here
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -18,6 +18,8 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { DomainsComponent } from './pages/domains/domains.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { environment } from './../environments/environment';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 const appRoutes: Routes = [
   { path: 'domains', component: DomainsComponent },
@@ -26,7 +28,7 @@ const appRoutes: Routes = [
   //   path: 'heroes',
   //   component: HeroListComponent,
   //   data: { title: 'Heroes List' }
-  // },
+  // }, 
   // { path: '',
   //   redirectTo: '/heroes',
   //   pathMatch: 'full'
@@ -41,12 +43,13 @@ const appRoutes: Routes = [
     AngularHelperLinksComponent,
     MainNavComponent,
     DomainsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     LayoutModule,
+    FontAwesomeModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
