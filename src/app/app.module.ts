@@ -25,7 +25,8 @@ import { DomainsComponent } from './pages/domains/domains.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { environment } from './../environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CarouselComponent } from './common-components/carousel/carousel.component';
 
 const appRoutes: Routes = [
   { path: 'domains', component: DomainsComponent },
@@ -42,6 +43,8 @@ const appRoutes: Routes = [
   { path: '**', component: PageNotFoundComponent }
 ];
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +53,7 @@ const appRoutes: Routes = [
     MainNavComponent,
     DomainsComponent,
     PageNotFoundComponent,
+    CarouselComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +73,7 @@ const appRoutes: Routes = [
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatMenuModule,
+    NgbModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: environment.tracing } // <-- debugging purposes only (console logs everything)

@@ -1,0 +1,26 @@
+<ngb-carousel>
+    <ng-template ngbSlide 
+    [showNavigationArrows]="true" 
+[showNavigationIndicators]="true"
+interval="800"
+[keyboard]="true"
+[pauseOnHover]="true"
+[wrap]="true">
+      <div class="picsum-img-wrapper">
+        <img src="../assets/images/bank.jpg" alt="Angular Carousel 1">
+      </div>
+      <div class="carousel-caption">
+        <h3>Title Goes Here</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img src="../assets/images/bitcoin.jpg" alt="Angular Carousel 2">
+      </div>
+      <div class="carousel-caption">
+        <h3>Title Goes Here</h3>
+        <p>Consectetur tortor volutpat pretium.</p>
+      </div>
+    </ng-template>
+</ngb-carousel>
