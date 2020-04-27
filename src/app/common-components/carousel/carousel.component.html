@@ -1,26 +1,19 @@
+    <!-- this is positioned in either ngb-carousel or ng-template
+        [showNavigationArrows]="showNavigationArrows" 
+        [showNavigationIndicators]="showNavigationIndicators"
+        interval="interval"
+        [keyboard]="keyboard"
+        [pauseOnHover]="pauseOnHover"
+        [wrap]="wrap" 
+    -->
 <ngb-carousel>
-    <ng-template ngbSlide 
-    [showNavigationArrows]="true" 
-[showNavigationIndicators]="true"
-interval="800"
-[keyboard]="true"
-[pauseOnHover]="true"
-[wrap]="true">
+    <ng-template ngbSlide *ngFor="let slide of slides">
       <div class="picsum-img-wrapper">
-        <img src="../assets/images/bank.jpg" alt="Angular Carousel 1">
+        <img src="{{slide.imgUrl}}" alt="{{slide.imgAlt}}">
       </div>
       <div class="carousel-caption">
-        <h3>Title Goes Here</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-    </ng-template>
-    <ng-template ngbSlide>
-      <div class="picsum-img-wrapper">
-        <img src="../assets/images/bitcoin.jpg" alt="Angular Carousel 2">
-      </div>
-      <div class="carousel-caption">
-        <h3>Title Goes Here</h3>
-        <p>Consectetur tortor volutpat pretium.</p>
+        <h3>{{slide.title}}</h3>
+        <p>{{slide.info}}</p>
       </div>
     </ng-template>
 </ngb-carousel>

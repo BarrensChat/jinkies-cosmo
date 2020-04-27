@@ -46,23 +46,7 @@
   <mat-chip>Naan</mat-chip>
   <mat-chip>Dal</mat-chip>
 </mat-chip-list>
-COM
-
-<ul>
-    <li>scotiabankbitcoin.com</li>
-    <li>tangerinebitcoin.com</li>
-    <li>homealoneclub.com</li>
-</ul>
-
-CA
-<ul>
-    <li>tdbitcoin.ca</li>
-    <li>tdcryptocurrency.ca</li>
-    <li>rbcbitcoin.ca</li>
-    <li>cibcbitcoin.ca</li>
-    <li>scotiabankbitcoin.ca</li>
-    <li>tangerinebitcoin.ca</li>
-</ul>
+ 
 
     
 
@@ -73,4 +57,44 @@ CA
     <fa-icon id="dollar" [icon]="faDollarSign" stackItemSize="1x"  transform="right-6 shrink-3" ></fa-icon>  
 </fa-stack>
 
-<app-carousel></app-carousel>
+<app-carousel 
+    showNavigationArrows="false" 
+    showNavigationIndicators="true"
+    keyboard="true"
+    pauseOnHover="true"
+    wrap="true"
+    [carouselContent]='carouselContent'
+
+    interval="800"
+></app-carousel>
+
+<mat-grid-list cols="2" rowHeight="1:1" gutterSize='15px'>
+    <mat-grid-tile>
+        <mat-grid-tile-header>.CA</mat-grid-tile-header>
+        <mat-list class="grid-top grid-wide">
+            <mat-list-item *ngFor='let domain_ of caDomains'>
+                <mat-icon matListIcon>domain</mat-icon>
+                <!-- <h3 matLine> from </h3> -->
+                <p matLine>
+                <span> {{domain_}} </span>
+                <span class="demo-2"> . ca </span>
+                </p>
+            </mat-list-item>
+        </mat-list>
+        <!-- <mat-grid-tile-footer>footer</mat-grid-tile-footer> -->
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-grid-tile-header>.COM</mat-grid-tile-header>
+        <mat-list class="grid-top grid-wide">
+            <mat-list-item *ngFor='let domain_ of comDomains'>
+                <mat-icon matListIcon>domain</mat-icon>
+                <!-- <h3 matLine> from </h3> -->
+                <p matLine>
+                <span> {{domain_}} </span>
+                <span class="demo-2"> . com </span>
+                </p>
+            </mat-list-item>
+        </mat-list>
+    </mat-grid-tile>
+  </mat-grid-list>

@@ -3,7 +3,19 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+//------------------ Angular Material ----------------------------
 
+//Use on mat-list if you want grid tile content to start at the
+//top of every tile instead of v-aligned middle
+.grid-top {
+    position: absolute;
+    top: 48px; //48 px is the height of the header
+}
+
+//this is used if you want the content to show on the far left of the tile
+.grid-wide {
+    width: 100%;
+}
 
 //------------------ NG Bootstrap related CSS --------------------
 ngb-carousel {
@@ -12,6 +24,7 @@ ngb-carousel {
     max-height: 500px;
     width: inherit;
     height: inherit;
+    z-index: 0;
 
     img {
         width: 100%;

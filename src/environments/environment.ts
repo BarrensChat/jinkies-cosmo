@@ -4,7 +4,22 @@
 
 export const environment = {
   production: false,
-  tracing: true
+  tracing: true,
+  domains_for_sale: {
+    'COM': [
+      'scotiabankbitcoin',
+      'tangerinebitcoin',
+      'homealoneclub',
+    ],
+    'CA': [
+      'tdbitcoin',
+      'tdcryptocurrency',
+      'rbcbitcoin',
+      'cibcbitcoin',
+      'scotiabankbitcoin',
+      'tangerinebitcoin'
+    ]
+  }
 };
 
 /*

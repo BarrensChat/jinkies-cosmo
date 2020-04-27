@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatChipsModule } from '@angular/material/chips';
@@ -27,6 +28,7 @@ import { environment } from './../environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselComponent } from './common-components/carousel/carousel.component';
+
 
 const appRoutes: Routes = [
   { path: 'domains', component: DomainsComponent },
@@ -65,6 +67,7 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatGridListModule,
     MatCardModule,
     MatSliderModule,
     MatChipsModule,
