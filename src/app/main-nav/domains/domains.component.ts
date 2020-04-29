@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-import { faPiggyBank } from '@fortawesome/free-solid-svg-icons';
-import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -10,9 +7,6 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./domains.component.scss']
 })
 export class DomainsComponent implements OnInit {
-  faCoffee = faCoffee;
-  faPiggyBank = faPiggyBank;
-  faDollarSign = faDollarSign;
   caDomains = environment.domains_for_sale.CA;
   comDomains = environment.domains_for_sale.COM;
   carouselContent = [

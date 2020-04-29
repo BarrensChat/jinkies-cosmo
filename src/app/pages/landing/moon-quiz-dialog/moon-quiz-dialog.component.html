@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Hello Friend!</h1>
+<div mat-dialog-content>
+    <p>How many thousands of miles is the distance of the Moon from the Earth?</p>
+    <!-- <mat-form-field>
+        <mat-label>Distance</mat-label>
+        <input matInput>
+    </mat-form-field> -->
+    <mat-slider 
+    class='distance-slider'
+    thumbLabel='true'
+    [displayWith]='distanceLabel' min="0" max="500" step="10" value="0"></mat-slider>
+</div>
+<div mat-dialog-actions class='actions-row'>
+    <button mat-button (click)="onNoClick()" matTooltip="The Earth is flat and space is fake. This is a stupid quiz"
+        matTooltipPosition="below">
+        Screw this...
+    </button>
+    <button mat-button [mat-dialog-close]="data.distance" cdkFocusInitial>Am I Right?</button>
+</div>
+
+<div mat-dialog-actions>
+    <a href='https://lmgtfy.com/?q=how+many+kilometers+is+the+moon+from+earth&pp=1&iie=1' mat-button target="_blank"
+        matTooltip="O____O Let me google that for you.." matTooltipPosition="below">
+        How am I supposed to know!?
+    </a>
+</div>

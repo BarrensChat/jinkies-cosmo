@@ -5,7 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { HeaderComponent } from './header/header.component';
 // import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
-// import { MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -39,7 +39,7 @@ import { CarouselComponent } from '../common-components/carousel/carousel.compon
     // LayoutModule,
     FontAwesomeModule,
     MatToolbarModule,
-    // MatButtonModule,
+    MatButtonModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,

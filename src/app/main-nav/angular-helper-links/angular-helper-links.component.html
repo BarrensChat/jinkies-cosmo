@@ -46,7 +46,62 @@
 <!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<mat-card>Simple card
+  <mat-card-header>
+  <mat-card-title>card title </mat-card-title>
+  <mat-card-subtitle>	Card subtitle </mat-card-subtitle>
+  <img mat-card-avatar>	avagar image
+  </mat-card-header>
+  <mat-card-content>	Primary card content. Intended for blocks of text
+  <img mat-card-image>	Card image. Stretches the image to the container width </mat-card-content>
+  <mat-card-actions>	
+      <button matTooltip="Info about the action" 
+      matTooltipPosition="right" color='primary' mat-button>Ok</button>
+      <button color='warn' mat-raised-button>Cancel</button>
+      <button color='accent' aria-label='aria label' mat-fab>Cancel</button>
+      <button mat-stroked-button>cancel</button>
+      <!-- mat-button	Rectangular text button w/ no elevation
+      mat-raised-button	Rectangular contained button w/ elevation
+      mat-flat-button	Rectangular contained button w/ no elevation
+      mat-stroked-button	Rectangular outlined button w/ no elevation
+      mat-icon-button	Circular button with a transparent background, meant to contain an icon
+      mat-fab	Circular button w/ elevation, defaults to theme's accent color
+      mat-mini-fab	Same as mat-fab but smaller -->
+  </mat-card-actions>
+  <mat-card-footer>footer</mat-card-footer>   
+
+</mat-card>
+
+
+<!-- <mat-card-title-group> can be used to combine a title, subtitle, and image into a single section. This element can contain:
+
+  <mat-card-title>
+  <mat-card-subtitle>
+  One of:
+  <img mat-card-sm-image>
+  <img mat-card-md-image>
+  <img mat-card-lg-image> -->
+
+
+
+
+<mat-chip-list>
+<mat-chip color="primary">Papadum</mat-chip>
+<mat-chip>Naan</mat-chip>
+<mat-chip>Dal</mat-chip>
+</mat-chip-list>
+
+
   
+
+
+<fa-stack>
+  <fa-icon class="piggy" [icon]="faPiggyBank" stackItemSize="2x"></fa-icon>
+  <!-- [inverse]="true" should inverse the color -->
+  <fa-icon id="dollar" [icon]="faDollarSign" stackItemSize="1x"  transform="right-6 shrink-3" ></fa-icon>  
+</fa-stack>
+
+
   <!-- Toolbar -->
   <div class="toolbar" role="banner">
     <img
