@@ -1,7 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@import "src/sass/_colors.scss";
+
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+//------------------ General App CSS / Overrides for theme -------
+a:hover, a:focus, a:active {
+    color: $warn !important;
+}
+
+
 
 //------------------ Angular Material ----------------------------
 

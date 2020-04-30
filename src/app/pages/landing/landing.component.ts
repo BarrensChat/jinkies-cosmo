@@ -9,6 +9,8 @@ import {MoonQuizDialogComponent} from './moon-quiz-dialog/moon-quiz-dialog.compo
 })
 export class LandingComponent implements OnInit {
 
+  dialogWidth = 300;
+
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -16,8 +18,8 @@ export class LandingComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(MoonQuizDialogComponent, {
-      width: '300px',
-      data: {distance: 73}
+      width: String(this.dialogWidth) + 'px',
+      data: {distance: 0, dialogWidth: this.dialogWidth}
     });
 
     dialogRef.afterClosed().subscribe(result => {

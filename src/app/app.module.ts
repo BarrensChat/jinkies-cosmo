@@ -14,6 +14,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -21,6 +24,8 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { MoonQuizDialogComponent } from './pages/landing/moon-quiz-dialog/moon-quiz-dialog.component';
+import { SerializerService } from './services/serializer.service';
+import { UrlSerializer } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -46,10 +51,18 @@ import { MoonQuizDialogComponent } from './pages/landing/moon-quiz-dialog/moon-q
     MatTooltipModule,
     MatSliderModule,
     MatInputModule,
+    MatCardModule,
+    MatTabsModule,
+    FormsModule,
     NgbModule
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: UrlSerializer,
+      useClass: SerializerService
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

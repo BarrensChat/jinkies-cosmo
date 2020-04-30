@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-domains',
@@ -24,13 +25,13 @@ export class DomainsComponent implements OnInit {
     }
   ]
 
-  constructor() {
+  constructor(private actRoute: ActivatedRoute) {
     
   }
 
   ngOnInit(): void {
 
-    console.log('-------',this);
+    console.log('params ->', this.actRoute.snapshot.params);
   }
 
 }

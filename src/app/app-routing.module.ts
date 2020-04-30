@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './pages/landing/landing.component';
 import { environment } from './../environments/environment';
 
+
 const appRoutes: Routes = [
 
   // You can navigate inside an auxiliary outlet by using the outlets property:

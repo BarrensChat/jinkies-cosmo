@@ -1,24 +1,34 @@
-<h1 mat-dialog-title>Hello Friend!</h1>
+<h1 mat-dialog-title>Hold Up!</h1>
 <div mat-dialog-content>
-    <p>How many thousands of miles is the distance of the Moon from the Earth?</p>
-    <!-- <mat-form-field>
-        <mat-label>Distance</mat-label>
-        <input matInput>
-    </mat-form-field> -->
+    <p>Before you enter you must first answer the following.</p>
+    <p>How many thousands of kilometers is the distance of the Moon from the Earth? (give or take 10,000km)</p>
+
     <mat-slider 
-    class='distance-slider'
-    thumbLabel='true'
-    [displayWith]='distanceLabel' min="0" max="500" step="10" value="0"></mat-slider>
+        class='distance-slider' 
+        thumbLabel='true' 
+        [displayWith]='distanceLabel' 
+        min="0" 
+        [max]="maxDistance" 
+        step="10"
+        [(ngModel)]="value" 
+        (ngModelChange)='updateMoonMargin()'
+    ></mat-slider>
+    <div>
+        <img class='space-img' src='assets/images/earth.gif' alt='earth.gif'>
+        <img [style.margin-left.px]='moonMargin' class='space-img' src='assets/images/moon.gif' alt='moon.gif'>
+    </div>
+
+
 </div>
 <div mat-dialog-actions class='actions-row'>
     <button mat-button (click)="onNoClick()" matTooltip="The Earth is flat and space is fake. This is a stupid quiz"
         matTooltipPosition="below">
         Screw this...
     </button>
-    <button mat-button [mat-dialog-close]="data.distance" cdkFocusInitial>Am I Right?</button>
+    <button mat-button [mat-dialog-close]="data.distance" (click)='checkAnswer()' cdkFocusInitial>Am I Right?</button>
 </div>
 
-<div mat-dialog-actions>
+<div mat-dialog-actions class='actions-row'>
     <a href='https://lmgtfy.com/?q=how+many+kilometers+is+the+moon+from+earth&pp=1&iie=1' mat-button target="_blank"
         matTooltip="O____O Let me google that for you.." matTooltipPosition="below">
         How am I supposed to know!?

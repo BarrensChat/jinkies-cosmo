@@ -1,6 +1,87 @@
 <div class='cover'>
-    <!-- routerLink="menu" -->
-    <button mat-raised-button color='primary' (click)="openDialog()" class='enter-site-button'>Enter</button>
+    <mat-card class="landing-card">
+        <mat-card-header>
+            <mat-card-title>To The Moon</mat-card-title>
+            <mat-card-subtitle>Domains still available!</mat-card-subtitle>
+        </mat-card-header>
 
-    
+        <mat-card-content>
+            <mat-tab-group>
+                <mat-tab label="Site Content">
+                    <h5 class='tab-info'>Web pages include</h5>
+                    <mat-list>
+                        <mat-list-item>
+                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
+                            <p matLine>List of domains available for purchase</p>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
+                            <p matLine>Contact Info</p>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-tab>
+                
+                <mat-tab label="Site Tech">
+                    <h5 class='tab-info'>
+                        This website contains the following tech
+                    </h5>
+                    <mat-list>
+                        <mat-list-item>
+                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
+                            <p matLine>Angular 9</p>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
+                            <p matLine>Angular Material</p>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
+                            <p matLine>NG Bootstrap</p>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
+                            <p matLine>Font Awesome</p>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
+                            <p matLine>AWS S3 (Frontend Hosting)</p>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-tab>
+
+                <mat-tab label="Soon to Come">
+                    <h5 class='tab-info'>A list of functionality and tech soon to be included</h5>
+                    <mat-list>
+                        <mat-list-item>
+                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
+                            <p matLine>Automated Article Creation</p>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
+                            <p matLine>AWS EC2</p>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
+                            <p matLine>AWS Polly</p>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
+                            <p matLine>Youtube video upload, tagging and other meta data assignments via Youtube API</p>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
+                            <p matLine>FFMPG image, gif and video creation via AWS Lambda functionality</p>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-tab>
+            </mat-tab-group>
+
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color='primary' (click)="openDialog()" matTooltip="I don't care let me in!"
+                matTooltipPosition="below">PROCEED</button>
+        </mat-card-actions>
+    </mat-card>
+
+    <div class='gradient'></div>
 </div>
