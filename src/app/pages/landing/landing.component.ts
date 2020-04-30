@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MoonQuizDialogComponent} from './moon-quiz-dialog/moon-quiz-dialog.component';
+import { MoonQuizService } from '../../services/moon-quiz.service';
 
 @Component({
   selector: 'app-landing',
@@ -9,21 +10,20 @@ import {MoonQuizDialogComponent} from './moon-quiz-dialog/moon-quiz-dialog.compo
 })
 export class LandingComponent implements OnInit {
 
-  dialogWidth = 300;
-
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private MoonQuizService: MoonQuizService) {}
 
   ngOnInit(): void {
   }
 
   openDialog(): void {
+    const quizDialogWidth = this.MoonQuizService.getDialogWidth();
     const dialogRef = this.dialog.open(MoonQuizDialogComponent, {
-      width: String(this.dialogWidth) + 'px',
-      data: {distance: 0, dialogWidth: this.dialogWidth}
+      width: String(quizDialogWidth) + 'px',
+      data: {distance: 0}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('quiz dialog closed');
       // this.animal = result;
     });
   }
