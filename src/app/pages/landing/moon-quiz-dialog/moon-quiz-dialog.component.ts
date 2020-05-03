@@ -25,11 +25,6 @@ export class MoonQuizDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.moonMargin = 0;
-
-    this.router.events.subscribe((val) => {
-      // TODO: need to check this router event and allow the transition
-      // console.log(val instanceof NavigationEnd) 
-  });
   }
 
   onNoClick(): void {
