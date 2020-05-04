@@ -14,13 +14,13 @@ export class DomainsComponent implements OnInit {
     {
       title: 'Available Domains',
       info: '.CA and .COM listed below',
-      imgUrl: '../../assets/images/bank.jpg',
+      imgUrl: 'assets/images/bank.jpg',
       imgAlt: 'bank jpg'
     },
     {
       title: 'Available Domains',
       info: '.CA and .COM listed below',
-      imgUrl: '../../assets/images/bitcoin.jpg',
+      imgUrl: 'assets/images/bitcoin.jpg',
       imgAlt: 'bitcoin jpg'
     }
   ]

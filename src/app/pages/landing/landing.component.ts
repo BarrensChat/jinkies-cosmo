@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MoonQuizDialogComponent} from './moon-quiz-dialog/moon-quiz-dialog.component';
-import { MoonQuizService } from '../../services/moon-quiz.service';
+import { MoonQuizService } from '@services/moon-quiz.service';
 
 @Component({
   selector: 'app-landing',

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './pages/landing/landing.component';
 import { environment } from './../environments/environment';
+import { AuthGuardService } from './services/auth-guard.service';
 
 
 const appRoutes: Routes = [
@@ -28,7 +29,10 @@ const appRoutes: Routes = [
     { path: '',
       component: LandingComponent,
     },
-    { path: 'menu', loadChildren: () => import('./main-nav/main-nav.module').then(m => m.MainNavModule) },
+    { 
+      path: 'menu', loadChildren: () => import('./main-nav/main-nav.module').then(m => m.MainNavModule),
+      canActivate: [AuthGuardService]
+    },
     //component: MainNavComponent },
 
     // { path: '**', component: PageNotFoundComponent }

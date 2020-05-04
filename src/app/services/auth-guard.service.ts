@@ -10,17 +10,17 @@ export class AuthGuardService implements CanActivate {
 
 
   //TODO: implement a user jwt token or some kind of user auth
-  constructor(private permissions: Permissions, private MoonQuizService:MoonQuizService) {
+  constructor(private MoonQuizService:MoonQuizService) {
   }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    return this.canGoToRoute(route.params.quizAnswer);
+    return this.canGoToRoute(); //route.params.quizAnswer -- could use a param
   }
   
-  canGoToRoute(correctQuizAnswer): boolean {
+  canGoToRoute(): boolean {
     return this.MoonQuizService.getHasUserAnsweredCorrectly();
   }
     

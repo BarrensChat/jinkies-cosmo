@@ -26,6 +26,8 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { MoonQuizDialogComponent } from './pages/landing/moon-quiz-dialog/moon-quiz-dialog.component';
 import { SerializerService } from './services/serializer.service';
 import { UrlSerializer } from '@angular/router';
+import { OkModalComponent } from './common-components/modals/ok-modal/ok-modal.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { UrlSerializer } from '@angular/router';
     PageNotFoundComponent,
     LandingComponent,
     MoonQuizDialogComponent,
+    OkModalComponent,
+    ContactComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DomainsComponent } from './domains/domains.component';
 import { AngularHelperLinksComponent } from './angular-helper-links/angular-helper-links.component';
 import { MainNavComponent } from './main-nav.component';
+import { ContactComponent } from 'app/pages/contact/contact.component';
 
 const appRoutes: Routes = [
   {
@@ -16,6 +17,10 @@ const appRoutes: Routes = [
       {
         path: 'helpers',
         component: AngularHelperLinksComponent
+      },
+      {
+        path: 'contact',
+        component: ContactComponent
       },
       {
         path: '',
