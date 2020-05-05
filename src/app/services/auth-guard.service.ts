@@ -10,7 +10,7 @@ export class AuthGuardService implements CanActivate {
 
 
   //TODO: implement a user jwt token or some kind of user auth
-  constructor(private MoonQuizService:MoonQuizService) {
+  constructor(private MoonQuizService:MoonQuizService, private router:Router) {
   }
 
   canActivate(
@@ -21,7 +21,13 @@ export class AuthGuardService implements CanActivate {
   }
   
   canGoToRoute(): boolean {
-    return this.MoonQuizService.getHasUserAnsweredCorrectly();
+
+    if(!this.MoonQuizService.getHasUserAnsweredCorrectly() ){
+      this.router.navigate(['/']);
+      return false;
+    }
+    
+    return true;
   }
     
 

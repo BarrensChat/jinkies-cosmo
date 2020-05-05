@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -58,6 +59,7 @@ import { ContactComponent } from './pages/contact/contact.component';
     MatCardModule,
     MatTabsModule,
     FormsModule,
+    MatGridListModule,
     NgbModule
 
   ],

@@ -14,10 +14,10 @@ const appRoutes: Routes = [
         path: 'domains',
         component: DomainsComponent
       },
-      {
-        path: 'helpers',
-        component: AngularHelperLinksComponent
-      },
+      // {
+      //   path: 'helpers',
+      //   component: AngularHelperLinksComponent
+      // },
       {
         path: 'contact',
         component: ContactComponent

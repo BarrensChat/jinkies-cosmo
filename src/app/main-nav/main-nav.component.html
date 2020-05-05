@@ -6,13 +6,15 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar class='text-center'>
       <a class='home-logo-link' mat-list-item routerLink="/" routerLinkActive="active">
-        <mat-icon class='home-logo' color='primary' matListIcon>domain</mat-icon>
+        <button color='primary' aria-label='aria label' mat-fab>
+          <mat-icon matListIcon>home</mat-icon>
+        </button>
       </a>
     </mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="domains" routerLinkActive="active">Domains For Sale</a>
       <a mat-list-item routerLink="contact" routerLinkActive="active">Contact</a>
-      <a mat-list-item routerLink="helpers" routerLinkActive="active">Helpers</a>
+      <!-- <a mat-list-item routerLink="helpers" routerLinkActive="active">Helpers</a> -->
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

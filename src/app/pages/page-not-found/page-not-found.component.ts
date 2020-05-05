@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageNotFoundComponent implements OnInit {
 
+  faCircle = faCircle;
+  faHome = faHome;
   constructor() { }
 
   ngOnInit(): void {
