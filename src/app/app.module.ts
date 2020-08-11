@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AppComponent } from './app.component';
@@ -29,6 +30,7 @@ import { SerializerService } from './services/serializer.service';
 import { UrlSerializer } from '@angular/router';
 import { OkModalComponent } from './common-components/modals/ok-modal/ok-modal.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { ContactComponent } from './pages/contact/contact.component';
     MoonQuizDialogComponent,
     OkModalComponent,
     ContactComponent,
+    LoginComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -59,6 +62,7 @@ import { ContactComponent } from './pages/contact/contact.component';
     MatCardModule,
     MatTabsModule,
     FormsModule,
+    ReactiveFormsModule,
     MatGridListModule,
     NgbModule
 

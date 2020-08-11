@@ -4,12 +4,17 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { environment } from './../environments/environment';
 import { AuthGuardService } from './services/auth-guard.service';
+import { LoginComponent } from './pages/login/login.component';
 
 
 const appRoutes: Routes = [
   {
     path: '',
     component: LandingComponent,
+  },
+  {
+    path: 'jinkies',
+    component: LoginComponent,
   },
   {
     path: 'menu', loadChildren: () => import('./main-nav/main-nav.module').then(m => m.MainNavModule),

@@ -12,33 +12,26 @@
     interval="800"
 ></app-carousel>
 
-<mat-grid-list cols="2" rowHeight="1:1" gutterSize='15px'>
-    <mat-grid-tile>
-        <mat-grid-tile-header>.CA</mat-grid-tile-header>
-        <mat-list class="grid-top grid-wide">
-            <mat-list-item *ngFor='let domain_ of caDomains'>
-                <mat-icon matListIcon>domain</mat-icon>
-                <!-- <h3 matLine> from </h3> -->
-                <p matLine>
-                <span> {{domain_}} </span>
-                <span class="demo-2"> . ca </span>
-                </p>
-            </mat-list-item>
-        </mat-list>
-        <!-- <mat-grid-tile-footer>footer</mat-grid-tile-footer> -->
-    </mat-grid-tile>
+<div class='row'>
+    <div class='col-md-6 col-12'>
+        <ul class="list-group">
+            <li class="list-group-item active text-center">.CA</li>
+            <li class="list-group-item" *ngFor='let domain of caDomains'>
+                <mat-icon class='align-middle' matListIcon>domain</mat-icon> <span class='align-middle'> {{domain}} . ca</span>
+            </li>
+        </ul>
+    </div>
+    <div class='col-md-6 col-12'>
+        <ul class="list-group">
+            <li class="list-group-item active text-center">.COM</li>
+            <li class="list-group-item" *ngFor='let domain of comDomains'>
+                <mat-icon class='align-middle' matListIcon>domain</mat-icon> <span class='align-middle'> {{domain}} . com</span>
+            </li>
+        </ul>
+    </div>
+</div>
 
-    <mat-grid-tile>
-        <mat-grid-tile-header>.COM</mat-grid-tile-header>
-        <mat-list class="grid-top grid-wide">
-            <mat-list-item *ngFor='let domain_ of comDomains'>
-                <mat-icon matListIcon>domain</mat-icon>
-                <!-- <h3 matLine> from </h3> -->
-                <p matLine>
-                <span> {{domain_}} </span>
-                <span class="demo-2"> . com </span>
-                </p>
-            </mat-list-item>
-        </mat-list>
-    </mat-grid-tile>
-</mat-grid-list>
+
+    
+
+        

@@ -11,7 +11,15 @@ a:hover, a:focus, a:active {
     color: $warn !important;
 }
 
+//------------------ Bootstrap Custom Styles ---------------------
+.list-group-item {
+    background-color: $primary !important;
 
+    &.active {
+        background-color: $warn-dark !important;
+        border-color: $warn-dark !important;
+    }
+}
 
 //------------------ Angular Material ----------------------------
 
