@@ -33,7 +33,7 @@ import { CarouselComponent } from '../common-components/carousel/carousel.compon
   ],
   imports: [
     MainNavRoutingModule,
-    CommonModule,
+    CommonModule, 
     NgbModule,
     FontAwesomeModule,
     MatToolbarModule,
