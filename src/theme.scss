@@ -1,0 +1,49 @@
+@import '~@angular/material/theming';
+
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$kermit-app-primary: mat-palette($mat-light-green);
+$kermit-app-accent:  mat-palette($mat-brown, 200, 100, 400);
+
+// The warn palette is optional (defaults to red).
+$kermit-app-warn:    mat-palette($mat-pink);
+// $kermit-app-warn:    mat-palette($mat-red);
+
+
+$kermit-app-theme: mat-dark-theme(
+  $kermit-app-primary,
+  $kermit-app-accent,
+  $kermit-app-warn
+);
+
+
+@include angular-material-theme($kermit-app-theme);
+
+//************** FOR MORE ON THEMEING GO TO https://material.angular.io/guide/theming *************
+
+
+// ***** ALTERNATE THEMES *******
+// Define an alternate dark theme.
+
+// $dark-primary: mat-palette($mat-blue-grey);
+// $dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+// $dark-warn:    mat-palette($mat-deep-orange);
+// $dark-theme:   mat-dark-theme((
+//   color: (
+//     primary: $dark-primary,
+//     accent: $dark-accent,
+//     warn: $dark-warn,
+//   )
+// ));
+
+// Include the dark color styles inside of a block with a CSS class. You can make this
+// CSS class whatever you want. In this example, any component inside of an element with
+// `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
+
+// .unicorn-dark-theme {
+//   @include angular-material-color($dark-theme);
+// }
