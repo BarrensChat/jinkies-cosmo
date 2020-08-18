@@ -8,8 +8,8 @@ import { FormControl } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  username = new FormControl('');
-  password = new FormControl('');
+  // username = new FormControl('');
+  // password = new FormControl('');
 
   constructor() { }
 

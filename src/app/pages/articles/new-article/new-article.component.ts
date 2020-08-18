@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { defaultSlideObject } from '../common/slide/slide.component';
 
 @Component({
   selector: 'app-new-article',
@@ -10,8 +11,9 @@ import { FormControl } from '@angular/forms';
 })
 export class NewArticleComponent implements OnInit {
 
-  slides = [];
-  articleData = new FormControl('');
+
+  slides = [defaultSlideObject];
+  // articleData = new FormControl('');
   slideIndex = 1;
 
   constructor() { }
@@ -20,5 +22,10 @@ export class NewArticleComponent implements OnInit {
 
   }
 
+  addSlide = function () {
+    this.slides.push(defaultSlideObject);
+
+    console.log('slides ->', this.slides);
+  }
 
 }
