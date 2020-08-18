@@ -1,0 +1,28 @@
+<div class="container mt-5">
+
+        
+    <app-slide *ngFor="let slide of slides; let i = index"
+        [slideIndex]='i+1'>
+    </app-slide>
+
+
+    <div class="row">
+        <div class="col-12 push-2-md col-md-8">
+            <button class="pull-right"
+                mat-raised-button 
+                color='primary' 
+                matTooltip="Will add a new article slide to your article" 
+                matTooltipPosition="below" 
+                (click)="addSlide()">
+                    Add Slide
+            </button>
+        </div>
+    </div>
+
+    <div class="offset-2 col-8 submit-container text-center">
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit" >Create Article</button>
+        </div>
+    </div>
+   
+</div>

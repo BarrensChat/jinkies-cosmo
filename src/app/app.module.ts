@@ -31,6 +31,7 @@ import { UrlSerializer } from '@angular/router';
 import { OkModalComponent } from './common-components/modals/ok-modal/ok-modal.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ArticlesComponent } from './pages/articles/articles.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { LoginComponent } from './pages/login/login.component';
     OkModalComponent,
     ContactComponent,
     LoginComponent,
+    ArticlesComponent,
   ],
   imports: [
     AppRoutingModule,

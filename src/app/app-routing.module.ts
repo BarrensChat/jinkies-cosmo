@@ -6,7 +6,6 @@ import { environment } from './../environments/environment';
 import { AuthGuardService } from './services/auth-guard.service';
 import { LoginComponent } from './pages/login/login.component';
 
-
 const appRoutes: Routes = [
   {
     path: '',
@@ -15,6 +14,10 @@ const appRoutes: Routes = [
   {
     path: 'jinkies',
     component: LoginComponent,
+  },
+  {
+    path: 'articles', loadChildren: () => import('./pages/articles/articles.module').then(m => m.ArticlesModule),
+    // canActivate: [AuthGuardService]
   },
   {
     path: 'menu', loadChildren: () => import('./main-nav/main-nav.module').then(m => m.MainNavModule),
