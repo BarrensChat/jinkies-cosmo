@@ -13,8 +13,6 @@ export class NewArticleComponent implements OnInit {
 
 
   slides = [defaultSlideObject];
-  // articleData = new FormControl('');
-  slideIndex = 1;
 
   constructor() { }
 
@@ -26,6 +24,12 @@ export class NewArticleComponent implements OnInit {
     this.slides.push(defaultSlideObject);
 
     console.log('slides ->', this.slides);
+  }
+
+  deleteSlide = function (event: number) {
+    this.slides.splice(event, 1);
+
+    console.log('we in weeee', event, this.slides);
   }
 
 }

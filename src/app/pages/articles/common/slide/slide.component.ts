@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
   export const defaultSlideObject = {
     media: '',
-    content: '***Add Content***'
+    content: ''
   }
 
 @Component({
@@ -13,15 +13,27 @@ import { FormControl } from '@angular/forms';
 })
 export class SlideComponent implements OnInit {
 
-  @Input() slideIndex: number;
   media = new FormControl(defaultSlideObject.media);
   content = new FormControl(defaultSlideObject.content);
+
+  @Input() 
+  slideIndex: number;
+
+  @Output("delete") 
+  deleteSlideFunction: EventEmitter<number> = new EventEmitter<number>();
+
+  deleteSlide() {
+    if (this.deleteSlideFunction) {
+      this.deleteSlideFunction.emit(this.slideIndex);
+    }
+  }
 
   constructor() { }
 
   ngOnInit(): void {
 
-    
+
   }
+
 
 }
