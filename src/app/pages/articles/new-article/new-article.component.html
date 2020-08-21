@@ -3,6 +3,7 @@
         <span *ngFor="let slide of slides; let i = index">
             <mat-divider class="mb-5" *ngIf="i != 0"></mat-divider>
             <app-slide
+                [slide]='slides[i]'
                 [slideIndex]='i' 
                 (delete)="deleteSlide($event)">
             </app-slide>

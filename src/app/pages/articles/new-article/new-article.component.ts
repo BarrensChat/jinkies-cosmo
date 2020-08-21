@@ -12,7 +12,8 @@ import { defaultSlideObject } from '../common/slide/slide.component';
 export class NewArticleComponent implements OnInit {
 
 
-  slides = [defaultSlideObject];
+  slideObj: defaultSlideObject;
+  slides = [this.slideObj];
 
   constructor() { }
 
@@ -21,15 +22,13 @@ export class NewArticleComponent implements OnInit {
   }
 
   addSlide = function () {
-    this.slides.push(defaultSlideObject);
-
-    console.log('slides ->', this.slides);
+    this.slides.push(this.slideObj);
   }
 
   deleteSlide = function (event: number) {
     this.slides.splice(event, 1);
 
-    console.log('we in weeee', event, this.slides);
+    console.log('slides left -> ', this.slides);
   }
 
 }
