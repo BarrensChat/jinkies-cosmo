@@ -1,5 +1,7 @@
 <div class="container mt-5">
 
+    <form [formGroup]='articleForm' (ngSubmit)='submitArticle(articleForm.value)'>
+
         <span *ngFor="let slide of slides; let i = index">
             <mat-divider class="mb-5" *ngIf="i != 0"></mat-divider>
             <app-slide
@@ -28,5 +30,7 @@
             <button class="btn btn-primary" type="submit" >Create Article</button>
         </div>
     </div>
-   
+
+
+   </form>
 </div>
