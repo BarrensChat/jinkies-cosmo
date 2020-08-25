@@ -8,16 +8,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 //------------------ General App CSS / Overrides for theme -------
 // a:hover, a:focus, a:active {
-//     color: $warn !important;
+//     color: $app-warn !important;
+// }
+
+// .mat-sidenav {
+//     background-image: linear-gradient($app-grey, $app-accent);
+//     box-shadow: inset 0 0 100px hsla(0,0%,0%,.3);
+//     min-height: 100%;
 // }
 
 //------------------ Bootstrap Custom Styles ---------------------
 .list-group-item {
-    background-color: $primary !important;
+    background-color: $app-grey !important;
 
     &.active {
-        background-color: $warn-dark !important;
-        border-color: $warn-dark !important;
+        background-color: $app-warn-dark !important;
+        border-color: $app-warn-dark !important;
     }
 }
 

@@ -1,21 +1,47 @@
 
 <div class="row">
 
-    <div class="col-12 col-md-2">
-        <span class="">Slide {{slideIndex}}</span>
+    <div class="col-12 col-md-2 slide-index-container">
+        <button class='slide-index' color="accent" mat-mini-fab disabled aria-label="Slide Number">
+            {{(slideIndex+1)}}
+        </button>
     </div>
     <div class="col-12 col-md-8">
 
-        <div class="form-group">
-            <label for="username">Media</label>
-            <input class="form-control" type="text" id="username" [formControl]="media" >
-            <!-- <small id="usernameHelp" class="form-text text-muted">Some note below text.</small> -->
-        </div>
+        <mat-card>
+            <mat-card-header>
+                <!-- <div mat-card-avatar class="example-header-image"></div> -->
+                <mat-card-title>Slide {{(slideIndex+1)}}</mat-card-title>
+                <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+            </mat-card-header>
+              
+            <mat-card-content>
+                <mat-form-field class="w-100">
+                    <mat-label>Media (video or img)</mat-label>
+                    <input matInput type="text" id="media{{slideIndex}}" [(ngModel)]="slide.media" >
+                    <!-- [formControl="slide.media"  formControlName="media{{slideIndex}}"-->
+                </mat-form-field>
+                
 
-        <div class="form-group">
-            <label for="password">Content</label>
-            <textarea class="form-control" type="password" id="password" [formControl]="content"></textarea>
-        </div>
+                <mat-form-field class="w-100">
+                    <mat-label>Slide text content</mat-label>
+                    <textarea matInput placeholder="***Add Content***" [(ngModel)]="slide.content"></textarea>
+                    <!-- [formControl]="slide.content"  formControlName="content{{slideIndex}}"-->
+                </mat-form-field>
+            </mat-card-content>
+            
+            
+            <mat-card-actions>
+                <button class="pull-right"
+                mat-raised-button 
+                color='warn' 
+                matTooltip="Remove slide from list" 
+                matTooltipPosition="below"
+                (click)="deleteSlide()">
+                    DELETE SLIDE
+                </button>
+            </mat-card-actions>
+        </mat-card>
 
     </div>
 

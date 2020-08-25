@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { defaultSlideObject } from '../common/slide/slide.component';
 
 @Component({
@@ -11,10 +12,11 @@ import { defaultSlideObject } from '../common/slide/slide.component';
 })
 export class NewArticleComponent implements OnInit {
 
+  public articleForm = new FormGroup({
 
-  slides = [defaultSlideObject];
-  // articleData = new FormControl('');
-  slideIndex = 1;
+  });
+  slideObj: defaultSlideObject = {media: 'jaja', content: 'yeet'};
+  slides = [this.slideObj];
 
   constructor() { }
 
@@ -23,9 +25,18 @@ export class NewArticleComponent implements OnInit {
   }
 
   addSlide = function () {
-    this.slides.push(defaultSlideObject);
+    this.slides.push(this.slideObj);
 
-    console.log('slides ->', this.slides);
+    console.log('slide added ->', this.slides);
   }
 
+  deleteSlide = function (event: number) {
+    this.slides.splice(event, 1);
+
+    console.log('slides left -> ', this.slides, event);
+  }
+
+  submitArticle = function (form) {
+
+  }
 }

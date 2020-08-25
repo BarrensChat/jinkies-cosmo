@@ -9,11 +9,16 @@ import { LoginComponent } from './pages/login/login.component';
 const appRoutes: Routes = [
   {
     path: '',
-    component: LandingComponent,
+    redirectTo: 'articles',
+    pathMatch: 'full'
   },
   {
     path: 'jinkies',
     component: LoginComponent,
+  },
+  {
+    path: 'lander',
+    component: LandingComponent,
   },
   {
     path: 'articles', loadChildren: () => import('./pages/articles/articles.module').then(m => m.ArticlesModule),

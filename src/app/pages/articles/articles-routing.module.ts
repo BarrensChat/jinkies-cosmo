@@ -11,10 +11,6 @@ const appRoutes: Routes = [
       {
         path: 'new',
         component: NewArticleComponent
-      },
-      {
-        path: '',
-        redirectTo: ''
       }
     ]
   }
