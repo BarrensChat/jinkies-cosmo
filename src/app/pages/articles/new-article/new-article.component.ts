@@ -15,7 +15,7 @@ export class NewArticleComponent implements OnInit {
   public articleForm = new FormGroup({
 
   });
-  slideObj: defaultSlideObject = {media: 'jaja', content: 'yeet'};
+  slideObj: defaultSlideObject = {media: '', content: ''};
   slides = [this.slideObj];
 
   constructor() { }

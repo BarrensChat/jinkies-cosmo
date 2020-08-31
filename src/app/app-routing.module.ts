@@ -7,13 +7,13 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { LoginComponent } from './pages/login/login.component';
 
 const appRoutes: Routes = [
+  // {
+  //   path: '',
+  //   redirectTo: 'articles',
+  //   pathMatch: 'full'
+  // },
   {
     path: '',
-    redirectTo: 'articles',
-    pathMatch: 'full'
-  },
-  {
-    path: 'jinkies',
     component: LoginComponent,
   },
   {
