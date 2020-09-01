@@ -1,0 +1,30 @@
+@import "../../../sass/_colors.scss";
+
+.cover {
+    height: 100%;
+    background: url('../../../assets/images/jinkies-cover.gif') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: flex;
+    overflow-y: auto;
+    padding-bottom: 150px;
+}
+
+.login-card {
+    background-color: rgba($app-grey,0.9);
+    z-index: 1;
+}
+
+.bottom-left-gif {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+}
+
+.bottom-right-gif {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}

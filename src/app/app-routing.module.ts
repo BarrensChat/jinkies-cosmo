@@ -7,11 +7,6 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { LoginComponent } from './pages/login/login.component';
 
 const appRoutes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: 'articles',
-  //   pathMatch: 'full'
-  // },
   {
     path: '',
     component: LoginComponent,
@@ -22,13 +17,12 @@ const appRoutes: Routes = [
   },
   {
     path: 'articles', loadChildren: () => import('./pages/articles/articles.module').then(m => m.ArticlesModule),
-    // canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService]
   },
   {
     path: 'menu', loadChildren: () => import('./main-nav/main-nav.module').then(m => m.MainNavModule),
     canActivate: [AuthGuardService]
   },
-
   {
     path: '**', component: PageNotFoundComponent
   }

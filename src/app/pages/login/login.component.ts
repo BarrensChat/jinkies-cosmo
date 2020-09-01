@@ -19,10 +19,14 @@ export class LoginComponent implements OnInit {
   }
 
   login = function() {
+
+    this.jwtService.login(this.username, this.password);
+
     if (this.jwtService.loggedIn){
       this.router.navigate(['articles']);
-    } 
+    } else {
+        //TODO: throw errors if login failed
+    }
 
-    //TODO: throw errors if login failed
   }
 }

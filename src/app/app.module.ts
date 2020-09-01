@@ -76,7 +76,7 @@ import { ArticlesComponent } from './pages/articles/articles.component';
         tokenGetter: function  tokenGetter() {
              return     localStorage.getItem('access_token');},
              allowedDomains: ['http://localhost:4200/', 'https://jinkiescosmo.com'],
-             disallowedRoutes: ['http://localhost:4200/auth/login']
+             disallowedRoutes: ['http://localhost:4200/articles']
       }
     })
   ],
