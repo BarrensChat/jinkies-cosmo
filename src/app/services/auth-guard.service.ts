@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router, CanActivate, NavigationEnd, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { MoonQuizService } from './moon-quiz.service';
+import { JwtService } from '@services/jwt.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,23 +10,23 @@ export class AuthGuardService implements CanActivate {
 
 
   //TODO: implement a user jwt token or some kind of user auth
-  constructor(private MoonQuizService:MoonQuizService, private router:Router) {
+  constructor(private router:Router, private JwtService: JwtService) {
   }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    return this.canGoToRoute(); //route.params.quizAnswer -- could use a param
+    return this.canAccessCosmo();
   }
-  
-  canGoToRoute(): boolean {
 
-    if(!this.MoonQuizService.getHasUserAnsweredCorrectly() ){
+  canAccessCosmo(): boolean {
+
+    //TODO: actually validate the jwt
+    if(!this.JwtService.loggedIn) {
       this.router.navigate(['/']);
       return false;
     }
-    
     return true;
   }
     

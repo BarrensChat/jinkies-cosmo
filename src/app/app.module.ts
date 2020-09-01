@@ -2,6 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppRoutingModule } from './app-routing.module';
+import { JwtModule } from '@auth0/angular-jwt';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -10,8 +15,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppRoutingModule } from './app-routing.module';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -51,6 +54,7 @@ import { ArticlesComponent } from './pages/articles/articles.component';
     BrowserModule,
     BrowserAnimationsModule,
     LayoutModule,
+    HttpClientModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -66,8 +70,15 @@ import { ArticlesComponent } from './pages/articles/articles.component';
     FormsModule,
     ReactiveFormsModule,
     MatGridListModule,
-    NgbModule
-
+    NgbModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function  tokenGetter() {
+             return     localStorage.getItem('access_token');},
+             allowedDomains: ['http://localhost:4200/', 'https://jinkiescosmo.com'],
+             disallowedRoutes: ['http://localhost:4200/articles']
+      }
+    })
   ],
   providers: [
     {
