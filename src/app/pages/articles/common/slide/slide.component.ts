@@ -13,8 +13,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class SlideComponent implements OnInit {
 
-  media: {};//new FormControl(defaultSlideObject.media);
-  content: {}; //new FormControl(defaultSlideObject.content);
+  media = new FormControl('');
+  content = new FormControl('');
+  slideFormGroup = new FormGroup({
+    media: this.media,
+    content: this.content
+  })
 
   @Input() slideIndex: number;
   @Input() slide: defaultSlideObject;
@@ -31,9 +35,11 @@ export class SlideComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // console.log('0-00-00-0', defaultSLideObject)
-    // this.media = new FormControl(this.slide.media);
-    // this.content = new FormControl(this.slide.content);
+    this.media.setValue(this.slide.media);
+    this.content.setValue(this.slide.content);
+
+
+    this.form.addControl('slide' + this.slideIndex.toString(), this.slideFormGroup);
 
   }
 

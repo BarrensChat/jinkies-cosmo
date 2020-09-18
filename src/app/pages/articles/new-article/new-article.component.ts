@@ -12,9 +12,7 @@ import { defaultSlideObject } from '../common/slide/slide.component';
 })
 export class NewArticleComponent implements OnInit {
 
-  public articleForm = new FormGroup({
-
-  });
+  articleForm = new FormGroup({});
   slideObj: defaultSlideObject = {media: '', content: ''};
   slides = [this.slideObj];
 
@@ -22,21 +20,24 @@ export class NewArticleComponent implements OnInit {
 
   ngOnInit(): void {
 
+
   }
 
   addSlide = function () {
-    this.slides.push(this.slideObj);
+    const newSlide: defaultSlideObject = {media: '', content: ''};
+    this.slides.push(newSlide);
 
     console.log('slide added ->', this.slides);
   }
 
   deleteSlide = function (event: number) {
     this.slides.splice(event, 1);
+    this.articleForm.removeControl('slide'+ event.toString());
 
-    console.log('slides left -> ', this.slides, event);
+    console.log('slides remaining -> ', this.slides, event);
   }
 
-  submitArticle = function (form) {
-
+  submitArticle = function () {
+    console.log('---article form---', this.articleForm);
   }
 }
