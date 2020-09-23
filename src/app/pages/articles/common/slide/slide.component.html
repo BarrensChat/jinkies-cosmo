@@ -3,7 +3,7 @@
 
     <div class="col-12 col-md-2 slide-index-container">
         <button class='slide-index' color="accent" mat-mini-fab disabled aria-label="Slide Number">
-            {{(slideIndex+1)}}
+            {{(this.order.value)}}
         </button>
     </div>
     <div class="col-12 col-md-8">
@@ -11,24 +11,24 @@
         <mat-card>
             <mat-card-header>
                 <!-- <div mat-card-avatar class="example-header-image"></div> -->
-                <mat-card-title>Slide {{(slideIndex+1)}}</mat-card-title>
+                <mat-card-title>Slide {{(this.order.value)}}</mat-card-title>
                 <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
             </mat-card-header>
               
             <mat-card-content>
                 <mat-form-field class="w-100">
                     <mat-label>Media (video or img)</mat-label>
-                    <input matInput type="text" id="media{{slideIndex}}" [formControl]="media" >
-                    <!-- <input matInput type="text" id="media{{slideIndex}}" [(ngModel)]="slide.media" > -->
-                    <!-- [formControl="slide.media"  formControlName="media{{slideIndex}}"-->
+                    <input matInput type="text" id="media{{this.order.value}}" [formControl]="media" >
+                    <!-- <input matInput type="text" id="media{{this.order.value}}" [(ngModel)]="slide.media" > -->
+                    <!-- [formControl="slide.media"  formControlName="media{{this.order.value}}"-->
                 </mat-form-field>
                 
 
                 <mat-form-field class="w-100">
                     <mat-label>Slide text content</mat-label>
-                    <textarea matInput placeholder="***Add Content***" [formControl]="content"></textarea>
+                    <textarea matInput placeholder="***Add Content***" [formControl]="content" ></textarea>
                     <!-- <textarea matInput placeholder="***Add Content***" [(ngModel)]="slide.content"></textarea> -->
-                    <!-- [formControl]="slide.content"  formControlName="content{{slideIndex}}"-->
+                    <!-- [formControl]="slide.content"  formControlName="content{{this.order.value}}"-->
                 </mat-form-field>
             </mat-card-content>
             

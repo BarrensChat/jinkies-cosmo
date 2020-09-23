@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
   export interface defaultSlideObject {
+    order: number,
     media: string,
     content: string
   }
@@ -13,21 +14,27 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class SlideComponent implements OnInit {
 
+  @Input() slideIndex: number;
+  
+  @Input() slide: defaultSlideObject;
+  @Output() slideChange = new EventEmitter<defaultSlideObject>();
+
+  @Input() form: FormGroup;
+  @Output("delete") deleteSlideFunction: EventEmitter<number> = new EventEmitter<number>();
+
   media = new FormControl('');
   content = new FormControl('');
+  order = new FormControl('');
+
   slideFormGroup = new FormGroup({
+    order: this.order,
     media: this.media,
     content: this.content
   })
 
-  @Input() slideIndex: number;
-  @Input() slide: defaultSlideObject;
-  @Input() form: FormGroup;
-  @Output("delete") deleteSlideFunction: EventEmitter<number> = new EventEmitter<number>();
-
   deleteSlide() {
     if (this.deleteSlideFunction) {
-      this.deleteSlideFunction.emit(this.slideIndex);
+      this.deleteSlideFunction.emit(this.order.value);
     }
   }
 
@@ -37,9 +44,9 @@ export class SlideComponent implements OnInit {
 
     this.media.setValue(this.slide.media);
     this.content.setValue(this.slide.content);
+    this.order.setValue(this.slide.order);
 
-
-    this.form.addControl('slide' + this.slideIndex.toString(), this.slideFormGroup);
+    this.form.addControl('slide' + this.order.value.toString(), this.slideFormGroup);
 
   }
 
