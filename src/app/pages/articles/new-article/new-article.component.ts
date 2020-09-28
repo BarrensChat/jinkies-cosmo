@@ -28,6 +28,10 @@ export class NewArticleComponent implements OnInit {
 
   }
 
+  insertSlide = function () {
+
+  }
+
   addSlide = function () {
     this.orderTracker++;
     const newSlide: defaultSlideObject = {order: this.orderTracker, media: '', content: ''};
@@ -46,6 +50,9 @@ export class NewArticleComponent implements OnInit {
   }
 
   submitArticle = function () {
-    console.log('---article form---', this.articleForm.value);
+
+    this.articleForm.markAllAsTouched();
+
+    console.log('---submitted article value and form---', this.articleForm.value, this.articleForm);
   }
 }
