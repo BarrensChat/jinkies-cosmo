@@ -7,6 +7,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 import { ArticlesRoutingModule } from './articles-routing.module';
 
 import { NewArticleComponent } from './new-article/new-article.component';
@@ -28,6 +30,8 @@ import { SlideComponent } from './common/slide/slide.component';
     MatCardModule,
     MatInputModule,
     MatDividerModule,
+    MatChipsModule,
+    MatIconModule,
     ArticlesRoutingModule,
   ]
 })

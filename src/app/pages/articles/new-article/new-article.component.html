@@ -8,12 +8,13 @@
                 [slide]='slides[i]'
                 [slideIndex]='i' 
                 [form] = 'articleForm'
+                (insert)="insertSlide($event)"
                 (delete)="deleteSlide($event)">
             </app-slide>
         </span>
 
 
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-12 col-md-2 text-center">
             <button
                 type='button'
@@ -25,7 +26,7 @@
                     Add Slide
             </button>
         </div>
-    </div>
+    </div> -->
 
     <div class="offset-2 col-8 submit-container text-center">
         <div class="form-group">

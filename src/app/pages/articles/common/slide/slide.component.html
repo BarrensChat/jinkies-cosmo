@@ -29,7 +29,7 @@
                         Media is required.
                     </div>
                     <div *ngIf="media.errors.minlength">
-                        Media must contain at least 1 letter.
+                        Media must contain at least {{validLength}} letters.
                     </div>
                     <!-- for custom validators
                         <div *ngIf="media.errors.forbiddenName">
@@ -48,14 +48,37 @@
                         Media is required.
                     </div>
                     <div *ngIf="content.errors.minlength">
-                        Media must contain at least 5 letter.
+                        Media must contain at least {{validLength}} letters.
                     </div>
                 </div>
+
+
+                <mat-form-field class="w-100">
+                    <mat-chip-list #chipList aria-label="Tag selection">
+                      <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                               [removable]="removable" (removed)="remove(tag)">
+                        {{tag.name}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      <input placeholder="New Tag..."
+                             [matChipInputFor]="chipList"
+                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                             [matChipInputAddOnBlur]="addOnBlur"
+                             (matChipInputTokenEnd)="add($event)"
+                             [formControl]="tagsControl"
+                             formControlName="tagsControl"
+                             >
+                    </mat-chip-list>
+                  </mat-form-field>
             </mat-card-content>
 
 
             <mat-card-actions>
-                <button class="pull-right" mat-raised-button color='warn' matTooltip="Remove slide from list"
+                <button type="button" class="pull-right" mat-raised-button color='primary' matTooltip="Insert slide below"
+                matTooltipPosition="below" (click)="insertSlide()">
+                INSERT SLIDE
+                </button>
+                <button type="button" class="pull-right" mat-raised-button color='warn' matTooltip="Remove slide from list"
                     matTooltipPosition="below" (click)="deleteSlide()">
                     DELETE SLIDE
                 </button>
