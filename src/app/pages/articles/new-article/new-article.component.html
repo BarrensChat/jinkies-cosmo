@@ -1,32 +1,18 @@
 <div class="container mt-5">
 
-    <form [formGroup]='articleForm' (ngSubmit)='submitArticle()'>
+    <form [formGroup]='articleFormArray' (ngSubmit)='submitArticle()'>
 
-        <span *ngFor="let slide of slides; let i = index">
+        <span *ngFor="let formGroup of articleFormArray; let i = index">
             <mat-divider class="mb-5" *ngIf="i != 0"></mat-divider>
             <app-slide
-                [slide]='slides[i]'
+                [slide]='formGroup[i]'
                 [slideIndex]='i' 
-                [form] = 'articleForm'
-                (insert)="insertSlide($event)"
+                [form] = 'articleFormArray'
+                (insert)="ArticleService.insertSlide($event)"
                 (delete)="deleteSlide($event)">
             </app-slide>
         </span>
 
-
-    <!-- <div class="row">
-        <div class="col-12 col-md-2 text-center">
-            <button
-                type='button'
-                mat-raised-button 
-                color='primary' 
-                matTooltip="Will add a new article slide to your article" 
-                matTooltipPosition="below" 
-                (click)="addSlide()">
-                    Add Slide
-            </button>
-        </div>
-    </div> -->
 
     <div class="offset-2 col-8 submit-container text-center">
         <div class="form-group">

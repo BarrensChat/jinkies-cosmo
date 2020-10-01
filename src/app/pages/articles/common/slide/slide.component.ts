@@ -1,15 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
-
-
-  export interface defaultSlideObject {
-    order: number,
-    media: string,
-    content: string,
-    tags: Array<number>
-  }
+import { defaultSlideObject } from '@services/business/article.service';
 
   export interface Tags {
     name: string;
@@ -29,7 +22,7 @@ export class SlideComponent implements OnInit {
 
   @Input() submission: boolean;
 
-  @Input() form: FormGroup;
+  @Input() form: FormArray;
   @Output("delete") deleteSlideFunction: EventEmitter<number> = new EventEmitter<number>();
   @Output("insert") insertSlideFunction: EventEmitter<number> = new EventEmitter<number>();
 
@@ -48,7 +41,7 @@ export class SlideComponent implements OnInit {
   tags: Tags[] = [
     {name: 'meme'},
     {name: 'anime'},
-    {name: 'polita'},
+    {name: 'polital'},
   ];
 
   constructor(private formBuilder: FormBuilder) { 
@@ -88,34 +81,34 @@ export class SlideComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.media = new FormControl('media' + this.slide.order, [
-      Validators.required, 
-      Validators.minLength(this.validLength),
-      // forbiddenNameValidator(/bob/i) // <-- Here's how you pass in the custom validator.
-    ]);
-    this.content = new FormControl('content' + this.slide.order, [
-      Validators.required, 
-      Validators.minLength(this.validLength),
-    ]);
-    this.tagsControl = new FormControl('tagsControl' + this.slide.order, [
-      Validators.required, 
-      Validators.minLength(this.validLength),
-    ]);
-    this.order = new FormControl('');
+    // this.media = new FormControl('media' + this.slide.order, [
+    //   Validators.required, 
+    //   Validators.minLength(this.validLength),
+    //   // forbiddenNameValidator(/bob/i) // <-- Here's how you pass in the custom validator.
+    // ]);
+    // this.content = new FormControl('content' + this.slide.order, [
+    //   Validators.required, 
+    //   Validators.minLength(this.validLength),
+    // ]);
+    // this.tagsControl = new FormControl('tagsControl' + this.slide.order, [
+    //   Validators.required
+    // ]);
+    // this.order = new FormControl('');
 
-    this.media.setValue(this.slide.media);
-    this.content.setValue(this.slide.content);
-    this.order.setValue(this.slide.order);
-    this.tagsControl.setValue(this.slide.tags);
+    // this.media.setValue(this.slide.media);
+    // this.content.setValue(this.slide.content);
+    // this.order.setValue(this.slide.order);
+    // this.tagsControl.setValue(this.slide.tags);
     
-    this.slideFormGroup = this.formBuilder.group({
-      order: this.order,
-      media: this.media,
-      content: this.content,
-      tags: this.tags
-    })
+    // this.slideFormGroup = this.formBuilder.group({
+    //   order: this.order,
+    //   media: this.media,
+    //   content: this.content,
+    //   tags: this.tags
+    // })
 
-    this.form.addControl('slide' + this.order.value.toString(), this.slideFormGroup);
+    // // this.form.addControl('slide' + this.order.value.toString(), this.slideFormGroup);
+    // this.form.push(this.slideFormGroup);
 
   }
 
