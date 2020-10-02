@@ -30,26 +30,33 @@ export class ArticleService {
     this.articleFormArray = afa;
   }
 
-  resetArticleFormArray = function() {
+  resetArticleFormArray() {
     if (this.articleFormArray) {
       this.articleFormArray.clear();
     }
 
-    this.insertSlide(0);
+    this.insertSlide(0, null);
   }
 
   updateOrdering = function() {
     for (const [i, formgroup] of this.articleFormArray.controls.entries()) {
-      formgroup.controls.order.setValue(i);
+      formgroup.controls.order.setValue(i + 1);
     }
   };
 
-  insertSlide = function(event: number) {
+  insertSlide = function(event: number, presetFormGroup: FormGroup) {
 
-    const newGroup = this.getFreshFormGroup();
+    const newGroup = (!presetFormGroup) ? this.getFreshFormGroup() : presetFormGroup;
 
     this.articleFormArray.insert(event, newGroup);
     this.updateOrdering();
+  };
+
+  moveSlide = function(index: number, direction: number) {
+    const formGroup = this.articleFormArray.controls[index];
+console.log('---form group ->', formGroup, index, index + direction);
+    this.deleteSlide(index);
+    this.insertSlide(index + direction, formGroup);
   };
 
   deleteSlide = function(index: number) {
@@ -63,7 +70,7 @@ export class ArticleService {
       return true;
     }
 
-  }
+  };
 
   getFreshFormGroup(order: number) {
     const mediaFormControl = new FormControl('media', [

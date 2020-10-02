@@ -20,6 +20,7 @@ export class SlideComponent implements OnInit {
 
   @Output("delete") deleteSlideFunction: EventEmitter<number> = new EventEmitter<number>();
   @Output("insert") insertSlideFunction: EventEmitter<number> = new EventEmitter<number>();
+  @Output("move") moveSlideFunction: EventEmitter<any> = new EventEmitter<any>();
 
   validLength = 5;
 
@@ -74,4 +75,9 @@ export class SlideComponent implements OnInit {
     }
   }
 
+  moveSlide(moveAhead: boolean) {
+    const dir = (moveAhead) ? -1 : 1;
+
+    this.moveSlideFunction.emit({index: this.slideIndex, direction: dir});
+  }
 }

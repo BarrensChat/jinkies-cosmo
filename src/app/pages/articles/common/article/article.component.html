@@ -1,0 +1,14 @@
+
+
+<span *ngFor="let formGroup of articleFormArray.controls; let i = index">
+  <mat-divider class="mb-5" *ngIf="i != 0"></mat-divider>
+  <app-slide
+      [slide]='formGroup'
+      [slideIndex]='i'
+      [form] = 'articleFormArray'
+      (insert)="insertSlide($event)"
+      (delete)="deleteSlide($event)"
+      (move)="moveSlide($event)"
+      >
+  </app-slide>
+</span>

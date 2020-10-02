@@ -2,16 +2,7 @@
 
     <form [formGroup]='articleFormArray' (ngSubmit)='submitArticle()'>
 
-        <span *ngFor="let formGroup of articleFormArray.controls; let i = index">
-            <mat-divider class="mb-5" *ngIf="i != 0"></mat-divider>
-            <app-slide
-                [slide]='formGroup'
-                [slideIndex]='i'
-                [form] = 'articleFormArray'
-                (insert)="insertSlide($event)"
-                (delete)="deleteSlide($event)">
-            </app-slide>
-        </span>
+    <app-article [articleStructure]='articleFormArray' ></app-article>
 
 
     <div class="offset-2 col-8 submit-container text-center">

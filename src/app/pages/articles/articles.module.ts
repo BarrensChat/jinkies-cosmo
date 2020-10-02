@@ -13,12 +13,14 @@ import { ArticlesRoutingModule } from './articles-routing.module';
 
 import { NewArticleComponent } from './new-article/new-article.component';
 import { SlideComponent } from './common/slide/slide.component';
+import { ArticleComponent } from './common/article/article.component';
 
 
 @NgModule({
   declarations: [
     NewArticleComponent,
     SlideComponent,
+    ArticleComponent,
   ],
   imports: [
     CommonModule,
