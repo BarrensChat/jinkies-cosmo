@@ -14,14 +14,11 @@ import { ArticlesRoutingModule } from './articles-routing.module';
 import { NewArticleComponent } from './new-article/new-article.component';
 import { SlideComponent } from './common/slide/slide.component';
 
-import { ArticleService } from '@services/business/article.service';
-
 
 @NgModule({
   declarations: [
     NewArticleComponent,
     SlideComponent,
-    ArticleService,
   ],
   imports: [
     CommonModule,
@@ -34,7 +31,7 @@ import { ArticleService } from '@services/business/article.service';
     MatDividerModule,
     MatChipsModule,
     MatIconModule,
-    ArticlesRoutingModule,
+    ArticlesRoutingModule
   ]
 })
 export class ArticlesModule { }

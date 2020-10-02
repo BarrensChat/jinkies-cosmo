@@ -2,13 +2,13 @@
 
     <form [formGroup]='articleFormArray' (ngSubmit)='submitArticle()'>
 
-        <span *ngFor="let formGroup of articleFormArray; let i = index">
+        <span *ngFor="let formGroup of articleFormArray.controls; let i = index">
             <mat-divider class="mb-5" *ngIf="i != 0"></mat-divider>
             <app-slide
-                [slide]='formGroup[i]'
-                [slideIndex]='i' 
+                [slide]='formGroup'
+                [slideIndex]='i'
                 [form] = 'articleFormArray'
-                (insert)="ArticleService.insertSlide($event)"
+                (insert)="insertSlide($event)"
                 (delete)="deleteSlide($event)">
             </app-slide>
         </span>
@@ -19,7 +19,6 @@
             <button class="btn btn-primary" type="submit" >Create Article</button>
         </div>
     </div>
-
 
    </form>
 </div>

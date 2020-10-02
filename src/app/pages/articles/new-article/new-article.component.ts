@@ -17,54 +17,43 @@ export class NewArticleComponent implements OnInit {
   articleFormArray = new FormArray([]);
   slideObj: defaultSlideObject = {
     order: 1,
-    media: '', 
+    media: '',
     content: '',
-    tags: []
+    // tags: []
   };
 
   orderTracker = 1;
 
   constructor(
     private dialog: MatDialog,
-    protected ArticleService: ArticleService
-  ) { }
+    private articleService: ArticleService
+  ) {
+
+   }
 
   ngOnInit(): void {
-
-
+    this.articleService.resetArticleFormArray();
+    this.articleFormArray = this.articleService.getArticleFormArray();
   }
 
-  addSlide = function () {
-    // this.orderTracker++;
-    // const newSlide: defaultSlideObject = {order: this.orderTracker, media: '', content: '', tags: []};
-    // this.slides.push(newSlide);
-  }
 
-  deleteSlide = function (event: number) {
-    if (this.ArticleService.deleteSlide(event - 1)) {
+  insertSlide = function(order: number) {
+    this.articleService.insertSlide(order);
+  };
+
+  deleteSlide = function(event: number) {
+    if (!this.articleService.deleteSlide(event - 1)) {
       const modalRef = this.dialog.open(OkModalComponent, {
         data: {title: 'Unable to Delete', content: 'The article must contain at least one slide', buttonText: 'OK'}
       });
     }
-  }
+  };
 
-  updateOrder = function (start: number) {
-    Object.keys(this.articleFormArray.controls).forEach(key => {
-
-      const val = this.articleFormArray.controls[key].controls.order.value;
-      if (val > start) {
-        this.articleFormArray.controls[key].controls.order.setValue(val + 1)
-      }
-    })
-
-    console.log('======before=====', this.articleFormArray);
-  }
-
-  submitArticle = function () {
+  submitArticle = function() {
 
     this.articleFormArray.markAllAsTouched();
 
     console.log('---submitted article value and form---', this.articleFormArray.value, this.articleFormArray);
-  }
- 
+  };
+
 }

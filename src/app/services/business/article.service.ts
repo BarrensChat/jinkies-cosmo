@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, FormArray, AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormArray,  AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 
 export interface defaultSlideObject {
   order: number,
   media: string,
   content: string,
-  tags: Array<number>
+  // tags: Array<number>
 }
 
 @Injectable({
@@ -15,10 +15,11 @@ export interface defaultSlideObject {
 export class ArticleService {
 
   private articleFormArray: FormArray;
+  private newSlide: defaultSlideObject = {order: 1, media: '', content: ''};
   validLength = 5;
 
-  constructor() { 
-
+  constructor(private formBuilder: FormBuilder) {
+    this.articleFormArray = new FormArray([]);
   }
 
   getArticleFormArray() {
@@ -29,55 +30,66 @@ export class ArticleService {
     this.articleFormArray = afa;
   }
 
-  insertSlide = function (event: number) {
-    //-1 because we want the index not the value spliced
-    this.orderTracker++;
-    const newSlide: defaultSlideObject = {order: event + 1, media: '', content: '', tags:[]};
+  resetArticleFormArray = function() {
+    if (this.articleFormArray) {
+      this.articleFormArray.clear();
+    }
 
-    // this.articleFormArray.insert(0, new)
+    this.insertSlide(0);
   }
 
-  deleteSlide = function (index: number) {
+  updateOrdering = function() {
+    for (const [i, formgroup] of this.articleFormArray.controls.entries()) {
+      formgroup.controls.order.setValue(i);
+    }
+  };
+
+  insertSlide = function(event: number) {
+
+    const newGroup = this.getFreshFormGroup();
+
+    this.articleFormArray.insert(event, newGroup);
+    this.updateOrdering();
+  };
+
+  deleteSlide = function(index: number) {
 
     if (this.articleFormArray.length < 2) {
       return false;
     } else {
 
-      // this.articleFormArray.removeControl('slide'+ event.toString());
-      this.articleFormArray.removeAt(index)
+      this.articleFormArray.removeAt(index);
+      this.updateOrdering();
       return true;
     }
 
   }
 
   getFreshFormGroup(order: number) {
-    const mediaFormControl = new FormControl('media' + this.slide.order, [
-      Validators.required, 
+    const mediaFormControl = new FormControl('media', [
+      Validators.required,
       Validators.minLength(this.validLength),
       // forbiddenNameValidator(/bob/i) // <-- Here's how you pass in the custom validator.
     ]);
-    const contentFormControl = new FormControl('content' + this.slide.order, [
-      Validators.required, 
+    const contentFormControl = new FormControl('content', [
+      Validators.required,
       Validators.minLength(this.validLength),
     ]);
-    const tagsFormControl = new FormControl('tagsControl' + this.slide.order, [
-      Validators.required
-    ]);
-    const orderFormControl = new FormControl('');
+    // const tagsFormControl = new FormControl('tagsControl' + this.slide.order, [
+    //   Validators.required
+    // ]);
+    const orderFormControl = new FormControl('order');
 
-    this.media.setValue(this.slide.media);
-    this.content.setValue(this.slide.content);
-    this.order.setValue(this.slide.order);
-    this.tagsControl.setValue(this.slide.tags);
-    
-    this.slideFormGroup = this.formBuilder.group({
-      order: this.order,
-      media: this.media,
-      content: this.content,
-      tags: this.tags
-    })
+    mediaFormControl.setValue(this.newSlide.media);
+    contentFormControl.setValue(this.newSlide.content);
+    orderFormControl.setValue(order);
 
-    // this.form.addControl('slide' + this.order.value.toString(), this.slideFormGroup);
-    this.form.push(this.slideFormGroup);
+    const slideFormGroup = this.formBuilder.group({
+      order: orderFormControl,
+      media: mediaFormControl,
+      content: contentFormControl
+    });
+
+    return slideFormGroup;
   }
 }
