@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormArray, AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormArray, FormControl, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { defaultSlideObject } from '@services/business/article.service';
+import { DefaultSlideObject } from '@services/business/article.service';
 import { ArticleService } from '@services/business/article.service';
 import { OkModalComponent } from '@common/modals/ok-modal/ok-modal.component';
 
@@ -12,18 +12,12 @@ import { OkModalComponent } from '@common/modals/ok-modal/ok-modal.component';
 })
 export class ArticleComponent implements OnInit {
 
-  @Input() articleStructure: FormArray;
+  @Input() articleFormGroup: FormGroup;
   @Input() mode: string;
 
-  articleFormArray = new FormArray([]);
-  slideObj: defaultSlideObject = {
-    order: 1,
-    media: '',
-    content: '',
-    // tags: []
-  };
+  slideFormArray: FormArray;
 
-  orderTracker = 1;
+  titleFormControl: FormControl;
 
   constructor(
     private dialog: MatDialog,
@@ -33,9 +27,9 @@ export class ArticleComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.articleService.setArticleFormArray(this.articleStructure);
-    // this.articleFormArray = this.articleService.getArticleFormArray();
-    this.articleFormArray = this.articleStructure;
+    this.articleService.setArticleFormGroup(this.articleFormGroup);
+
+    console.log('----->', this.articleFormGroup);
   }
 
 
@@ -57,9 +51,9 @@ export class ArticleComponent implements OnInit {
 
   submitArticle() {
 
-    this.articleFormArray.markAllAsTouched();
+    this.articleFormGroup.markAllAsTouched();
 
-    console.log('---submitted article value and form---', this.articleFormArray.value, this.articleFormArray);
+    console.log('---submitted article value and form---', this.articleFormGroup.value, this.articleFormGroup);
   }
 
 }

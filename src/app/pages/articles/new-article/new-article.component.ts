@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray} from '@angular/forms';
+import { FormGroup} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ArticleService } from '@services/business/article.service';
 
@@ -12,8 +12,7 @@ import { ArticleService } from '@services/business/article.service';
 })
 export class NewArticleComponent implements OnInit {
 
-  articleFormArray = new FormArray([]);
-
+  articleFormGroup: FormGroup;
 
   constructor(
     private dialog: MatDialog,
@@ -23,15 +22,15 @@ export class NewArticleComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.articleService.resetArticleFormArray();
-    this.articleFormArray = this.articleService.getArticleFormArray();
+    this.articleService.resetArticleFormGroup();
+    this.articleFormGroup = this.articleService.getArticleFormGroup();
   }
 
   submitArticle() {
 
-    this.articleFormArray.markAllAsTouched();
+    this.articleFormGroup.markAllAsTouched();
 
-    console.log('---submitted article value and form---', this.articleFormArray.value, this.articleFormArray);
+    console.log('---submitted article value and form---', this.articleFormGroup.value, this.articleFormGroup);
   }
 
 }

@@ -2,10 +2,16 @@ import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, FormArray,  AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 
-export interface defaultSlideObject {
-  order: number,
-  media: string,
-  content: string,
+export interface DefaultSlideObject {
+  order: number;
+  media: string;
+  content: string;
+}
+
+
+export interface DefaultArticleObject {
+  title: string;
+  slides: FormArray;
   // tags: Array<number>
 }
 
@@ -14,65 +20,88 @@ export interface defaultSlideObject {
 })
 export class ArticleService {
 
-  private articleFormArray: FormArray;
-  private newSlide: defaultSlideObject = {order: 1, media: '', content: ''};
-  validLength = 5;
+  private articleFormGroup: FormGroup;
+  private slideFormArray: FormArray;
+  private newSlide: DefaultSlideObject = {order: 1, media: '', content: ''};
+  private newArticle: DefaultArticleObject;
+  private validLength = 5;
+  private validArticleTitleLength: 5;
 
   constructor(private formBuilder: FormBuilder) {
-    this.articleFormArray = new FormArray([]);
+    // this.articleFormArray = new FormArray([]);
+    this.slideFormArray = new FormArray([]);
+    this.newArticle = {title: '', slides: this.slideFormArray};
   }
 
-  getArticleFormArray() {
-    return this.articleFormArray;
+  // Article Form Array manipulators
+  getArticleFormGroup() {
+    return this.articleFormGroup;
   }
 
-  setArticleFormArray(afa: FormArray) {
-    this.articleFormArray = afa;
+  setArticleFormGroup(afg: FormGroup) {
+    this.articleFormGroup = afg;
   }
 
-  resetArticleFormArray() {
-    if (this.articleFormArray) {
-      this.articleFormArray.clear();
+  resetArticleFormGroup() {
+    if (this.articleFormGroup) {
+      this.articleFormGroup.reset();
+    }
+
+    this.articleFormGroup = this.getFreshArticleFormGroup();
+  }
+
+  // Slide Form Array manipulators
+  getSlideFormArray() {
+    return this.slideFormArray;
+  }
+
+  setSlideFormArray(afa: FormArray) {
+    this.slideFormArray = afa;
+  }
+
+  resetSlideFormArray() {
+    if (this.slideFormArray) {
+      this.slideFormArray.clear();
     }
 
     this.insertSlide(0, null);
   }
 
   updateOrdering = function() {
-    for (const [i, formgroup] of this.articleFormArray.controls.entries()) {
+    for (const [i, formgroup] of this.slideFormArray.controls.entries()) {
       formgroup.controls.order.setValue(i + 1);
     }
   };
 
-  insertSlide = function(event: number, presetFormGroup: FormGroup) {
+  insertSlide = function(index: number, presetFormGroup: FormGroup) {
 
-    const newGroup = (!presetFormGroup) ? this.getFreshFormGroup() : presetFormGroup;
+    const newGroup = (!presetFormGroup) ? this.getFreshSlideFormGroup() : presetFormGroup;
 
-    this.articleFormArray.insert(event, newGroup);
+    this.slideFormArray.insert(index, newGroup);
     this.updateOrdering();
   };
 
   moveSlide = function(index: number, direction: number) {
-    const formGroup = this.articleFormArray.controls[index];
-console.log('---form group ->', formGroup, index, index + direction);
+    const formGroup = this.slideFormArray.controls[index];
+
     this.deleteSlide(index);
     this.insertSlide(index + direction, formGroup);
   };
 
   deleteSlide = function(index: number) {
 
-    if (this.articleFormArray.length < 2) {
+    if (this.slideFormArray.length < 2) {
       return false;
     } else {
 
-      this.articleFormArray.removeAt(index);
+      this.slideFormArray.removeAt(index);
       this.updateOrdering();
       return true;
     }
 
   };
 
-  getFreshFormGroup(order: number) {
+  getFreshSlideFormGroup(order: number) {
     const mediaFormControl = new FormControl('media', [
       Validators.required,
       Validators.minLength(this.validLength),
@@ -98,5 +127,27 @@ console.log('---form group ->', formGroup, index, index + direction);
     });
 
     return slideFormGroup;
+  }
+
+  getFreshArticleFormGroup() {
+    const titleFormControl = new FormControl('title', [
+      Validators.required,
+      Validators.minLength(this.validArticleTitleLength),
+    ]);
+    const slidesFormArray = new FormArray([]);
+    const slidesFormGroup = this.getFreshSlideFormGroup(1);
+
+    titleFormControl.setValue(this.newArticle.title);
+    slidesFormArray.insert(0, slidesFormGroup);
+
+    // const articleFormArray: FormGroup;
+    const articleFormGroup = this.formBuilder.group({
+      title: titleFormControl,
+      slides: slidesFormArray,
+    });
+
+    // const articleFormArray = new FormArray([titleFormControl, slidesFormArray]);
+
+    return articleFormGroup;
   }
 }
