@@ -17,4 +17,19 @@
         min-height: 90px;
     }
 
+    .shift-slide-options {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .delete-slide {
+      position: absolute;
+      right: 0;
+    }
+
+    .alert {
+      padding: 5px !important;
+    }
+
 }

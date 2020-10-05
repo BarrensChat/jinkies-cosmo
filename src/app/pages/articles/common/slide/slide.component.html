@@ -1,9 +1,8 @@
-
 <div class="row">
 
     <div class="col-12 col-md-2 slide-index-container">
         <button class='slide-index' color="accent" mat-mini-fab disabled aria-label="Slide Number">
-            {{(slideIndex+1)}}
+            {{(this.slideIndex + 1)}}
         </button>
     </div>
     <div class="col-12 col-md-8">
@@ -11,33 +10,95 @@
         <mat-card>
             <mat-card-header>
                 <!-- <div mat-card-avatar class="example-header-image"></div> -->
-                <mat-card-title>Slide {{(slideIndex+1)}}</mat-card-title>
+                <mat-card-title>Slide {{(this.slideIndex + 1)}}</mat-card-title>
                 <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-            </mat-card-header>
-              
-            <mat-card-content>
-                <mat-form-field class="w-100">
-                    <mat-label>Media (video or img)</mat-label>
-                    <input matInput type="text" id="media{{slideIndex}}" [(ngModel)]="slide.media" >
-                    <!-- [formControl="slide.media"  formControlName="media{{slideIndex}}"-->
-                </mat-form-field>
-                
 
-                <mat-form-field class="w-100">
-                    <mat-label>Slide text content</mat-label>
-                    <textarea matInput placeholder="***Add Content***" [(ngModel)]="slide.content"></textarea>
-                    <!-- [formControl]="slide.content"  formControlName="content{{slideIndex}}"-->
+                <div class="shift-slide-options">
+                  <button type="button" *ngIf="this.slideIndex >= 1" (click)="moveSlide(true)" class="m-1" mat-raised-button color='primary' matTooltip="Move slide closer to the BEGINNING of article.">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_upward</mat-icon>
+                  </button>
+                  <button type="button" *ngIf="this.slideIndex < (this.form.length - 1)" (click)="moveSlide(false)" class="m-1" mat-raised-button color='primary' matTooltip="Move slide closer to the END of article.">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_downward</mat-icon>
+                  </button>
+                </div>
+
+            </mat-card-header>
+
+            <mat-card-content [formGroup]='this.slide'>
+
+              <div class="row">
+                <div class="col-6">
+                  <mat-card-title>
+                    Media File
+                  </mat-card-title>
+                    <!-- <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Media (video or img)</mat-label>
+                        <input matInput type="text" id="media" formControlName="media" [formControl]="this.slide.controls.media">
+                    </mat-form-field> -->
+
+                    <!-- <mat-form-field appearance="fill" class="w-100"> -->
+
+                    <button type="button" class="mb-5" color='primary' mat-raised-button (click)="fileInput.click()">Select Image</button>
+                    <input hidden (change)="onFileSelected('thumbnail')" #fileInput type="file" id="thumbnail">
+
+                    <!-- </mat-form-field> -->
+
+                    <div *ngIf="this.slide.controls.media.invalid && (this.slide.controls.media.dirty || this.slide.controls.media.touched)"
+                        class="alert alert-danger">
+
+                      <div *ngIf="this.slide.controls.media.errors.required">
+                          Media is required.
+                      </div>
+                      <div *ngIf="this.slide.controls.media.errors.minlength">
+                          Media must contain at least {{validLength}} letters.
+                      </div>
+                      <!-- for custom validators
+                          <div *ngIf="media.errors.forbiddenName">
+
+                          </div>
+                      -->
+                    </div>
+
+                </div>
+                <div class="col-6">
+                  <mat-card-title>
+                    Audio File (Not Required)
+                  </mat-card-title>
+
+                  <button type="button" class="mb-5" color='primary' mat-raised-button (click)="fileInput.click()">Select Image</button>
+                  <input hidden (change)="onFileSelected('background_audio')" #fileInput type="file" id="background_audio">
+
+                </div>
+              </div>
+
+
+
+                <mat-card-title>
+                  Text Content
+                </mat-card-title>
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Content</mat-label>
+                    <textarea matInput placeholder="Add a description" formControlName="description" [formControl]="this.slide['controls'].description"></textarea>
                 </mat-form-field>
+
+                <div *ngIf="this.slide['controls'].description.invalid && (this.slide['controls'].description.dirty || this.slide['controls'].description.touched)" class="alert alert-danger">
+                    <div *ngIf="this.slide.controls.description.errors.required">
+                        Description is required.
+                    </div>
+                    <div *ngIf="this.slide.controls.description.errors.minlength">
+                        Media must contain at least {{validLength}} letters.
+                    </div>
+                </div>
             </mat-card-content>
-            
-            
+
+
             <mat-card-actions>
-                <button class="pull-right"
-                mat-raised-button 
-                color='warn' 
-                matTooltip="Remove slide from list" 
-                matTooltipPosition="below"
-                (click)="deleteSlide()">
+                <button type="button" mat-raised-button color='primary' matTooltip="Insert slide below"
+                matTooltipPosition="below" (click)="insertSlide()">
+                INSERT SLIDE
+                </button>
+                <button type="button" class="delete-slide" mat-raised-button color='warn' matTooltip="Remove slide from list"
+                    matTooltipPosition="below" (click)="deleteSlide()">
                     DELETE SLIDE
                 </button>
             </mat-card-actions>
@@ -46,4 +107,3 @@
     </div>
 
 </div>
-

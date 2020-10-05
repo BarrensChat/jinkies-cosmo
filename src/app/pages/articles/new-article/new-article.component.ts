@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { defaultSlideObject } from '../common/slide/slide.component';
+import { FormGroup} from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ArticleService } from '@services/business/article.service';
 
 @Component({
   selector: 'app-new-article',
@@ -12,31 +12,39 @@ import { defaultSlideObject } from '../common/slide/slide.component';
 })
 export class NewArticleComponent implements OnInit {
 
-  public articleForm = new FormGroup({
+  articleFormGroup: FormGroup;
 
-  });
-  slideObj: defaultSlideObject = {media: '', content: ''};
-  slides = [this.slideObj];
+  payload: string;
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog,
+    private articleService: ArticleService
+  ) {
+
+   }
 
   ngOnInit(): void {
-
+    this.articleService.resetArticleFormGroup();
+    this.articleFormGroup = this.articleService.getArticleFormGroup();
   }
 
-  addSlide = function () {
-    this.slides.push(this.slideObj);
+  submitArticle() {
 
-    console.log('slide added ->', this.slides);
+    this.articleFormGroup.markAllAsTouched();
+
+    console.log('===',this.articleFormGroup.get('release_date') );
+  //   console.log('====', this.releaseDate());
+  //   this.articleService.setArticleFormGroup(this.articleFormGroup);
+  //   const yeet = this.articleService.getArticleFormGroup();
+  //   yeet.get('thumbnail').setValue('yeeeting');
+  //   this.articleFormGroup.markAllAsTouched();
+
+  //   const jaja = this.articleService.getArticleFormGroup();
+  //   console.log('---submitted article value and form---', jaja.value, jaja);
+
+  console.log('------', this.articleFormGroup.value);
+    this.payload = JSON.stringify(this.articleFormGroup.value, undefined, 2);
+    console.log('---submitted article value and form---', this.articleFormGroup.value, this.articleFormGroup);
   }
 
-  deleteSlide = function (event: number) {
-    this.slides.splice(event, 1);
-
-    console.log('slides left -> ', this.slides, event);
-  }
-
-  submitArticle = function (form) {
-
-  }
 }

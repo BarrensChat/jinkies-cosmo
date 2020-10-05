@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  username = '';//new FormControl('username');
-  password = '';//new FormControl('password');
+  username = new FormControl('');
+  password = new FormControl('');
 
   constructor(private jwtService: JwtService, private router: Router) { }
 
@@ -20,11 +20,12 @@ export class LoginComponent implements OnInit {
 
   login = function() {
 
-    this.jwtService.login(this.username, this.password);
+    this.jwtService.login(this.username.value, this.password.value);
 
     if (this.jwtService.loggedIn){
       this.router.navigate(['articles']);
     } else {
+      console.error('Password or Login incorrect.', this.username, this.password)
         //TODO: throw errors if login failed
     }
 

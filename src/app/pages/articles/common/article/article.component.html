@@ -1,0 +1,121 @@
+
+<div [formGroup]='articleFormGroup'>
+
+  <mat-card class="mb-5">
+    <mat-card-title>Title</mat-card-title>
+
+    <!-- <mat-card-content [formGroup]='this.title'> -->
+    <mat-card-content>
+      <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="Enter a title for the article" type="text" id="title" formControlName="title" [formControl]="this.title()">
+      </mat-form-field>
+      <div *ngIf="this.title().invalid && (this.title().dirty || this.title().touched)" class="alert alert-danger">
+        <div *ngIf="this.title().errors.required">
+            Description is required.
+        </div>
+        <div *ngIf="this.title().errors.minlength">
+            Media must contain at least {{this.validLength()}} letters.
+        </div>
+    </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div [formGroup]="articleFormGroup" *ngIf="this.slides().controls">
+    <span *ngFor="let formGroup of this.slides().controls; let i = index">
+      <mat-divider class="mb-5" *ngIf="i != 0"></mat-divider>
+      <app-slide
+          [slide]='formGroup'
+          [slideIndex]='i'
+          [form] = "this.slides().controls"
+          (insert)="insertSlide($event)"
+          (delete)="deleteSlide($event)"
+          (move)="moveSlide($event)"
+          >
+      </app-slide>
+    </span>
+  </div>
+
+  <mat-card class="mt-5 mb-5">
+    <mat-card-content>
+      <div class="row mb-3">
+        <div class="col-6">
+          <mat-card-title>
+            Tags
+          </mat-card-title>
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-chip-list #chipList aria-label="Tag selection">
+              <mat-chip *ngFor="let tag of this.tags().controls; let i = index" [selectable]="selectable"
+                        [removable]="removable" (removed)="remove(tag)">
+                {{tag.get('name').value}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="New Tag..."
+                      [matChipInputFor]="chipList"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      [matChipInputAddOnBlur]="addOnBlur"
+                      (matChipInputTokenEnd)="add($event)"
+                      formArrayName="tags"
+                      >
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+
+        <div class="col-6">
+          <mat-card-title>
+            Category
+          </mat-card-title>
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Category</mat-label>
+            <mat-select id='category' ngDefaultControl  name='category' formControlName="category" [formControl]="this.category()" >
+              <mat-option *ngFor="let category of this.categories()" value="{{category.id}}">{{category.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div *ngIf="this.category().invalid && (this.category().dirty || this.category().touched)" class="alert alert-danger">
+            <div *ngIf="this.category().errors.required">
+                Category is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <mat-card-title>
+            Thumbnail
+          </mat-card-title>
+          <!-- <mat-form-field appearance="fill" class="w-100"> -->
+
+            <button type="button" color='primary' mat-raised-button (click)="fileInput.click()">Select Image</button>
+            <input hidden (change)="onFileSelected('thumbnail')" #fileInput type="file" id="thumbnail">
+
+          <!-- </mat-form-field> -->
+        </div>
+
+        <div class="col-6">
+          <mat-card-title>
+            Recording Date / Release Date
+          </mat-card-title>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input [formControl]="this.releaseDate()" formGroupName="release_date" matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker">
+              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <div *ngIf="this.releaseDate().invalid && (this.releaseDate().dirty || this.releaseDate().touched)" class="alert alert-danger">
+            <!--For some reason this control doesnt have errors for required
+              <div *ngIf="this.releaseDate().errors.required"> -->
+                Release Date is required.
+            <!-- </div> -->
+          </div>
+        </div>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>
+

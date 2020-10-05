@@ -1,10 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
-  export interface defaultSlideObject {
-    media: string,
-    content: string
-  }
 
 @Component({
   selector: 'app-slide',
@@ -13,29 +9,56 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class SlideComponent implements OnInit {
 
-  media: {};//new FormControl(defaultSlideObject.media);
-  content: {}; //new FormControl(defaultSlideObject.content);
-
   @Input() slideIndex: number;
-  @Input() slide: defaultSlideObject;
-  @Input() form: FormGroup;
+  @Input() slide: FormGroup;
+  @Input() form: FormArray;
+
+  media;
+
   @Output("delete") deleteSlideFunction: EventEmitter<number> = new EventEmitter<number>();
+  @Output("insert") insertSlideFunction: EventEmitter<number> = new EventEmitter<number>();
+  @Output("move") moveSlideFunction: EventEmitter<any> = new EventEmitter<any>();
 
-  deleteSlide() {
-    if (this.deleteSlideFunction) {
-      this.deleteSlideFunction.emit(this.slideIndex);
-    }
+  validLength = 5;
+
+  constructor() {
   }
-
-  constructor() { }
 
   ngOnInit(): void {
 
-    // console.log('0-00-00-0', defaultSLideObject)
-    // this.media = new FormControl(this.slide.media);
-    // this.content = new FormControl(this.slide.content);
-
   }
 
+  onFileSelected(selector: string) {
+    const inputNode: any = document.querySelector('#' + selector);
 
+    if (typeof (FileReader) !== 'undefined') {
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        console.log('setting----->', e.target.result);
+        // this.[selector] = e.target.result;
+        this.media = e.target.result;
+      };
+
+      reader.readAsArrayBuffer(inputNode.files[0]);
+    }
+  }
+
+  deleteSlide() {
+    if (this.deleteSlideFunction) {
+      this.deleteSlideFunction.emit(this.slideIndex + 1);
+    }
+  }
+
+  insertSlide() {
+    if (this.insertSlideFunction) {
+      this.insertSlideFunction.emit(this.slideIndex + 1);
+    }
+  }
+
+  moveSlide(moveAhead: boolean) {
+    const dir = (moveAhead) ? -1 : 1;
+
+    this.moveSlideFunction.emit({index: this.slideIndex, direction: dir});
+  }
 }

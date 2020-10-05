@@ -1,29 +1,11 @@
+<mat-card class="mb-5 mt-2 mr-2 ml-2 text-center">
+  <h1>New Article</h1>
+</mat-card>
+
 <div class="container mt-5">
 
-    <form [formGroup]='articleForm' (ngSubmit)='submitArticle(articleForm.value)'>
-
-        <span *ngFor="let slide of slides; let i = index">
-            <mat-divider class="mb-5" *ngIf="i != 0"></mat-divider>
-            <app-slide
-                [slide]='slides[i]'
-                [slideIndex]='i' 
-                (delete)="deleteSlide($event)">
-            </app-slide>
-        </span>
-
-
-    <div class="row">
-        <div class="col-12 col-md-2 text-center">
-            <button
-                mat-raised-button 
-                color='primary' 
-                matTooltip="Will add a new article slide to your article" 
-                matTooltipPosition="below" 
-                (click)="addSlide()">
-                    Add Slide
-            </button>
-        </div>
-    </div>
+  <form (ngSubmit)='submitArticle()'>
+    <app-article [articleFormGroup]='articleFormGroup' ></app-article>
 
     <div class="offset-2 col-8 submit-container text-center">
         <div class="form-group">
@@ -31,6 +13,10 @@
         </div>
     </div>
 
+  </form>
 
-   </form>
+
+  <pre style="color:white">
+    {{this.payload}}
+  </pre>
 </div>
