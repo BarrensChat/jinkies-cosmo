@@ -1,11 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatChipInputEvent} from '@angular/material/chips';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
-export interface Tags {
-  name: string;
-}
 
 @Component({
   selector: 'app-slide',
@@ -24,43 +19,11 @@ export class SlideComponent implements OnInit {
 
   validLength = 5;
 
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  tags: Tags[] = [
-    {name: 'meme'},
-    {name: 'anime'},
-    {name: 'polital'},
-  ];
-
-  constructor(private formBuilder: FormBuilder) {
+  constructor() {
   }
 
   ngOnInit(): void {
 
-  }
-
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    if ((value || '').trim()) {
-      this.tags.push({name: value.trim()});
-    }
-
-    if (input) {
-      input.value = '';
-    }
-  }
-
-  remove(tags: Tags): void {
-    const index = this.tags.indexOf(tags);
-
-    if (index >= 0) {
-      this.tags.splice(index, 1);
-    }
   }
 
   deleteSlide() {

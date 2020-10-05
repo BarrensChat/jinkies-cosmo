@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormArray, FormControl, AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormArray, FormControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { DefaultSlideObject } from '@services/business/article.service';
 import { ArticleService } from '@services/business/article.service';
 import { OkModalComponent } from '@common/modals/ok-modal/ok-modal.component';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-article',
@@ -15,23 +16,64 @@ export class ArticleComponent implements OnInit {
   @Input() articleFormGroup: FormGroup;
   @Input() mode: string;
 
-  slideFormArray: FormArray;
-
   titleFormControl: FormControl;
+
+  // tag values
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(
     private dialog: MatDialog,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private fb: FormBuilder
   ) {
 
    }
 
   ngOnInit(): void {
+    console.log('--->', this.articleFormGroup);
     this.articleService.setArticleFormGroup(this.articleFormGroup);
-
-    console.log('----->', this.articleFormGroup);
   }
 
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || '').trim()) {
+
+      this.tags().push(
+        this.fb.group({
+          name: value.trim()
+        })
+      );
+    }
+
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(index: number): void {
+    if (index >= 0) {
+      this.tags().removeAt(index);
+    }
+  }
+
+  slides(): FormArray {
+    return this.articleFormGroup.get('slides') as FormArray
+  }
+
+  tags(): FormArray {
+    return this.articleFormGroup.get('tags') as FormArray
+  }
+
+  categoriesToArray(): Array<any> {
+    const categories = this.articleService.getCategories();
+    return Object.keys(categories).map((k) => categories[k]);
+  }
 
   insertSlide(index: number) {
     this.articleService.insertSlide(index, null);
@@ -53,7 +95,8 @@ export class ArticleComponent implements OnInit {
 
     this.articleFormGroup.markAllAsTouched();
 
-    console.log('---submitted article value and form---', this.articleFormGroup.value, this.articleFormGroup);
+    const jaja = this.articleService.getArticleFormGroup();
+    console.log('---submitted article value and form---', jaja.value, jaja);
   }
 
 }

@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { ArticlesRoutingModule } from './articles-routing.module';
 
 import { NewArticleComponent } from './new-article/new-article.component';
@@ -33,6 +34,7 @@ import { ArticleComponent } from './common/article/article.component';
     MatDividerModule,
     MatChipsModule,
     MatIconModule,
+    MatSelectModule,
     ArticlesRoutingModule
   ]
 })

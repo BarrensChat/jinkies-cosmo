@@ -5,9 +5,13 @@ import { FormGroup, FormControl, FormArray,  AbstractControl, FormBuilder, Valid
 export interface DefaultSlideObject {
   order: number;
   media: string;
-  content: string;
+  description: string;
+  tags: [];
 }
 
+export interface DefaultTagsObject {
+  name: string;
+}
 
 export interface DefaultArticleObject {
   title: string;
@@ -22,12 +26,34 @@ export class ArticleService {
 
   private articleFormGroup: FormGroup;
   private slideFormArray: FormArray;
-  private newSlide: DefaultSlideObject = {order: 1, media: '', content: ''};
+  private newTags: DefaultTagsObject[] = [
+    {name: 'meme'},
+    {name: 'anime'},
+    {name: 'polital'},
+  ];
+  private newSlide: DefaultSlideObject = {order: 1, media: '', description: '', tags: []};
   private newArticle: DefaultArticleObject;
   private validLength = 5;
   private validArticleTitleLength: 5;
+  private categories = {
+    1: 'Film & Animation',
+    2: 'Autos & Vehicles',
+    3: 'Music',
+    4: 'Pets & Animals',
+    5: 'Sports',
+    6: 'Travel & Events',
+    7: 'Gaming',
+    8: 'People & Blogs',
+    9: 'Comedy',
+    10: 'Entertainment',
+    11: 'News & Politics',
+    12: 'Howto & Style',
+    13: 'Education',
+    14: 'Science & Technology',
+    15: 'Nonprofits & Activism'
+  }
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private fb: FormBuilder) {
     // this.articleFormArray = new FormArray([]);
     this.slideFormArray = new FormArray([]);
     this.newArticle = {title: '', slides: this.slideFormArray};
@@ -52,23 +78,27 @@ export class ArticleService {
 
   // Slide Form Array manipulators
   getSlideFormArray() {
-    return this.slideFormArray;
+    return this.articleFormGroup.controls.slides;
   }
 
   setSlideFormArray(afa: FormArray) {
-    this.slideFormArray = afa;
+    this.articleFormGroup.controls.slides = afa;
   }
 
-  resetSlideFormArray() {
-    if (this.slideFormArray) {
-      this.slideFormArray.clear();
-    }
-
-    this.insertSlide(0, null);
+  getCategories = function() {
+    return this.categories;
   }
+
+  // resetSlideFormArray() {
+  //   if (this.slideFormArray) {
+  //     this.slideFormArray.clear();
+  //   }
+
+  //   this.insertSlide(0, null);
+  // }
 
   updateOrdering = function() {
-    for (const [i, formgroup] of this.slideFormArray.controls.entries()) {
+    for (const [i, formgroup] of this.articleFormGroup.controls.slides.controls.entries()) {
       formgroup.controls.order.setValue(i + 1);
     }
   };
@@ -77,12 +107,12 @@ export class ArticleService {
 
     const newGroup = (!presetFormGroup) ? this.getFreshSlideFormGroup() : presetFormGroup;
 
-    this.slideFormArray.insert(index, newGroup);
+    this.articleFormGroup.controls.slides.insert(index, newGroup);
     this.updateOrdering();
   };
 
   moveSlide = function(index: number, direction: number) {
-    const formGroup = this.slideFormArray.controls[index];
+    const formGroup = this.articleFormGroup.controls.slides.controls[index];
 
     this.deleteSlide(index);
     this.insertSlide(index + direction, formGroup);
@@ -90,11 +120,11 @@ export class ArticleService {
 
   deleteSlide = function(index: number) {
 
-    if (this.slideFormArray.length < 2) {
+    if (this.articleFormGroup.controls.slides.length < 2) {
       return false;
     } else {
 
-      this.slideFormArray.removeAt(index);
+      this.articleFormGroup.controls.slides.removeAt(index);
       this.updateOrdering();
       return true;
     }
@@ -107,23 +137,21 @@ export class ArticleService {
       Validators.minLength(this.validLength),
       // forbiddenNameValidator(/bob/i) // <-- Here's how you pass in the custom validator.
     ]);
-    const contentFormControl = new FormControl('content', [
+    const descriptionFormControl = new FormControl('description', [
       Validators.required,
       Validators.minLength(this.validLength),
     ]);
-    // const tagsFormControl = new FormControl('tagsControl' + this.slide.order, [
-    //   Validators.required
-    // ]);
+
     const orderFormControl = new FormControl('order');
 
     mediaFormControl.setValue(this.newSlide.media);
-    contentFormControl.setValue(this.newSlide.content);
+    descriptionFormControl.setValue(this.newSlide.description);
     orderFormControl.setValue(order);
 
-    const slideFormGroup = this.formBuilder.group({
+    const slideFormGroup = this.fb.group({
       order: orderFormControl,
       media: mediaFormControl,
-      content: contentFormControl
+      description: descriptionFormControl,
     });
 
     return slideFormGroup;
@@ -139,14 +167,13 @@ export class ArticleService {
 
     titleFormControl.setValue(this.newArticle.title);
     slidesFormArray.insert(0, slidesFormGroup);
+    // tagsFormGroup.setValue(this.newTags)
 
-    // const articleFormArray: FormGroup;
-    const articleFormGroup = this.formBuilder.group({
+    const articleFormGroup = this.fb.group({
       title: titleFormControl,
       slides: slidesFormArray,
+      tags: this.fb.array([]),
     });
-
-    // const articleFormArray = new FormArray([titleFormControl, slidesFormArray]);
 
     return articleFormGroup;
   }
