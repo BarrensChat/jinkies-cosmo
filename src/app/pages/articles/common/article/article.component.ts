@@ -17,6 +17,7 @@ export class ArticleComponent implements OnInit {
   @Input() mode: string;
 
   titleFormControl: FormControl;
+  thumbnail;
 
   // tag values
   visible = true;
@@ -34,7 +35,6 @@ export class ArticleComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log('--->', this.articleFormGroup);
     this.articleService.setArticleFormGroup(this.articleFormGroup);
   }
 
@@ -62,17 +62,52 @@ export class ArticleComponent implements OnInit {
     }
   }
 
+  onFileSelected(selector: string) {
+    const inputNode: any = document.querySelector('#' + selector);
+
+    if (typeof (FileReader) !== 'undefined') {
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        console.log('setting----->', e.target.result);
+        // this.[selector] = e.target.result;
+        this.thumbnail = e.target.result;
+      };
+
+      reader.readAsArrayBuffer(inputNode.files[0]);
+    }
+  }
+
   slides(): FormArray {
-    return this.articleFormGroup.get('slides') as FormArray
+    return this.articleFormGroup.get('slides') as FormArray;
+  }
+
+  releaseDate(): FormControl {
+    return this.articleFormGroup.get('release_date') as FormControl;
+  }
+
+  validLength(): number {
+    return this.articleService.getValidLength();
+  }
+
+  title(): FormControl {
+    return this.articleFormGroup.get('title') as FormControl;
+  }
+
+  thubmnail(): FormControl {
+    return this.articleFormGroup.get('thumbnail') as FormControl;
   }
 
   tags(): FormArray {
-    return this.articleFormGroup.get('tags') as FormArray
+    return this.articleFormGroup.get('tags') as FormArray;
   }
 
-  categoriesToArray(): Array<any> {
-    const categories = this.articleService.getCategories();
-    return Object.keys(categories).map((k) => categories[k]);
+  category(): FormControl {
+    return this.articleFormGroup.get('category') as FormControl;
+  }
+
+  categories(): Array<any> {
+    return this.articleService.getCategories();
   }
 
   insertSlide(index: number) {
@@ -89,14 +124,6 @@ export class ArticleComponent implements OnInit {
         data: {title: 'Unable to Delete', content: 'The article must contain at least one slide', buttonText: 'OK'}
       });
     }
-  }
-
-  submitArticle() {
-
-    this.articleFormGroup.markAllAsTouched();
-
-    const jaja = this.articleService.getArticleFormGroup();
-    console.log('---submitted article value and form---', jaja.value, jaja);
   }
 
 }

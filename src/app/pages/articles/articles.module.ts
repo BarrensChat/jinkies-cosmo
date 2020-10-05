@@ -10,6 +10,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 import { ArticlesRoutingModule } from './articles-routing.module';
 
 import { NewArticleComponent } from './new-article/new-article.component';
@@ -35,6 +39,10 @@ import { ArticleComponent } from './common/article/article.component';
     MatChipsModule,
     MatIconModule,
     MatSelectModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+
     ArticlesRoutingModule
   ]
 })

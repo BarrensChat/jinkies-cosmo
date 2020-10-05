@@ -14,6 +14,8 @@ export class NewArticleComponent implements OnInit {
 
   articleFormGroup: FormGroup;
 
+  payload: string;
+
   constructor(
     private dialog: MatDialog,
     private articleService: ArticleService
@@ -30,6 +32,18 @@ export class NewArticleComponent implements OnInit {
 
     this.articleFormGroup.markAllAsTouched();
 
+    console.log('===',this.articleFormGroup.get('release_date') );
+  //   console.log('====', this.releaseDate());
+  //   this.articleService.setArticleFormGroup(this.articleFormGroup);
+  //   const yeet = this.articleService.getArticleFormGroup();
+  //   yeet.get('thumbnail').setValue('yeeeting');
+  //   this.articleFormGroup.markAllAsTouched();
+
+  //   const jaja = this.articleService.getArticleFormGroup();
+  //   console.log('---submitted article value and form---', jaja.value, jaja);
+
+  console.log('------', this.articleFormGroup.value);
+    this.payload = JSON.stringify(this.articleFormGroup.value, undefined, 2);
     console.log('---submitted article value and form---', this.articleFormGroup.value, this.articleFormGroup);
   }
 

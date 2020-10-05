@@ -35,28 +35,31 @@ export class ArticleService {
   private newArticle: DefaultArticleObject;
   private validLength = 5;
   private validArticleTitleLength: 5;
-  private categories = {
-    1: 'Film & Animation',
-    2: 'Autos & Vehicles',
-    3: 'Music',
-    4: 'Pets & Animals',
-    5: 'Sports',
-    6: 'Travel & Events',
-    7: 'Gaming',
-    8: 'People & Blogs',
-    9: 'Comedy',
-    10: 'Entertainment',
-    11: 'News & Politics',
-    12: 'Howto & Style',
-    13: 'Education',
-    14: 'Science & Technology',
-    15: 'Nonprofits & Activism'
-  }
+  private categories = [
+    {id: 1, name: 'Autos & Vehicles'},
+    {id: 2, name: 'Music'},
+    {id: 3, name: 'Pets & Animals'},
+    {id: 4, name: 'Sports'},
+    {id: 5, name: 'Travel & Events'},
+    {id: 6, name: 'Gaming'},
+    {id: 7, name: 'People & Blogs'},
+    {id: 8, name: 'Comedy'},
+    {id: 9, name: 'Entertainment'},
+    {id: 10, name: 'News & Politics'},
+    {id: 12, name: 'Howto & Style'},
+    {id: 13, name: 'Education'},
+    {id: 14, name: 'Science & Technology'},
+    {id: 15, name: 'Nonprofits & Activism'}
+  ];
 
   constructor(private fb: FormBuilder) {
     // this.articleFormArray = new FormArray([]);
     this.slideFormArray = new FormArray([]);
     this.newArticle = {title: '', slides: this.slideFormArray};
+  }
+
+  getCategories(): Array<any> {
+    return this.categories;
   }
 
   // Article Form Array manipulators
@@ -85,18 +88,6 @@ export class ArticleService {
     this.articleFormGroup.controls.slides = afa;
   }
 
-  getCategories = function() {
-    return this.categories;
-  }
-
-  // resetSlideFormArray() {
-  //   if (this.slideFormArray) {
-  //     this.slideFormArray.clear();
-  //   }
-
-  //   this.insertSlide(0, null);
-  // }
-
   updateOrdering = function() {
     for (const [i, formgroup] of this.articleFormGroup.controls.slides.controls.entries()) {
       formgroup.controls.order.setValue(i + 1);
@@ -110,6 +101,10 @@ export class ArticleService {
     this.articleFormGroup.controls.slides.insert(index, newGroup);
     this.updateOrdering();
   };
+
+  getValidLength = function() {
+    return this.validLength;
+  }
 
   moveSlide = function(index: number, direction: number) {
     const formGroup = this.articleFormGroup.controls.slides.controls[index];
@@ -132,11 +127,11 @@ export class ArticleService {
   };
 
   getFreshSlideFormGroup(order: number) {
-    const mediaFormControl = new FormControl('media', [
-      Validators.required,
-      Validators.minLength(this.validLength),
-      // forbiddenNameValidator(/bob/i) // <-- Here's how you pass in the custom validator.
-    ]);
+    // const mediaFormControl = new FormControl('media', [
+    //   Validators.required,
+    //   Validators.minLength(this.validLength),
+    //    forbiddenNameValidator(/bob/i) // <-- Here's how you pass in the custom validator.
+    // ]);
     const descriptionFormControl = new FormControl('description', [
       Validators.required,
       Validators.minLength(this.validLength),
@@ -144,13 +139,14 @@ export class ArticleService {
 
     const orderFormControl = new FormControl('order');
 
-    mediaFormControl.setValue(this.newSlide.media);
+    // mediaFormControl.setValue(this.newSlide.media);
     descriptionFormControl.setValue(this.newSlide.description);
     orderFormControl.setValue(order);
 
     const slideFormGroup = this.fb.group({
       order: orderFormControl,
-      media: mediaFormControl,
+      media: this.fb.control(['media', [Validators.required]]),
+      background_audio: this.fb.control(['background_audio', []]),
       description: descriptionFormControl,
     });
 
@@ -167,12 +163,14 @@ export class ArticleService {
 
     titleFormControl.setValue(this.newArticle.title);
     slidesFormArray.insert(0, slidesFormGroup);
-    // tagsFormGroup.setValue(this.newTags)
 
     const articleFormGroup = this.fb.group({
       title: titleFormControl,
       slides: slidesFormArray,
       tags: this.fb.array([]),
+      category: this.fb.control(['category', Validators.required]),
+      thumbnail: this.fb.control(['thumbnail', Validators.required]),
+      release_date: this.fb.control(['release_date', Validators.required]),
     });
 
     return articleFormGroup;

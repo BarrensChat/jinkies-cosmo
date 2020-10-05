@@ -13,6 +13,8 @@ export class SlideComponent implements OnInit {
   @Input() slide: FormGroup;
   @Input() form: FormArray;
 
+  media;
+
   @Output("delete") deleteSlideFunction: EventEmitter<number> = new EventEmitter<number>();
   @Output("insert") insertSlideFunction: EventEmitter<number> = new EventEmitter<number>();
   @Output("move") moveSlideFunction: EventEmitter<any> = new EventEmitter<any>();
@@ -24,6 +26,22 @@ export class SlideComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  onFileSelected(selector: string) {
+    const inputNode: any = document.querySelector('#' + selector);
+
+    if (typeof (FileReader) !== 'undefined') {
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        console.log('setting----->', e.target.result);
+        // this.[selector] = e.target.result;
+        this.media = e.target.result;
+      };
+
+      reader.readAsArrayBuffer(inputNode.files[0]);
+    }
   }
 
   deleteSlide() {
