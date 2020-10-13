@@ -16,7 +16,8 @@ export interface DefaultTagsObject {
 export interface DefaultArticleObject {
   title: string;
   slides: FormArray;
-  // tags: Array<number>
+  tags: Array<number>;
+  thumbnail: string;
 }
 
 @Injectable({
@@ -55,7 +56,7 @@ export class ArticleService {
   constructor(private fb: FormBuilder) {
     // this.articleFormArray = new FormArray([]);
     this.slideFormArray = new FormArray([]);
-    this.newArticle = {title: '', slides: this.slideFormArray};
+    this.newArticle = {title: '', slides: this.slideFormArray, tags: [], thumbnail: ''};
   }
 
   getCategories(): Array<any> {
@@ -104,11 +105,10 @@ export class ArticleService {
 
   getValidLength = function() {
     return this.validLength;
-  }
+  };
 
   moveSlide = function(index: number, direction: number) {
     const formGroup = this.articleFormGroup.controls.slides.controls[index];
-
     this.deleteSlide(index);
     this.insertSlide(index + direction, formGroup);
   };
@@ -169,8 +169,9 @@ export class ArticleService {
       slides: slidesFormArray,
       tags: this.fb.array([]),
       category: this.fb.control(['category', Validators.required]),
-      thumbnail: this.fb.control(['thumbnail', Validators.required]),
+      thumbnail: this.fb.control(['thumbnail', [Validators.required]]), //, requiredFile('png', 'jpg', 'jpeg')
       release_date: this.fb.control(['release_date', Validators.required]),
+
     });
 
     return articleFormGroup;

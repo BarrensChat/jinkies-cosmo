@@ -35,6 +35,7 @@ import { OkModalComponent } from './common-components/modals/ok-modal/ok-modal.c
 import { ContactComponent } from './pages/contact/contact.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ArticlesComponent } from './pages/articles/articles.component';
+import { ConfirmModalComponent } from './common-components/modals/confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ArticlesComponent } from './pages/articles/articles.component';
     ContactComponent,
     LoginComponent,
     ArticlesComponent,
+    ConfirmModalComponent,
   ],
   imports: [
     AppRoutingModule,

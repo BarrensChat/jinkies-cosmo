@@ -1,0 +1,12 @@
+
+<div>
+  <label for='{{this.fileName}}'>
+    <div *ngIf="file === null">Choose File</div>
+    <div>{{file ? file.name : 'or drag and drop file here' }}</div>
+  </label>
+  <input class="file-input" id="{{this.fileName}}" type="file" style="display:none">
+</div>
+
+<!-- <app-progress [progress]="progress"></app-progress> -->
+
+

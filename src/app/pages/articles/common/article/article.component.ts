@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormArray, FormControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ArticleService } from '@services/business/article.service';
@@ -59,22 +59,6 @@ export class ArticleComponent implements OnInit {
   remove(index: number): void {
     if (index >= 0) {
       this.tags().removeAt(index);
-    }
-  }
-
-  onFileSelected(selector: string) {
-    const inputNode: any = document.querySelector('#' + selector);
-
-    if (typeof (FileReader) !== 'undefined') {
-      const reader = new FileReader();
-
-      reader.onload = (e: any) => {
-        console.log('setting----->', e.target.result);
-        // this.[selector] = e.target.result;
-        this.thumbnail = e.target.result;
-      };
-
-      reader.readAsArrayBuffer(inputNode.files[0]);
     }
   }
 

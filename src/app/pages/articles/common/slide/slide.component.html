@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" [@constructDestruct]="constructState === this.slideStates.CONSTRUCT ? this.slideStates.CONSTRUCT: this.slideStates.DESTRUCT">
 
     <div class="col-12 col-md-2 slide-index-container">
         <button class='slide-index' color="accent" mat-mini-fab disabled aria-label="Slide Number">

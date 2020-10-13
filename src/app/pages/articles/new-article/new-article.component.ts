@@ -32,7 +32,7 @@ export class NewArticleComponent implements OnInit {
 
     this.articleFormGroup.markAllAsTouched();
 
-    console.log('===',this.articleFormGroup.get('release_date') );
+    console.log('===', this.articleFormGroup.get('thumbnail') );
   //   console.log('====', this.releaseDate());
   //   this.articleService.setArticleFormGroup(this.articleFormGroup);
   //   const yeet = this.articleService.getArticleFormGroup();
@@ -42,7 +42,6 @@ export class NewArticleComponent implements OnInit {
   //   const jaja = this.articleService.getArticleFormGroup();
   //   console.log('---submitted article value and form---', jaja.value, jaja);
 
-  console.log('------', this.articleFormGroup.value);
     this.payload = JSON.stringify(this.articleFormGroup.value, undefined, 2);
     console.log('---submitted article value and form---', this.articleFormGroup.value, this.articleFormGroup);
   }
