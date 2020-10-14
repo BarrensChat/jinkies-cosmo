@@ -90,7 +90,7 @@ export class SlideComponent implements OnInit, OnDestroy, AfterContentChecked  {
         }
       });
       dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog result: ${result}`, result);
+
         if (result) {
           this.slideDestruct();
           setTimeout(() => {
@@ -100,7 +100,7 @@ export class SlideComponent implements OnInit, OnDestroy, AfterContentChecked  {
       });
 
     } else {
-      console.error('Delete function not available.')
+      console.error('Delete function not available.');
     }
   }
 
@@ -115,16 +115,12 @@ export class SlideComponent implements OnInit, OnDestroy, AfterContentChecked  {
 
     this.moveSlideFunction.emit({
       index: this.slideIndex,
-      direction: dir,
-      // constructFunction: this.slideConstruct(),
-      // destructFunction: this.slideDestruct()
+      direction: dir
     });
   }
 
   slideDestruct = function() {
     this.constructState = this.slideStates.DESTRUCT;
-    setTimeout(() => {
-    }, 500);
   };
 
   slideConstruct = function() {

@@ -46,7 +46,7 @@
           <mat-form-field appearance="fill" class="w-100">
             <mat-chip-list #chipList aria-label="Tag selection">
               <mat-chip *ngFor="let tag of this.tags().controls; let i = index" [selectable]="selectable"
-                        [removable]="removable" (removed)="remove(tag)">
+                        [removable]="removable" (removed)="remove(i)">
                 {{tag.get('name').value}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
@@ -85,11 +85,7 @@
           <mat-card-title>
             Thumbnail
           </mat-card-title>
-          <!-- <mat-form-field appearance="fill" class="w-100"> -->
-
-
-            <app-file-upload formControlName='thumbnail' fileName="thumbnailFile" [fc]="this.articleFormGroup.controls.thumbnail"></app-file-upload>
-          <!-- </mat-form-field> -->
+          <app-file-upload formControlName='thumbnail' fileName="thumbnailFile" [fc]="this.articleFormGroup.controls.thumbnail"></app-file-upload>
         </div>
 
         <div class="col-6">

@@ -20,20 +20,24 @@ export class FileUploadComponent implements OnInit {
   onChange: () => void;
 
   public file: File | null = null;
+  public fn = 'or drag and drop file here';
+  public updated = false;
 
   @HostListener('change', ['$event.target.files']) emitFiles( event: FileList ) {
 
     // Using item(0) here because we only want one file.
     const file = event && event.item(0);
     this.file = file;
-    this.fc.setValue(this.file);
+    this.fc.setValue(file);
+    this.fn = file.name;
+    this.updated = true;
   }
 
   constructor( private host: ElementRef<HTMLInputElement> ) {
   }
 
   ngOnInit(): void {
-console.log('filename ->', this.fileName);
+
   }
 
   writeValue( value: null ) {

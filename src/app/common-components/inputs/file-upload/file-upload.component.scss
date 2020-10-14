@@ -1,0 +1,21 @@
+@import '../../../../sass/colors';
+
+:host {
+  .file-drop-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    border: 2px dashed $app-primary;
+    min-height: 100px;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: $app-primary;
+    cursor: pointer;
+
+    span {
+      display: block;
+    }
+  }
+}

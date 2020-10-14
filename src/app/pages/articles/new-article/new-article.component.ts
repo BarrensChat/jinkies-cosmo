@@ -32,7 +32,6 @@ export class NewArticleComponent implements OnInit {
 
     this.articleFormGroup.markAllAsTouched();
 
-    console.log('===', this.articleFormGroup.get('thumbnail') );
   //   console.log('====', this.releaseDate());
   //   this.articleService.setArticleFormGroup(this.articleFormGroup);
   //   const yeet = this.articleService.getArticleFormGroup();

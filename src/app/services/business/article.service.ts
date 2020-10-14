@@ -1,6 +1,27 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, FormArray,  AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { strict } from 'assert';
 
+export function requiredFileType( types: string ) {
+  return (control: FormControl) => {
+    const file = control.value;
+    const allowedValues = types.toLowerCase();
+    const allowedValuesArray = allowedValues.split(',');
+
+    if ( file ) {
+      const extension = file.name.split('.')[1].toLowerCase();
+
+      if (allowedValuesArray.includes(extension.toLowerCase()) ) {
+        return {
+          requiredFileType: true
+        };
+      }
+      return null;
+    }
+
+    return null;
+  };
+}
 
 export interface DefaultSlideObject {
   order: number;
@@ -34,6 +55,7 @@ export class ArticleService {
   ];
   private newSlide: DefaultSlideObject = {order: 1, media: '', description: '', tags: []};
   private newArticle: DefaultArticleObject;
+  private rft = requiredFileType;
   private validLength = 5;
   private validArticleTitleLength: 5;
   private categories = [
@@ -169,7 +191,7 @@ export class ArticleService {
       slides: slidesFormArray,
       tags: this.fb.array([]),
       category: this.fb.control(['category', Validators.required]),
-      thumbnail: this.fb.control(['thumbnail', [Validators.required]]), //, requiredFile('png', 'jpg', 'jpeg')
+      thumbnail: this.fb.control(['thumbnail', [Validators.required, this.rft('png,jpg,jpeg')]]),
       release_date: this.fb.control(['release_date', Validators.required]),
 
     });

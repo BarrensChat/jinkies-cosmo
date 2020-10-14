@@ -31,17 +31,9 @@
                   <mat-card-title>
                     Media File
                   </mat-card-title>
-                    <!-- <mat-form-field appearance="fill" class="w-100">
-                        <mat-label>Media (video or img)</mat-label>
-                        <input matInput type="text" id="media" formControlName="media" [formControl]="this.slide.controls.media">
-                    </mat-form-field> -->
 
-                    <!-- <mat-form-field appearance="fill" class="w-100"> -->
+                    <app-file-upload formControlName='media' fileName="mediaFile{{this.slideIndex}}" [fc]="this.slide.controls.media"></app-file-upload>
 
-                    <button type="button" class="mb-5" color='primary' mat-raised-button (click)="fileInput.click()">Select Image</button>
-                    <input hidden (change)="onFileSelected('thumbnail')" #fileInput type="file" id="thumbnail">
-
-                    <!-- </mat-form-field> -->
 
                     <div *ngIf="this.slide.controls.media.invalid && (this.slide.controls.media.dirty || this.slide.controls.media.touched)"
                         class="alert alert-danger">
@@ -65,13 +57,10 @@
                     Audio File (Not Required)
                   </mat-card-title>
 
-                  <button type="button" class="mb-5" color='primary' mat-raised-button (click)="fileInput.click()">Select Image</button>
-                  <input hidden (change)="onFileSelected('background_audio')" #fileInput type="file" id="background_audio">
+                  <app-file-upload formControlName='background_audio' fileName="backgroundAudioFile{{this.slideIndex}}" [fc]="this.slide.controls.background_audio"></app-file-upload>
 
                 </div>
               </div>
-
-
 
                 <mat-card-title>
                   Text Content
