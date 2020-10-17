@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, FormArray,  AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { strict } from 'assert';
+import { FormGroup, FormControl, FormArray,  FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar} from '@angular/material/snack-bar';
+
 
 export function requiredFileType( types: string ) {
   return (control: FormControl) => {
@@ -38,7 +39,6 @@ export interface DefaultArticleObject {
   title: string;
   slides: FormArray;
   tags: Array<number>;
-  thumbnail: string;
 }
 
 @Injectable({
@@ -75,10 +75,10 @@ export class ArticleService {
     {id: 15, name: 'Nonprofits & Activism'}
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {
     // this.articleFormArray = new FormArray([]);
     this.slideFormArray = new FormArray([]);
-    this.newArticle = {title: '', slides: this.slideFormArray, tags: [], thumbnail: ''};
+    this.newArticle = {title: '', slides: this.slideFormArray, tags: []};
   }
 
   getCategories(): Array<any> {
@@ -133,6 +133,19 @@ export class ArticleService {
     const formGroup = this.articleFormGroup.controls.slides.controls[index];
     this.deleteSlide(index);
     this.insertSlide(index + direction, formGroup);
+
+    const textDirection = (direction > 0) ? 'Down' : 'Up';
+
+    this.snackBar.open('Slide ' + (index + 1) + ' moved', textDirection, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
+    // TODO: Creating snackbars from components. Will need to do something similar like modals
+    // this._snackBar.openFromComponent(PizzaPartyComponent, {
+    //   duration: this.durationInSeconds * 1000,
+    // });
   };
 
   deleteSlide = function(index: number) {
@@ -191,7 +204,10 @@ export class ArticleService {
       slides: slidesFormArray,
       tags: this.fb.array([]),
       category: this.fb.control(['category', Validators.required]),
-      thumbnail: this.fb.control(['thumbnail', [Validators.required, this.rft('png,jpg,jpeg')]]),
+      // thumbnail: this.fb.control(['thumbnail', [Validators.required, this.rft('png,jpg,jpeg')]]),
+      thumbnail: this.fb.group({
+        media: [null, [Validators.required, this.rft('png,jpg,jpeg')]],
+      }),
       release_date: this.fb.control(['release_date', Validators.required]),
 
     });

@@ -78,8 +78,8 @@ export class ArticleComponent implements OnInit {
     return this.articleFormGroup.get('title') as FormControl;
   }
 
-  thubmnail(): FormControl {
-    return this.articleFormGroup.get('thumbnail') as FormControl;
+  thubmnail(): FormGroup {
+    return this.articleFormGroup.get('thumbnail') as FormGroup;
   }
 
   tags(): FormArray {

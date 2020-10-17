@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, HostListener, ElementRef } from '@angular/core';
-import { ReactiveFormsModule, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
+import { ReactiveFormsModule, NG_VALUE_ACCESSOR, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-file-upload',
@@ -15,25 +15,17 @@ import { ReactiveFormsModule, NG_VALUE_ACCESSOR, FormControl } from '@angular/fo
 })
 export class FileUploadComponent implements OnInit {
 
-  @Input() fc: FormControl;
+  @Input() fc: FormGroup;
   @Input() fileName: string;
   onChange: () => void;
 
   public file: File | null = null;
   public fn = 'or drag and drop file here';
   public updated = false;
+  public imageURL: string;
 
-  @HostListener('change', ['$event.target.files']) emitFiles( event: FileList ) {
+  constructor( private host: ElementRef<HTMLInputElement>) {
 
-    // Using item(0) here because we only want one file.
-    const file = event && event.item(0);
-    this.file = file;
-    this.fc.setValue(file);
-    this.fn = file.name;
-    this.updated = true;
-  }
-
-  constructor( private host: ElementRef<HTMLInputElement> ) {
   }
 
   ngOnInit(): void {
@@ -44,6 +36,27 @@ export class FileUploadComponent implements OnInit {
     // clear file input
     this.host.nativeElement.value = '';
     this.file = null;
+  }
+
+  // Image Preview
+  showPreview(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+
+    this.fc.setValue({
+      media: file
+    });
+
+    // this.fc.updateValueAndValidity();
+
+    // File Preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageURL = reader.result as string;
+      this.fn = file.name;
+      this.updated = true;
+    };
+    reader.readAsDataURL(file);
+
   }
 
   registerOnChange( fn: () => void) {

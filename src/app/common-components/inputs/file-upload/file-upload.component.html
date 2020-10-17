@@ -1,12 +1,15 @@
 
-
 <label class="file-drop-box" for='{{this.fileName}}'>
-    <span *ngIf="!this.updated">Choose File</span>
-    <span>{{this.fn}}</span>
 
-    <input class="file-input" id="{{this.fileName}}" type="file" style="display:none">
+  <span *ngIf="!this.updated">Choose File</span>
+  <span>{{this.fn}}</span>
+
+  <input class="file-input" id="{{this.fileName}}" (change)="showPreview($event)" type="file" style="display:none"
+    accept="file_type | audio/* | video/* | image/* | media_type">
+
+  <div *ngIf="imageURL && imageURL !== ''">
+    <img class="imagePreview" [src]="imageURL" [alt]="this.fc.value.name">
+  </div>
+
 </label>
-
-<!-- <app-progress [progress]="progress"></app-progress> -->
-
 

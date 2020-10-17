@@ -22,6 +22,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -72,6 +73,7 @@ import { ConfirmModalComponent } from './common-components/modals/confirm-modal/
     FormsModule,
     ReactiveFormsModule,
     MatGridListModule,
+    MatSnackBarModule,
     NgbModule,
     JwtModule.forRoot({
       config: {
