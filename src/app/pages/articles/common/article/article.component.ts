@@ -17,7 +17,6 @@ export class ArticleComponent implements OnInit {
   @Input() mode: string;
 
   titleFormControl: FormControl;
-  thumbnail;
 
   // tag values
   visible = true;
@@ -78,7 +77,7 @@ export class ArticleComponent implements OnInit {
     return this.articleFormGroup.get('title') as FormControl;
   }
 
-  thubmnail(): FormGroup {
+  thumbnail(): FormGroup {
     return this.articleFormGroup.get('thumbnail') as FormGroup;
   }
 

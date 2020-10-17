@@ -17,7 +17,7 @@
         <div *ngIf="this.title().errors.minlength">
             Media must contain at least {{this.validLength()}} letters.
         </div>
-    </div>
+      </div>
     </mat-card-content>
   </mat-card>
 
@@ -86,6 +86,15 @@
             Thumbnail
           </mat-card-title>
           <app-file-upload  fileName="thumbnailFile" [fc]="this.articleFormGroup.controls.thumbnail"></app-file-upload>
+          <div *ngIf="this.thumbnail().invalid && (this.thumbnail().dirty || this.thumbnail().touched)" class="alert alert-danger">
+            <div *ngIf="this.thumbnail().errors.required">
+                Thumbnail is required.
+            </div>
+            <!-- TODO: get requested file type validation working -->
+            <!-- <div *ngIf="this.thumbnail().errors.minlength">
+
+            </div> -->
+          </div>
         </div>
 
         <div class="col-6">
