@@ -23,7 +23,7 @@ export class JwtService {
       console.log('---jwt token---', environment.fakeCreds[username].token);
       return true;
     }
-    
+
     return false;
 
     // return this.httpClient.post<{ access_token: string }>('http://www.jinkiescosmo.com/auth/login', { username, password }).pipe(tap(res => {
@@ -34,8 +34,8 @@ export class JwtService {
 
   register(username: string, password: string) {
     return this.httpClient.post<{ access_token: string }>('http://www.jinkiescosmo/auth/register', { username, password }).pipe(tap(res => {
-      this.login(username, password)
-    }))
+      this.login(username, password);
+    }));
   }
 
   logout() {

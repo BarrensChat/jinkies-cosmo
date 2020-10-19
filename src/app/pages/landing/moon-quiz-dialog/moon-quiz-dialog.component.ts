@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MoonQuizService } from '@services/moon-quiz.service';
-import { OkModalComponent } from '@common/modals/ok-modal/ok-modal.component';
+import { OkModalComponent } from '@components/modals/ok-modal/ok-modal.component';
 import { Router } from '@angular/router';
 
 @Component({

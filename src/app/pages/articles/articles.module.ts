@@ -19,6 +19,7 @@ import { ArticlesRoutingModule } from './articles-routing.module';
 import { NewArticleComponent } from './new-article/new-article.component';
 import { SlideComponent } from './common/slide/slide.component';
 import { ArticleComponent } from './common/article/article.component';
+import { FileUploadComponent } from '@components/inputs/file-upload/file-upload.component';
 
 
 @NgModule({
@@ -26,10 +27,12 @@ import { ArticleComponent } from './common/article/article.component';
     NewArticleComponent,
     SlideComponent,
     ArticleComponent,
+    FileUploadComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
+
     ReactiveFormsModule,
     MatButtonModule,
     MatTooltipModule,

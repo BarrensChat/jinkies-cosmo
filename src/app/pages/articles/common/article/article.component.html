@@ -17,12 +17,12 @@
         <div *ngIf="this.title().errors.minlength">
             Media must contain at least {{this.validLength()}} letters.
         </div>
-    </div>
+      </div>
     </mat-card-content>
   </mat-card>
 
   <div [formGroup]="articleFormGroup" *ngIf="this.slides().controls">
-    <span *ngFor="let formGroup of this.slides().controls; let i = index">
+    <span *ngFor="let formGroup of this.slides().controls; let i = index" id="slide{{i}}">
       <mat-divider class="mb-5" *ngIf="i != 0"></mat-divider>
       <app-slide
           [slide]='formGroup'
@@ -46,7 +46,7 @@
           <mat-form-field appearance="fill" class="w-100">
             <mat-chip-list #chipList aria-label="Tag selection">
               <mat-chip *ngFor="let tag of this.tags().controls; let i = index" [selectable]="selectable"
-                        [removable]="removable" (removed)="remove(tag)">
+                        [removable]="removable" (removed)="remove(i)">
                 {{tag.get('name').value}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
@@ -85,12 +85,15 @@
           <mat-card-title>
             Thumbnail
           </mat-card-title>
-          <!-- <mat-form-field appearance="fill" class="w-100"> -->
-
-            <button type="button" color='primary' mat-raised-button (click)="fileInput.click()">Select Image</button>
-            <input hidden (change)="onFileSelected('thumbnail')" #fileInput type="file" id="thumbnail">
-
-          <!-- </mat-form-field> -->
+          <app-file-upload  fileName="thumbnailFile" [fc]="this.articleFormGroup.controls.thumbnail"></app-file-upload>
+          <div *ngIf="this.thumbnail().invalid && (this.thumbnail().dirty || this.thumbnail().touched)" class="alert alert-danger">
+            <div *ngIf="this.thumbnail().errors.required">
+                Thumbnail is required.
+            </div>
+            <div *ngIf="this.thumbnail().errors.invalidImageFormat">
+                Invalid file format for image.
+            </div>
+          </div>
         </div>
 
         <div class="col-6">
@@ -107,7 +110,7 @@
           </mat-form-field>
 
           <div *ngIf="this.releaseDate().invalid && (this.releaseDate().dirty || this.releaseDate().touched)" class="alert alert-danger">
-            <!--For some reason this control doesnt have errors for required
+            <!-- this control doesnt have errors for required
               <div *ngIf="this.releaseDate().errors.required"> -->
                 Release Date is required.
             <!-- </div> -->

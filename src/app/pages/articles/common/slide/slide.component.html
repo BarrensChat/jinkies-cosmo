@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" [@constructDestruct]="constructState === this.slideStates.CONSTRUCT ? this.slideStates.CONSTRUCT: this.slideStates.DESTRUCT">
 
     <div class="col-12 col-md-2 slide-index-container">
         <button class='slide-index' color="accent" mat-mini-fab disabled aria-label="Slide Number">
@@ -31,33 +31,20 @@
                   <mat-card-title>
                     Media File
                   </mat-card-title>
-                    <!-- <mat-form-field appearance="fill" class="w-100">
-                        <mat-label>Media (video or img)</mat-label>
-                        <input matInput type="text" id="media" formControlName="media" [formControl]="this.slide.controls.media">
-                    </mat-form-field> -->
 
-                    <!-- <mat-form-field appearance="fill" class="w-100"> -->
+                  <app-file-upload fileName="mediaFile{{this.slideIndex}}" [fc]="this.slide.controls.media"></app-file-upload>
 
-                    <button type="button" class="mb-5" color='primary' mat-raised-button (click)="fileInput.click()">Select Image</button>
-                    <input hidden (change)="onFileSelected('thumbnail')" #fileInput type="file" id="thumbnail">
 
-                    <!-- </mat-form-field> -->
+                  <div *ngIf="this.slide.controls.media.invalid && (this.slide.controls.media.dirty || this.slide.controls.media.touched)"
+                    class="alert alert-danger">
 
-                    <div *ngIf="this.slide.controls.media.invalid && (this.slide.controls.media.dirty || this.slide.controls.media.touched)"
-                        class="alert alert-danger">
-
-                      <div *ngIf="this.slide.controls.media.errors.required">
-                          Media is required.
-                      </div>
-                      <div *ngIf="this.slide.controls.media.errors.minlength">
-                          Media must contain at least {{validLength}} letters.
-                      </div>
-                      <!-- for custom validators
-                          <div *ngIf="media.errors.forbiddenName">
-
-                          </div>
-                      -->
+                    <div *ngIf="this.slide.controls.media.errors.required">
+                      Media is required.
                     </div>
+                    <div *ngIf="this.slide.controls.media.errors.invalidImageFormat">
+                      Invalid file format for image.
+                    </div>
+                  </div>
 
                 </div>
                 <div class="col-6">
@@ -65,25 +52,29 @@
                     Audio File (Not Required)
                   </mat-card-title>
 
-                  <button type="button" class="mb-5" color='primary' mat-raised-button (click)="fileInput.click()">Select Image</button>
-                  <input hidden (change)="onFileSelected('background_audio')" #fileInput type="file" id="background_audio">
+                  <!-- TODO: make this allow for image AND video -->
+                  <app-file-upload formControlName='background_audio' fileName="backgroundAudioFile{{this.slideIndex}}" [fc]="this.slide.controls.background_audio"></app-file-upload>
 
+                  <div *ngIf="this.slide.controls.background_audio.invalid && (this.slide.controls.background_audio.dirty || this.slide.controls.background_audio.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="this.slide.controls.background_audio.errors.invalidAudioFormat">
+                      Invalid file format for image.
+                    </div>
+                  </div>
                 </div>
               </div>
-
-
 
                 <mat-card-title>
                   Text Content
                 </mat-card-title>
                 <mat-form-field appearance="fill" class="w-100">
                     <mat-label>Content</mat-label>
-                    <textarea matInput placeholder="Add a description" formControlName="description" [formControl]="this.slide['controls'].description"></textarea>
+                    <textarea matInput placeholder="Add a description" formControlName="description" [formControl]="this.slide.controls.description"></textarea>
                 </mat-form-field>
 
-                <div *ngIf="this.slide['controls'].description.invalid && (this.slide['controls'].description.dirty || this.slide['controls'].description.touched)" class="alert alert-danger">
+                <div *ngIf="this.slide.controls.description.invalid && (this.slide.controls.description.dirty || this.slide.controls.description.touched)" class="alert alert-danger">
                     <div *ngIf="this.slide.controls.description.errors.required">
-                        Description is required.
+                        Content is required.
                     </div>
                     <div *ngIf="this.slide.controls.description.errors.minlength">
                         Media must contain at least {{validLength}} letters.

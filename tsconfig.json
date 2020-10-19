@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@common/*": ["app/common-components/*"],
+      "@components/*": ["app/common-components/*"],
+      "@classes/*": ["app/common-classes/*"],
       "@services/*": ["app/services/*"],
       "@assets/*": ["assets/*"],
     },

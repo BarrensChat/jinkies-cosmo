@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormArray, FormControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ArticleService } from '@services/business/article.service';
-import { OkModalComponent } from '@common/modals/ok-modal/ok-modal.component';
+import { OkModalComponent } from '@components/modals/ok-modal/ok-modal.component';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
@@ -17,7 +17,6 @@ export class ArticleComponent implements OnInit {
   @Input() mode: string;
 
   titleFormControl: FormControl;
-  thumbnail;
 
   // tag values
   visible = true;
@@ -62,22 +61,6 @@ export class ArticleComponent implements OnInit {
     }
   }
 
-  onFileSelected(selector: string) {
-    const inputNode: any = document.querySelector('#' + selector);
-
-    if (typeof (FileReader) !== 'undefined') {
-      const reader = new FileReader();
-
-      reader.onload = (e: any) => {
-        console.log('setting----->', e.target.result);
-        // this.[selector] = e.target.result;
-        this.thumbnail = e.target.result;
-      };
-
-      reader.readAsArrayBuffer(inputNode.files[0]);
-    }
-  }
-
   slides(): FormArray {
     return this.articleFormGroup.get('slides') as FormArray;
   }
@@ -94,8 +77,8 @@ export class ArticleComponent implements OnInit {
     return this.articleFormGroup.get('title') as FormControl;
   }
 
-  thubmnail(): FormControl {
-    return this.articleFormGroup.get('thumbnail') as FormControl;
+  thumbnail(): FormGroup {
+    return this.articleFormGroup.get('thumbnail') as FormGroup;
   }
 
   tags(): FormArray {

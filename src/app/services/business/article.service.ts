@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, FormArray,  AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormArray,  FormBuilder, Validators, Validator } from '@angular/forms';
+import { MatSnackBar} from '@angular/material/snack-bar';
+import { VideoFileValidator, AudioFileValidator, ImageFileValidator } from '@classes/validators';
+
 
 
 export interface DefaultSlideObject {
@@ -16,7 +19,7 @@ export interface DefaultTagsObject {
 export interface DefaultArticleObject {
   title: string;
   slides: FormArray;
-  // tags: Array<number>
+  tags: Array<number>;
 }
 
 @Injectable({
@@ -52,10 +55,11 @@ export class ArticleService {
     {id: 15, name: 'Nonprofits & Activism'}
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {
     // this.articleFormArray = new FormArray([]);
     this.slideFormArray = new FormArray([]);
-    this.newArticle = {title: '', slides: this.slideFormArray};
+    this.newArticle = {title: '', slides: this.slideFormArray, tags: []};
+
   }
 
   getCategories(): Array<any> {
@@ -104,13 +108,24 @@ export class ArticleService {
 
   getValidLength = function() {
     return this.validLength;
-  }
+  };
 
   moveSlide = function(index: number, direction: number) {
     const formGroup = this.articleFormGroup.controls.slides.controls[index];
-
     this.deleteSlide(index);
     this.insertSlide(index + direction, formGroup);
+
+    const textDirection = (direction > 0) ? 'Down' : 'Up';
+
+    // TODO: Creating snackbars from components. Will need to do something similar like modals
+    // this._snackBar.openFromComponent(PizzaPartyComponent, {
+    //   duration: this.durationInSeconds * 1000,
+    // });
+    this.snackBar.open('Slide ' + (index + 1) + ' moved', textDirection, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   };
 
   deleteSlide = function(index: number) {
@@ -145,8 +160,8 @@ export class ArticleService {
 
     const slideFormGroup = this.fb.group({
       order: orderFormControl,
-      media: this.fb.control(['media', [Validators.required]]),
-      background_audio: this.fb.control(['background_audio', []]),
+      media: [null, [Validators.required, ImageFileValidator.validate]],
+      background_audio: [null, [AudioFileValidator.validate]],
       description: descriptionFormControl,
     });
 
@@ -169,8 +184,10 @@ export class ArticleService {
       slides: slidesFormArray,
       tags: this.fb.array([]),
       category: this.fb.control(['category', Validators.required]),
-      thumbnail: this.fb.control(['thumbnail', Validators.required]),
+
+      thumbnail: [null, [Validators.required, ImageFileValidator.validate]],
       release_date: this.fb.control(['release_date', Validators.required]),
+
     });
 
     return articleFormGroup;
