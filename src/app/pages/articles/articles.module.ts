@@ -19,7 +19,7 @@ import { ArticlesRoutingModule } from './articles-routing.module';
 import { NewArticleComponent } from './new-article/new-article.component';
 import { SlideComponent } from './common/slide/slide.component';
 import { ArticleComponent } from './common/article/article.component';
-import { FileUploadComponent } from '@common/inputs/file-upload/file-upload.component';
+import { FileUploadComponent } from '@components/inputs/file-upload/file-upload.component';
 
 
 @NgModule({

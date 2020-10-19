@@ -1,28 +1,9 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, FormArray,  FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormArray,  FormBuilder, Validators, Validator } from '@angular/forms';
 import { MatSnackBar} from '@angular/material/snack-bar';
+import { VideoFileValidator, AudioFileValidator, ImageFileValidator } from '@classes/validators';
 
 
-export function requiredFileType( types: string ) {
-  return (control: FormControl) => {
-    const file = control.value;
-    const allowedValues = types.toLowerCase();
-    const allowedValuesArray = allowedValues.split(',');
-
-    if ( file ) {
-      const extension = file.name.split('.')[1].toLowerCase();
-
-      if (allowedValuesArray.includes(extension.toLowerCase()) ) {
-        return {
-          requiredFileType: true
-        };
-      }
-      return null;
-    }
-
-    return null;
-  };
-}
 
 export interface DefaultSlideObject {
   order: number;
@@ -55,7 +36,6 @@ export class ArticleService {
   ];
   private newSlide: DefaultSlideObject = {order: 1, media: '', description: '', tags: []};
   private newArticle: DefaultArticleObject;
-  private rft = requiredFileType;
   private validLength = 5;
   private validArticleTitleLength: 5;
   private categories = [
@@ -79,6 +59,7 @@ export class ArticleService {
     // this.articleFormArray = new FormArray([]);
     this.slideFormArray = new FormArray([]);
     this.newArticle = {title: '', slides: this.slideFormArray, tags: []};
+
   }
 
   getCategories(): Array<any> {
@@ -179,8 +160,8 @@ export class ArticleService {
 
     const slideFormGroup = this.fb.group({
       order: orderFormControl,
-      media: this.fb.control(['media', [Validators.required]]),
-      background_audio: this.fb.control(['background_audio', []]),
+      media: [null, [Validators.required, ImageFileValidator.validate]],
+      background_audio: [null, [AudioFileValidator.validate]],
       description: descriptionFormControl,
     });
 
@@ -203,10 +184,8 @@ export class ArticleService {
       slides: slidesFormArray,
       tags: this.fb.array([]),
       category: this.fb.control(['category', Validators.required]),
-      // thumbnail: this.fb.control(['thumbnail', [Validators.required, this.rft('png,jpg,jpeg')]]),
-      thumbnail: this.fb.group({
-        media: [null, [Validators.required, this.rft('png,jpg,jpeg')]],
-      }),
+
+      thumbnail: [null, [Validators.required, ImageFileValidator.validate]],
       release_date: this.fb.control(['release_date', Validators.required]),
 
     });

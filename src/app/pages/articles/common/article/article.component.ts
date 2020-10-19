@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormArray, FormControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ArticleService } from '@services/business/article.service';
-import { OkModalComponent } from '@common/modals/ok-modal/ok-modal.component';
+import { OkModalComponent } from '@components/modals/ok-modal/ok-modal.component';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 

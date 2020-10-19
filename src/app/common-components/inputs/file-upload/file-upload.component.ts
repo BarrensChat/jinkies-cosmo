@@ -42,9 +42,7 @@ export class FileUploadComponent implements OnInit {
   showPreview(event) {
     const file = (event.target as HTMLInputElement).files[0];
 
-    this.fc.setValue({
-      media: file
-    });
+    this.fc.setValue(file);
 
     // this.fc.updateValueAndValidity();
 

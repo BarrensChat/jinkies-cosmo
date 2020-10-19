@@ -90,10 +90,9 @@
             <div *ngIf="this.thumbnail().errors.required">
                 Thumbnail is required.
             </div>
-            <!-- TODO: get requested file type validation working -->
-            <!-- <div *ngIf="this.thumbnail().errors.minlength">
-
-            </div> -->
+            <div *ngIf="this.thumbnail().errors.invalidImageFormat">
+                Invalid file format for image.
+            </div>
           </div>
         </div>
 

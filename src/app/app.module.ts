@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { JwtModule } from '@auth0/angular-jwt';
 
+// Tool modules
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -24,6 +25,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
+// Stand alone files
+import { VideoFileValidator, ImageFileValidator, AudioFileValidator } from './common-classes/validators';
+
+// Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
@@ -51,6 +56,11 @@ import { ConfirmModalComponent } from './common-components/modals/confirm-modal/
     LoginComponent,
     ArticlesComponent,
     ConfirmModalComponent,
+
+    // stand alone files
+    VideoFileValidator,
+    ImageFileValidator,
+    AudioFileValidator
   ],
   imports: [
     AppRoutingModule,
@@ -82,7 +92,7 @@ import { ConfirmModalComponent } from './common-components/modals/confirm-modal/
              allowedDomains: ['http://localhost:4200/', 'https://jinkiescosmo.com'],
              disallowedRoutes: ['http://localhost:4200/articles']
       }
-    })
+    }),
   ],
   providers: [
     {

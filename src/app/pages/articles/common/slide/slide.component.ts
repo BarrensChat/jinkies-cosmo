@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, AfterContentChecked, OnDestroy, I
 import { FormArray, FormGroup } from '@angular/forms';
 import { trigger, state, style, animate, transition} from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmModalComponent } from '@common/modals/confirm-modal/confirm-modal.component';
+import { ConfirmModalComponent } from '@components/modals/confirm-modal/confirm-modal.component';
 
 
 @Component({
@@ -32,7 +32,6 @@ export class SlideComponent implements OnInit, OnDestroy, AfterContentChecked  {
   @Input() slide: FormGroup;
   @Input() form: FormArray;
 
-  media;
   constructState: string;
   slideStates = {
     CONSTRUCT: 'construct',
@@ -50,7 +49,6 @@ export class SlideComponent implements OnInit, OnDestroy, AfterContentChecked  {
   }
 
   ngOnInit(): void {
-
   }
 
   ngAfterContentChecked(): void {
@@ -60,22 +58,6 @@ export class SlideComponent implements OnInit, OnDestroy, AfterContentChecked  {
 
   ngOnDestroy(): void {
 
-  }
-
-  onFileSelected(selector: string) {
-    const inputNode: any = document.querySelector('#' + selector);
-
-    if (typeof (FileReader) !== 'undefined') {
-      const reader = new FileReader();
-
-      reader.onload = (e: any) => {
-        console.log('setting----->', e.target.result);
-        // this.[selector] = e.target.result;
-        this.media = e.target.result;
-      };
-
-      reader.readAsArrayBuffer(inputNode.files[0]);
-    }
   }
 
   deleteSlide() {
