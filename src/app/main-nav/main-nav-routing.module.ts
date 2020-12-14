@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DomainsComponent } from '../pages/domains/domains.component';
 import { AngularHelperLinksComponent } from './angular-helper-links/angular-helper-links.component';
 import { MainNavComponent } from './main-nav.component';
 import { ContactComponent } from 'app/pages/contact/contact.component';
@@ -10,10 +9,6 @@ const appRoutes: Routes = [
     path: '',
     component: MainNavComponent,
     children: [
-      {
-        path: 'domains',
-        component: DomainsComponent
-      },
       // {
       //   path: 'helpers',
       //   component: AngularHelperLinksComponent
