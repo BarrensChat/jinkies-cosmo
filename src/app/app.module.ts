@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -24,6 +24,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 // Stand alone files
 import { VideoFileValidator, ImageFileValidator, AudioFileValidator } from './common-classes/validators';
@@ -68,6 +69,7 @@ import { ConfirmModalComponent } from './common-components/modals/confirm-modal/
     BrowserAnimationsModule,
     LayoutModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -84,6 +86,7 @@ import { ConfirmModalComponent } from './common-components/modals/confirm-modal/
     ReactiveFormsModule,
     MatGridListModule,
     MatSnackBarModule,
+    MatProgressBarModule,
     NgbModule,
     JwtModule.forRoot({
       config: {

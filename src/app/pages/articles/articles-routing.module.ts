@@ -14,8 +14,12 @@ const appRoutes: Routes = [
         component: NewArticleComponent
       },
       {
-        path: 'articles',
+        path: 'all',
         component: AllArticlesComponent
+      },
+      {
+        path: '',
+        redirectTo: 'new'
       }
     ]
   }

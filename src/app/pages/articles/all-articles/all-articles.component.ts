@@ -28,11 +28,14 @@ export class AllArticlesComponent implements OnInit {
 
     this.articles = this.as.getArticlesRequest()
       .subscribe(data => {
-        console.log('-========', data);
+        console.log('Articles ->', data);
+        if (data && !data['error']) {
+          this.articles = data;
+        }
 
-        this.articles = data.body;
+        //TODO: throw errors if bad request
+
       });
-
   }
 
 }

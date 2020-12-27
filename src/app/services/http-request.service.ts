@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, of } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { AppConstants } from '@constants/app-constants';
 
 
@@ -25,6 +25,12 @@ import { AppConstants } from '@constants/app-constants';
 
   // these are the defaults - {observe: 'body', responseType: 'json'}
 
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': 'auth-token'
+    })
+  };
 
 @Injectable({
   providedIn: 'root'
@@ -35,35 +41,43 @@ export class HttpRequestService {
 
   getRequest(endpointPath: string) {
 
-    return this.http.get(AppConstants.API_ENDPOINT + endpointPath, { observe: 'response' })
+    // If there are CORS problems opt to using jsonp
+    return this.http.get(AppConstants.API_ENDPOINT + endpointPath)
       .pipe(
-        retry(AppConstants.API_REQUEST_RETRY_COUNT), // retry a failed request up to 3 times
+        retry(AppConstants.API_REQUEST_RETRY_COUNT), // retry a failed request up to API_REQUEST_RETRY_COUNT times
         catchError(this.handleError)
       );
-
   }
 
-  // postRequest(hero: Hero): Observable<Hero> {
-  //   return this.http.post<Hero>(this.heroesUrl, hero, httpOptions)
-  //     .pipe(
-  //       catchError(this.handleError('addHero', hero))
-  //     );
-  // }
+  // body - The data to POST in the body of the request.
+  // options` - An object containing method options which, in this case, specify required headers.
+  postRequest(endpointPath: string, payload): Observable<any> {
+
+    // return this.http.post<any>(AppConstants.API_ENDPOINT + endpointPath, hero, httpOptions)
+    //   .pipe(
+    //     catchError(this.handleError('addHero', hero))
+    //   );
+
+    console.log('posting ->', httpOptions, 'payload ->', payload);
+
+      return this.http.post(AppConstants.API_ENDPOINT + endpointPath, payload, httpOptions).pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
     } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong.
+
       console.error(
         `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+        `body was: `, error.error);
     }
     // Return an observable with a user-facing error message.
-    return throwError(
-      'Something bad happened; please try again later.');
+    return of(error);
   }
+
 
 }

@@ -37,7 +37,7 @@ export interface DefaultArticleObject {
 })
 export class ArticleService {
 
-  private rqArticles = 'articles';
+  private rqArticlesPath = 'articles';
   private articleFormGroup: FormGroup;
   private slideFormArray: FormArray;
   private newTags: DefaultTagsObject[] = [
@@ -159,7 +159,7 @@ export class ArticleService {
   };
 
   getArticlesRequest() {
-    return this.hs.getRequest(this.rqArticles);
+    return this.hs.getRequest(this.rqArticlesPath);
   }
 
   getFreshSlideFormGroup(order: number) {
