@@ -12,31 +12,43 @@
                         <mat-card-header>
                             <!-- <div mat-card-avatar class="example-header-image"></div> -->
                             <mat-card-title>Jinkies Cosmo</mat-card-title>
-                            <mat-card-subtitle>Login</mat-card-subtitle>
+                            <mat-card-subtitle>Email</mat-card-subtitle>
                         </mat-card-header>
-                        
+
                         <mat-card-content>
-                            <mat-form-field class="w-100">
-                                <mat-label>Username</mat-label>
-                                <!-- <input matInput type="text" placeholder="Enter username" id="username" [(ngModel)]="username" > -->
-                                <input matInput type="text" placeholder="Enter username" [formControl]="username">
-                                <!-- [formControl="slide.media"  formControlName="username" "-->
-                            </mat-form-field>
-                            
-                            <mat-form-field class="w-100">
-                                <mat-label>Password</mat-label>
-                                <!-- <input type="password" matInput placeholder="Enter password" id="password" [(ngModel)]="password"> -->
-                                <input type="password" matInput placeholder="Enter password" [formControl]="password">
-                                <!-- [formControl]="slide.content"  formControlName="password" "-->
-                            </mat-form-field>
+                          <mat-form-field class="w-100">
+                              <mat-label>email</mat-label>
+                              <!-- <input matInput type="text" placeholder="Enter email" id="email" [(ngModel)]="email" > -->
+                              <input matInput type="text" placeholder="Enter email" [formControl]="email">
+                              <!-- [formControl="slide.media"  formControlName="email" "-->
+                          </mat-form-field>
+
+                          <mat-form-field class="w-100">
+                              <mat-label>Password</mat-label>
+                              <!-- <input type="password" matInput placeholder="Enter password" id="password" [(ngModel)]="password"> -->
+                              <input type="password" matInput placeholder="Enter password" [formControl]="password">
+                              <!-- [formControl]="slide.content"  formControlName="password" "-->
+                          </mat-form-field>
+
+                          <div *ngIf="(this.password.invalid && (this.password.touched || this.password.dirty)) || (this.email.invalid && (this.email.dirty || this.email.touched))" class="alert alert-danger">
+                            <div *ngIf="this.email.errors && this.password">
+                              Failed to login, incorrect email/password.
+                            </div>
+                          </div>
                         </mat-card-content>
-                        
-                        
-                        <mat-card-actions class="text-right">
+
+                        <div class='row'>
+                          <div class='col-12'>
+                            <mat-progress-bar class='loading-bar' mode="indeterminate"  *ngIf="this.showLoading"></mat-progress-bar>
+                          </div>
+                        </div>
+
+                        <mat-card-actions class="text-right" >
                             <button
+                            *ngIf="!this.showLoading"
                             type="submit"
-                            mat-raised-button 
-                            color='primary' 
+                            mat-raised-button
+                            color='primary'
                             matTooltipPosition="below"
                             (click)="login()">
                                 Login
@@ -54,4 +66,4 @@
         <img class="bottom-right-gif" src='assets/images/Duke-Stripper.gif' alt='jinkies-logo'>
     </div>
 </div>
-    
+

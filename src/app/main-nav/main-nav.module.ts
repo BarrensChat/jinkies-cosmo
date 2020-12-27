@@ -17,7 +17,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSliderModule } from '@angular/material/slider';
-import { DomainsComponent } from '../pages/domains/domains.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MainNavRoutingModule } from './main-nav-routing.module';
 import { AngularHelperLinksComponent } from './angular-helper-links/angular-helper-links.component';
@@ -29,11 +28,10 @@ import { CarouselComponent } from '../common-components/carousel/carousel.compon
   declarations: [
     CarouselComponent,
     AngularHelperLinksComponent,
-    DomainsComponent,
   ],
   imports: [
     MainNavRoutingModule,
-    CommonModule, 
+    CommonModule,
     NgbModule,
     FontAwesomeModule,
     MatToolbarModule,

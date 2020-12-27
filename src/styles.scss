@@ -17,6 +17,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 //     min-height: 100%;
 // }
 
+.loading-bar {
+  position: fixed;
+  top: 30px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
 //------------------ Bootstrap Custom Styles ---------------------
 .list-group-item {
     background-color: $app-grey !important;
@@ -58,7 +65,7 @@ ngb-carousel {
     .carousel-inner {
         overflow: visible;
     }
-    
+
     .carousel-item {
         display: flex !important;
         opacity: 0;
@@ -66,13 +73,13 @@ ngb-carousel {
         transition: opacity 1.2s ease-in-out, visibility 1.2s;
         z-index: -1;
     }
-    
+
     .carousel-item.active{
         opacity: 1;
         visibility: visible;
         z-index: 10;
     }
-    
+
     .carousel-control-prev, .carousel-control-next, .carousel-indicators {
         z-index: 20;
         cursor: pointer;

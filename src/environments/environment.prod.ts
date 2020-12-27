@@ -1,21 +1,8 @@
 export const environment = {
   production: true,
   tracing: false,
-  domains_for_sale: {
-    'COM': [
-      'scotiabankbitcoin',
-      'tangerinebitcoin',
-      'homealoneclub',
-    ],
-    'CA': [
-      'tdbitcoin',
-      'tdcryptocurrency',
-      'rbcbitcoin',
-      'cibcbitcoin',
-      'scotiabankbitcoin',
-      'tangerinebitcoin'
-    ]
-  },
+  api_endpoint: 'http://jinkiescosmobeanstalk-env.eba-vcfvvctp.us-east-2.elasticbeanstalk.com/api/',
+  api_request_retry_count: 3,
   fakeCreds: {
     sonic: {
       pw: 'dankeykang',

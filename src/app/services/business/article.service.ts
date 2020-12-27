@@ -2,8 +2,18 @@ import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, FormArray,  FormBuilder, Validators, Validator } from '@angular/forms';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { VideoFileValidator, AudioFileValidator, ImageFileValidator } from '@classes/validators';
+import { HttpRequestService } from '@services/http-request.service';
+import { Observable } from 'rxjs';
 
-
+export interface TableElementColumns {
+  created_at: string;
+  performance: number;
+  user_id: number;
+  url: string;
+  category: {
+    name: string;
+  }
+}
 
 export interface DefaultSlideObject {
   order: number;
@@ -27,6 +37,7 @@ export interface DefaultArticleObject {
 })
 export class ArticleService {
 
+  private rqArticlesPath = 'articles';
   private articleFormGroup: FormGroup;
   private slideFormArray: FormArray;
   private newTags: DefaultTagsObject[] = [
@@ -55,11 +66,17 @@ export class ArticleService {
     {id: 15, name: 'Nonprofits & Activism'}
   ];
 
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {
+  private articleTableHeaders = ['id', 'title', 'state', 'kind', 'live_date'];
+
+  constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private hs: HttpRequestService) {
     // this.articleFormArray = new FormArray([]);
     this.slideFormArray = new FormArray([]);
     this.newArticle = {title: '', slides: this.slideFormArray, tags: []};
 
+  }
+
+  getTableHeaders(): Array<any> {
+    return this.articleTableHeaders;
   }
 
   getCategories(): Array<any> {
@@ -140,6 +157,10 @@ export class ArticleService {
     }
 
   };
+
+  getArticlesRequest() {
+    return this.hs.getRequest(this.rqArticlesPath);
+  }
 
   getFreshSlideFormGroup(order: number) {
     // const mediaFormControl = new FormControl('media', [
