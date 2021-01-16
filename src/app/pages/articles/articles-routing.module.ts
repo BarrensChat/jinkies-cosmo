@@ -18,6 +18,9 @@ const appRoutes: Routes = [
         component: AllArticlesComponent
       },
       {
+        path: 'polly', loadChildren: () => import('../polly/polly.module').then(m => m.PollyModule),
+      },
+      {
         path: '',
         redirectTo: 'new'
       }

@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       this.showLoading = false;
 
       if (this.jwtService.loggedIn){
-        this.router.navigate(['articles']);
+        this.router.navigate(['jinkies']);
 
       } else {
         console.error('Password or Login incorrect.', this.email.value, this.password.value)
@@ -47,8 +47,6 @@ export class LoginComponent implements OnInit {
             this.email.setErrors({'invalid': data.error.email});
           }
         }
-
-        console.log('----', this.email);
       }
     });
 

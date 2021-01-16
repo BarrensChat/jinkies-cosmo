@@ -1,34 +1,3 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <mat-toolbar class='text-center main-toolbar-menu'>
-      <a class='home-logo-link' mat-list-item routerLink="/" routerLinkActive="active">
-          <img class='home-logo' src='assets/images/kermit.png' alt='kermit.png'>
-      </a>
-    </mat-toolbar>
-    <mat-nav-list class='main-list'>
-      <a mat-list-item routerLink="new" routerLinkActive="active">New Article</a>
-      <a mat-list-item routerLink="all" routerLinkActive="active">Articles</a>
-      <!-- <a mat-list-item routerLink="helpers" routerLinkActive="active">Helpers</a> -->
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>Articles</span>
-    </mat-toolbar>
+<router-outlet></router-outlet>
 
-    <div class="main-content">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+

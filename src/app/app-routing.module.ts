@@ -12,12 +12,19 @@ const appRoutes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'lander',
+    path: 'jinkies',
+    canActivate: [AuthGuardService],
     component: LandingComponent,
-  },
-  {
-    path: 'articles', loadChildren: () => import('./pages/articles/articles.module').then(m => m.ArticlesModule),
-    canActivate: [AuthGuardService]
+    children: [
+        {
+          path: 'articles', loadChildren: () => import('./pages/articles/articles.module').then(m => m.ArticlesModule),
+          canActivate: [AuthGuardService]
+        },
+        {
+          path: 'polly', loadChildren: () => import('./pages/polly/polly.module').then(m => m.PollyModule),
+          canActivate: [AuthGuardService]
+        },
+    ]
   },
   {
     path: 'menu', loadChildren: () => import('./main-nav/main-nav.module').then(m => m.MainNavModule),
