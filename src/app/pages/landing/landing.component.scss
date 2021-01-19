@@ -31,4 +31,15 @@ padding: 10px;
 
 .main-list{
   margin-top: 40px;
+
+
+}
+
+.menu-link {
+  width: 200px;
+  text-align: center;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
 }

@@ -190,6 +190,8 @@ export class ArticleService {
   }
 
   getFreshArticleFormGroup() {
+
+    //TODO: use a uniform way of setting these controls / groups / arrays. Requires testing.
     const titleFormControl = new FormControl('title', [
       Validators.required,
       Validators.minLength(this.validArticleTitleLength),

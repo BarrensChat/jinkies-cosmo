@@ -1,1 +1,75 @@
-<p>polly works!</p>
+
+<div [formGroup]='pollyFormGroup'>
+
+  <mat-card class="mb-5">
+    <mat-card-title>Title</mat-card-title>
+
+    <!-- <mat-card-content [formGroup]='this.title'> -->
+    <mat-card-content>
+      <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="Enter a title for the polly" type="text" id="title" formControlName="title" [formControl]="this.title()" >
+      </mat-form-field>
+      <div *ngIf="this.title().invalid && (this.title().dirty || this.title().touched)" class="alert alert-danger">
+        <div *ngIf="this.title().errors.required">
+            Description is required.
+        </div>
+        <div *ngIf="this.title().errors.minlength">
+            Title must contain at least {{this.validLength()}} letters.
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="mt-5 mb-5">
+    <mat-card-content>
+      <div class="row mb-3">
+
+        <div class="col-6">
+          <mat-card-title>
+            Language
+          </mat-card-title>
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Language</mat-label>
+            <mat-select id='language_code' ngDefaultControl  name='language_code' formControlName="language_code" [formControl]="this.languageCode()" >
+              <mat-option *ngFor="let language_code of this.languages() | keyvalue" value="{{language_code.value}}">{{language_code.key}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div *ngIf="this.languageCode().invalid && (this.languageCode().dirty || this.languageCode().touched)" class="alert alert-danger">
+            <div *ngIf="this.languageCode().errors.required">
+                Language is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <mat-card-title>
+            Speech
+          </mat-card-title>
+          <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Speech</mat-label>
+              <textarea matInput placeholder="Polly Speech" formControlName="text" [formControl]="this.text()"></textarea>
+          </mat-form-field>
+
+          <div *ngIf="this.text().invalid && (this.text().dirty || this.text().touched)" class="alert alert-danger">
+            <div *ngIf="this.text().errors.required">
+                Speech text is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row mb-3">
+
+
+
+
+      </div>
+
+
+
+    </mat-card-content>
+  </mat-card>
+</div>

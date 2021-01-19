@@ -9,10 +9,16 @@
       </a>
     </mat-toolbar>
     <mat-nav-list class='main-list'>
-      <a mat-list-item routerLink="articles/new" routerLinkActive="active">New Article</a>
-      <a mat-list-item routerLink="articles/all" routerLinkActive="active">Articles</a>
-      <a mat-list-item routerLink="polly/new" routerLinkActive="active">Polly</a>
-      <!-- <a mat-list-item routerLink="helpers" routerLinkActive="active">Helpers</a> -->
+      <a mat-list-item  [matMenuTriggerFor]="article_menu" >Articles</a>
+      <mat-menu #article_menu="matMenu">
+        <a class="menu-link" routerLink="articles/new"  mat-menu-item>New</a>
+        <a class="menu-link" routerLink="articles/all" mat-menu-item>List</a>
+      </mat-menu>
+      <a mat-list-item  [matMenuTriggerFor]="polly_menu" >Polly</a>
+      <mat-menu #polly_menu="matMenu">
+        <a class="menu-link" routerLink="polly/new"  mat-menu-item>New</a>
+        <a class="menu-link" routerLink="polly/all" mat-menu-item>List</a>
+      </mat-menu>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

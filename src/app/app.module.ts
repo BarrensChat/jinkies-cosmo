@@ -25,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatMenuModule } from '@angular/material/menu';
 
 // Stand alone files
 import { VideoFileValidator, ImageFileValidator, AudioFileValidator } from './common-classes/validators';
@@ -87,6 +88,7 @@ import { ConfirmModalComponent } from './common-components/modals/confirm-modal/
     MatGridListModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    MatMenuModule,
     NgbModule,
     JwtModule.forRoot({
       config: {
