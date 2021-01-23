@@ -21,7 +21,6 @@ export class PollyComponent implements OnInit {
 
   ngOnInit(): void {
     this.pollyService.setPollyFormGroup(this.pollyFormGroup);
-    console.log('---polly form group---', this.pollyFormGroup);
 
     this.pollyService.setLanguages();
     this.watchVoices();
@@ -33,11 +32,7 @@ export class PollyComponent implements OnInit {
     this.pollyFormGroup.get('language_code').valueChanges.subscribe(val => {
       this.pollyService.setVoices(val);
 
-      // TODO: asycronously setVoices will finish after the below line. This needs to be addressed
-      if (this.voices().length > 0 && typeof this.voices()[0].Id !== undefined) {
-        this.pollyFormGroup.controls['voice_code'].setValue(this.voices()[0].Id);
 
-      }
     });
 
   }
@@ -54,8 +49,8 @@ export class PollyComponent implements OnInit {
     return this.pollyFormGroup.get('title') as FormControl;
   }
 
-  text(): FormControl {
-    return this.pollyFormGroup.get('text') as FormControl;
+  speech(): FormControl {
+    return this.pollyFormGroup.get('speech') as FormControl;
   }
 
   languageCode(): FormControl {

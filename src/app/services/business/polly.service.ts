@@ -6,6 +6,7 @@ import { VideoFileValidator, AudioFileValidator, ImageFileValidator } from '@cla
 import { HttpRequestService } from '@services/http-request.service';
 import { Observable } from 'rxjs';
 import { AppConstants } from '@constants/app-constants';
+import { Router } from '@angular/router';
 
 export interface TableElementColumns {
   label: string;
@@ -13,7 +14,7 @@ export interface TableElementColumns {
   language_code: string;
   voice_code: string;
   url: string;
-  text: string;
+  speech: string;
 }
 
 export interface DefaultPollyObject {
@@ -22,7 +23,7 @@ export interface DefaultPollyObject {
   language_code: string;
   voice_code: string;
   url: string;
-  text: string;
+  speech: string;
   user: string;
 }
 
@@ -42,7 +43,8 @@ export class PollyService {
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    private hs: HttpRequestService) {
+    private hs: HttpRequestService,
+    private router: Router) {
   }
 
   getTableHeaders(): Array<any> {
@@ -94,9 +96,15 @@ export class PollyService {
     .subscribe(data => {
       if (data && !data['error']) {
         this.voices = data;
+
+        if (this.voices.length > 0 && typeof this.voices[0].Id !== undefined) {
+          this.pollyFormGroup.controls['voice_code'].setValue(this.voices[0].Id);
+        }
+
         return this.voices;
       } else {
         this.voices = [];
+        this.pollyFormGroup.controls['voice_code'].reset();
         return this.voices;
       }
 
@@ -105,12 +113,43 @@ export class PollyService {
     });
   }
 
+  createPolly = function(): Observable<any> {
+
+    const payload = JSON.stringify(this.pollyFormGroup.value, undefined, 2);
+
+    return this.hs.postRequest(AppConstants.API_ENDPOINTS.polly.create, payload)
+    .subscribe(data => {
+      if (data && !data['error']) {
+
+        if(typeof data.taskID !== undefined && typeof data.uri !== undefined) {
+          this.snackBar.open('Polly has been created', 'Success', {
+            duration: 2500,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['success-snackbar']
+          });
+
+          this.router.navigate(['jinkies/polly/all']);
+        }
+
+        return data;
+      } else {
+
+        if (data['error']) {
+          console.error(data['error']);
+        }
+        return data;
+      }
+
+    });
+  }
+
   getVoices = function() {
     return this.voices;
   }
 
-  getPollysRequest() {
-    // return this.hs.getRequest(this.rqPollyPath);
+  getPollysRequest = function(){
+    return this.hs.getRequest(AppConstants.API_ENDPOINTS.polly.get_all);
   }
 
   // SNACKBARS / TOASTS
@@ -131,7 +170,7 @@ export class PollyService {
       title: this.fb.control(null, [Validators.minLength(this.validPollyTitleLength), Validators.required]),
       language_code: this.fb.control(null, [Validators.required]),
       voice_code: this.fb.control(null, [Validators.required]),
-      text: this.fb.control(null, [Validators.required, Validators.minLength(1)]),
+      speech: this.fb.control(null, [Validators.required, Validators.minLength(1)]),
     });
 
     pollyFormGroup.controls['language_code'].setValue(this.ENGLISH_US_LANGUAGE_CODE);

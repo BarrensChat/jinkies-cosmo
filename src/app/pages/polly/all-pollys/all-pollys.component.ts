@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PollyService, TableElementColumns } from '@services/business/polly.service';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-all-pollys',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllPollysComponent implements OnInit {
 
-  constructor() { }
+  pollys: any;
+  tableHeaders: Array<any>;
+  expandedElement: TableElementColumns | null;
+
+  constructor(private ps: PollyService) { }
 
   ngOnInit(): void {
-  }
+    this.tableHeaders = this.ps.getTableHeaders();
 
+    this.pollys = this.ps.getPollysRequest()
+      .subscribe(data => {
+
+        if (data && !data['error']) {
+          this.pollys = data;
+        } else {
+          this.pollys = [];
+        }
+
+        console.log('Pollys ->', data);
+      });
+  }
 }

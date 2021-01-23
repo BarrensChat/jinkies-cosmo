@@ -8,7 +8,9 @@ export class AppConstants {
   public static API_ENDPOINTS = {
     polly: {
       get_languages: 'polly/language-codes',
-      get_voices: 'polly/voices'
+      get_voices: 'polly/voices',
+      create: 'polly/create-polly',
+      get_all: 'polly/all'
     }
   }
 

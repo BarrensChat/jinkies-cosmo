@@ -78,12 +78,12 @@
               </mat-card-title>
               <mat-form-field appearance="fill" class="w-100 speech-text-area">
                   <mat-label>Speech</mat-label>
-                  <textarea matInput placeholder="Polly Speech" formControlName="text" [formControl]="this.text()"></textarea>
+                  <textarea matInput placeholder="Polly Speech" formControlName="speech" [formControl]="this.speech()"></textarea>
               </mat-form-field>
 
-              <div *ngIf="this.text().invalid && (this.text().dirty || this.text().touched)" class="alert alert-danger">
-                <div *ngIf="this.text().errors.required">
-                    Speech text is required.
+              <div *ngIf="this.speech().invalid && (this.speech().dirty || this.speech().touched)" class="alert alert-danger">
+                <div *ngIf="this.speech().errors.required">
+                    Speech is required.
                 </div>
               </div>
             </div>

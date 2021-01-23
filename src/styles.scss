@@ -48,6 +48,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     width: 100%;
 }
 
+.success-snackbar {
+  background-color: $app-success-color;
+}
+
+.danger-snackbar {
+  background-color: $app-danger-color;
+}
+
 //------------------ NG Bootstrap related CSS --------------------
 ngb-carousel {
     max-width: 700px;

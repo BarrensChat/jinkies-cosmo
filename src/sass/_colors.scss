@@ -6,6 +6,8 @@ $app-primary-palette: mat-palette($mat-light-green);
 // $app-accent:  mat-palette($mat-light-green);
 $app-accent-palette:   mat-palette($mat-brown, 200, 100, 400);
 $app-warn-palette:    mat-palette($mat-pink);
+$app-success-palette: mat-palette($mat-light-green);
+$app-danger-pallet: mat-palette($mat-red, 800);
 
 // General app colors
 $app-primary: mat-color($app-primary-palette);
@@ -15,5 +17,6 @@ $app-warn: mat-color($app-warn-palette);
 
 $app-warn-dark: mat-color($app-warn-palette, 700);
 
-$gold: lightgoldenrodyellow;
-$pink: rgba(255, 192, 203, 0.986);
+$app-success-color: mat-color($app-success-palette);
+$app-danger-color: mat-color($app-danger-pallet);
+

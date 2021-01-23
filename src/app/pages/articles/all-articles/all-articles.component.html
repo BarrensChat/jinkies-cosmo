@@ -38,12 +38,9 @@
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
     </table>
 
-    <!-- <mat-list *ngIf="this.articles.length > 0; then rqError; else loading;"> -->
-    <!-- <p style='color:red' #rqError>There was an error in the request</p>
-    <mat-progress-bar mode="indeterminate" #loading></mat-progress-bar> -->
 
-
-    <mat-progress-bar class='loading-bar' mode="indeterminate"  *ngIf="!this.articles.length || this.articles.length === 0"></mat-progress-bar>
+    <mat-progress-bar class='loading-bar' mode="indeterminate"  *ngIf="!this.articles"></mat-progress-bar>
+    <p  *ngIf="this.articles.length === 0">No Articles found.</p>
   </div>
 </div>
 

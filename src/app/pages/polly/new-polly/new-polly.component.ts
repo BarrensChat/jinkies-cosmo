@@ -30,17 +30,10 @@ export class NewPollyComponent implements OnInit {
 
     this.pollyFormGroup.markAllAsTouched();
 
-  //   console.log('====', this.releaseDate());
-  //   this.articleService.setArticleFormGroup(this.articleFormGroup);
-  //   const yeet = this.articleService.getArticleFormGroup();
-  //   yeet.get('thumbnail').setValue('yeeeting');
-  //   this.articleFormGroup.markAllAsTouched();
+    if (this.pollyFormGroup.valid) {
+      this.pollyService.createPolly();
+    }
 
-  //   const jaja = this.articleService.getArticleFormGroup();
-  //   console.log('---submitted article value and form---', jaja.value, jaja);
-
-    this.payload = JSON.stringify(this.pollyFormGroup.value, undefined, 2);
-    console.log('---submitted polly value and form---', this.pollyFormGroup.value, this.pollyFormGroup);
   }
 
 }
