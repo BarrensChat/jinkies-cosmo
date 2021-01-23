@@ -37,6 +37,7 @@ export class PollyService {
   private newPolly: DefaultPollyObject;
   private validPollyTitleLength: 5;
   private pollyTableHeaders = ['id', 'title', 'state', 'kind', 'live_date'];
+  private ENGLISH_US_LANGUAGE_CODE = 'en-US';
 
   constructor(
     private fb: FormBuilder,
@@ -87,16 +88,17 @@ export class PollyService {
     });
   }
 
-  setVoices = function(languageCode: string) {
+  setVoices = function(languageCode: string): Observable<any[]> {
 
-    this.hs.getRequest(AppConstants.API_ENDPOINTS.polly.get_voices + '?language_code=' + languageCode)
+    return this.hs.getRequest(AppConstants.API_ENDPOINTS.polly.get_voices + '?language_code=' + languageCode)
     .subscribe(data => {
       if (data && !data['error']) {
         this.voices = data;
+        return this.voices;
       } else {
         this.voices = [];
+        return this.voices;
       }
-      console.log('voices ->', this.voices);
 
       //TODO: throw errors if bad request
 
@@ -118,6 +120,9 @@ export class PollyService {
   //   verticalPosition: 'top',
   // });
 
+  getDefaultEnglishLanguageCode() {
+    return this.ENGLISH_US_LANGUAGE_CODE;
+  }
 
   getFreshPollyFormGroup() {
 
@@ -128,6 +133,8 @@ export class PollyService {
       voice_code: this.fb.control(null, [Validators.required]),
       text: this.fb.control(null, [Validators.required, Validators.minLength(1)]),
     });
+
+    pollyFormGroup.controls['language_code'].setValue(this.ENGLISH_US_LANGUAGE_CODE);
 
     return pollyFormGroup;
   }

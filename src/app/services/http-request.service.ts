@@ -39,7 +39,7 @@ export class HttpRequestService {
 
   constructor(private http: HttpClient) { }
 
-  getRequest(endpointPath: string) {
+  getRequest(endpointPath: string): Observable<any> {
 
     // If there are CORS problems opt to using jsonp
     return this.http.get(AppConstants.API_ENDPOINT + endpointPath)
@@ -57,8 +57,6 @@ export class HttpRequestService {
     //   .pipe(
     //     catchError(this.handleError('addHero', hero))
     //   );
-
-    console.log('posting ->', httpOptions, 'payload ->', payload);
 
       return this.http.post(AppConstants.API_ENDPOINT + endpointPath, payload, httpOptions).pipe(
         catchError(this.handleError) // then handle the error

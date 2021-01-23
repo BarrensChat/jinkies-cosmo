@@ -24,17 +24,22 @@ export class PollyComponent implements OnInit {
     console.log('---polly form group---', this.pollyFormGroup);
 
     this.pollyService.setLanguages();
-    this.setVoices();
+    this.watchVoices();
+    this.pollyService.setVoices(this.pollyService.getDefaultEnglishLanguageCode());
   }
 
-  setVoices = function() {
+  watchVoices = function() {
 
-    this.pollyFormGroup.get('language_code').valueChanges.subscribe( val => {
+    this.pollyFormGroup.get('language_code').valueChanges.subscribe(val => {
       this.pollyService.setVoices(val);
-    });
-    // if (this.languageCode.value()) {
 
-    // }
+      // TODO: asycronously setVoices will finish after the below line. This needs to be addressed
+      if (this.voices().length > 0 && typeof this.voices()[0].Id !== undefined) {
+        this.pollyFormGroup.controls['voice_code'].setValue(this.voices()[0].Id);
+
+      }
+    });
+
   }
 
   createdAt(): FormControl {
