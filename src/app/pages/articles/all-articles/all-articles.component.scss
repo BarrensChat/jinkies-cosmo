@@ -1,30 +1,9 @@
 @import "../../../../sass/_colors.scss";
 
+:host {
 
-table {
-  width: 100%;
 }
 
-tr.example-detail-row {
-  height: 0;
-}
-
-tr.example-element-row:not(.example-expanded-row):hover {
-  background: $app-primary;
-}
-
-tr.example-element-row:not(.example-expanded-row):active {
-  background: $app-primary;
-}
-
-.example-element-row td {
-  border-bottom-width: 0;
-}
-
-.example-element-detail {
-  overflow: hidden;
-  display: flex;
-}
 
 // .example-element-diagram {
 //   min-width: 80px;

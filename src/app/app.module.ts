@@ -45,6 +45,10 @@ import { LoginComponent } from './pages/login/login.component';
 import { ArticlesComponent } from './pages/articles/articles.component';
 import { ConfirmModalComponent } from './common-components/modals/confirm-modal/confirm-modal.component';
 
+//interceptors
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '@interceptors/auth.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,7 +99,7 @@ import { ConfirmModalComponent } from './common-components/modals/confirm-modal/
         tokenGetter: function  tokenGetter() {
              return     localStorage.getItem('access_token');},
              allowedDomains: ['http://localhost:4200/', 'https://jinkiescosmo.com'],
-             disallowedRoutes: ['http://localhost:4200/articles']
+             disallowedRoutes: []
       }
     }),
   ],
@@ -103,6 +107,11 @@ import { ConfirmModalComponent } from './common-components/modals/confirm-modal/
     {
       provide: UrlSerializer,
       useClass: SerializerService
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

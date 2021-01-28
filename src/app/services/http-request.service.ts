@@ -59,6 +59,7 @@ export class HttpRequestService {
     //   );
 
       return this.http.post(AppConstants.API_ENDPOINT + endpointPath, payload, httpOptions).pipe(
+        retry(AppConstants.API_REQUEST_RETRY_COUNT),
         catchError(this.handleError) // then handle the error
       );
   }

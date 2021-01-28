@@ -158,6 +158,7 @@ export class ArticleService {
 
   };
 
+  //TODO: change the endpiont for articles to the correct one in the constants file
   getArticlesRequest() {
     return this.hs.getRequest(this.rqArticlesPath);
   }

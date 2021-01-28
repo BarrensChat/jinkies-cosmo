@@ -9,12 +9,10 @@ import { AppConstants } from '@constants/app-constants';
 import { Router } from '@angular/router';
 
 export interface TableElementColumns {
-  label: string;
-  created_at: string;
+  id: number;
   language_code: string;
   voice_code: string;
-  url: string;
-  speech: string;
+  created_at: string;
 }
 
 export interface DefaultPollyObject {
@@ -37,7 +35,7 @@ export class PollyService {
   private pollyFormGroup: FormGroup;
   private newPolly: DefaultPollyObject;
   private validPollyTitleLength: 5;
-  private pollyTableHeaders = ['id', 'title', 'state', 'kind', 'live_date'];
+  private pollyTableHeaders = ['id', 'language_code', 'voice_code', 'created_at'];
   private ENGLISH_US_LANGUAGE_CODE = 'en-US';
 
   constructor(

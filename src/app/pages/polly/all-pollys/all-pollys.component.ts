@@ -5,7 +5,13 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 @Component({
   selector: 'app-all-pollys',
   templateUrl: './all-pollys.component.html',
-  styleUrls: ['./all-pollys.component.scss']
+  styleUrls: ['./all-pollys.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ])]
 })
 export class AllPollysComponent implements OnInit {
 
@@ -22,7 +28,7 @@ export class AllPollysComponent implements OnInit {
       .subscribe(data => {
 
         if (data && !data['error']) {
-          this.pollys = data;
+          this.pollys = data.data;
         } else {
           this.pollys = [];
         }
