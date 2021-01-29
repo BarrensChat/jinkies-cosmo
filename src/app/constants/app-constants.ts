@@ -10,7 +10,8 @@ export class AppConstants {
       get_languages: 'polly/language-codes',
       get_voices: 'polly/voices',
       create: 'polly/create-polly',
-      get_all: 'polly/all'
+      get_all: 'polly/all',
+      delete: 'polly/delete'
     }
   }
 

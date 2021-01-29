@@ -12,6 +12,7 @@ export interface TableElementColumns {
   id: number;
   language_code: string;
   voice_code: string;
+  title: string;
   created_at: string;
 }
 
@@ -35,7 +36,7 @@ export class PollyService {
   private pollyFormGroup: FormGroup;
   private newPolly: DefaultPollyObject;
   private validPollyTitleLength: 5;
-  private pollyTableHeaders = ['id', 'language_code', 'voice_code', 'created_at'];
+  private pollyTableHeaders = ['id', 'language_code', 'voice_code', 'title', 'created_at'];
   private ENGLISH_US_LANGUAGE_CODE = 'en-US';
 
   constructor(
@@ -140,6 +141,10 @@ export class PollyService {
       }
 
     });
+  }
+
+  deletePolly = function() {
+    return this.hs.postRequest(AppConstants.API_ENDPOINTS.polly.delete);
   }
 
   getVoices = function() {

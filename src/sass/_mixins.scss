@@ -1,27 +1,34 @@
 @import "./_colors.scss";
+
 @mixin expandable-table-css {
   table {
     width: 100%;
   }
 
-  tr.example-detail-row {
+  tr.table-detail-row {
     height: 0;
   }
 
-  tr.example-element-row:not(.example-expanded-row):hover {
+  tr.table-element-row:not(.table-expanded-row):hover {
     background: $app-primary;
   }
 
-  tr.example-element-row:not(.example-expanded-row):active {
+  tr.table-element-row:not(.table-expanded-row):active {
     background: $app-primary;
   }
 
-  .example-element-row td {
+  .table-element-row td {
     border-bottom-width: 0;
   }
 
-  .example-element-detail {
+  .table-element-detail {
     overflow: hidden;
     display: flex;
+  }
+
+  .table-element-container {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PollyService, TableElementColumns } from '@services/business/polly.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmModalComponent } from '@components/modals/confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-all-pollys',
@@ -19,7 +21,7 @@ export class AllPollysComponent implements OnInit {
   tableHeaders: Array<any>;
   expandedElement: TableElementColumns | null;
 
-  constructor(private ps: PollyService) { }
+  constructor(private ps: PollyService, private md: MatDialog) { }
 
   ngOnInit(): void {
     this.tableHeaders = this.ps.getTableHeaders();
@@ -35,5 +37,27 @@ export class AllPollysComponent implements OnInit {
 
         console.log('Pollys ->', data);
       });
+  }
+
+  delete(): void {
+
+    const dialogRef = this.md.open(ConfirmModalComponent, {
+      data: {
+        title: 'Deleting Polly',
+        content: 'Are you sure you want to delete the clip?',
+        buttonText: 'Oops, Cancel',
+        buttonText2: 'Delete Polly'
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        this.ps.deletePolly().then(data => {
+
+        });
+      }
+    });
+
+
   }
 }
