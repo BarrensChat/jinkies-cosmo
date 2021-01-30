@@ -6,4 +6,9 @@
 
 :host {
   @include expandable-table-css;
+
+  .polly-copy {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
 }

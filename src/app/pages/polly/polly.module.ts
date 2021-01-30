@@ -17,6 +17,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { PollyRoutingModule } from './polly-routing.module';
 
 import { NewPollyComponent } from './new-polly/new-polly.component';
@@ -50,7 +52,8 @@ import { PollyComponent } from './common/polly/polly.component';
     MatNativeDateModule,
     MatTableModule,
 
-    PollyRoutingModule
+    PollyRoutingModule,
+    FontAwesomeModule
   ]
 })
 export class PollyModule { }

@@ -155,6 +155,13 @@ export class PollyService {
     return this.hs.getRequest(AppConstants.API_ENDPOINTS.polly.get_all);
   }
 
+  playPolly = function(url: string): void {
+    let audio = new Audio();
+    audio.src = url;
+    audio.load();
+    audio.play();
+  }
+
   // SNACKBARS / TOASTS
   // this.snackBar.open('Slide ' + (index + 1) + ' moved', textDirection, {
   //   duration: 2500,

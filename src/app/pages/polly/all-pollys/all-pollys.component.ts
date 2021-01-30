@@ -3,6 +3,7 @@ import { PollyService, TableElementColumns } from '@services/business/polly.serv
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmModalComponent } from '@components/modals/confirm-modal/confirm-modal.component';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-all-pollys',
@@ -20,6 +21,7 @@ export class AllPollysComponent implements OnInit {
   pollys: any;
   tableHeaders: Array<any>;
   expandedElement: TableElementColumns | null;
+  faPlay = faPlay;
 
   constructor(private ps: PollyService, private md: MatDialog) { }
 
@@ -57,7 +59,29 @@ export class AllPollysComponent implements OnInit {
         });
       }
     });
+  }
 
+  play(url: string): void {
+    this.ps.playPolly(url);
+  }
 
+  download(): void {
+
+    const dialogRef = this.md.open(ConfirmModalComponent, {
+      data: {
+        title: 'Deleting Polly',
+        content: 'Are you sure you want to delete the clip?',
+        buttonText: 'Oops, Cancel',
+        buttonText2: 'Delete Polly'
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        this.ps.deletePolly().then(data => {
+
+        });
+      }
+    });
   }
 }
