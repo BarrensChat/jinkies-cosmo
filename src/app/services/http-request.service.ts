@@ -3,15 +3,17 @@ import { Observable, throwError, of } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { AppConstants } from '@constants/app-constants';
+import { Router } from '@angular/router';
+import { MatSnackBar} from '@angular/material/snack-bar';
 
 
   // You can define an interface say 'Config' and have the response data
-  // map to according to the interface structure in the component or service call below
+  // map according to the interface structure in the component or service call below
   // this.configService.getConfig()
   // .subscribe((data: Config) => this.config = { ...data });
   //
 
-  // Then in this service something like:
+  // Then you can do something like:
   //     return this.http.get<Config>(AppConstants.API_ENDPOINT + endpointPath);
 
   // options: {
@@ -37,7 +39,9 @@ import { AppConstants } from '@constants/app-constants';
 })
 export class HttpRequestService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
   getRequest(endpointPath: string): Observable<any> {
 
@@ -60,7 +64,7 @@ export class HttpRequestService {
 
       return this.http.post(AppConstants.API_ENDPOINT + endpointPath, payload, httpOptions).pipe(
         retry(AppConstants.API_REQUEST_RETRY_COUNT),
-        catchError(this.handleError) // then handle the error
+        catchError((res) => this.handleError(res)) // then handle the error
       );
   }
 
@@ -70,9 +74,23 @@ export class HttpRequestService {
       console.error('An error occurred:', error.error.message);
     } else {
 
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: `, error.error);
+      console.error( `Backend returned code ${error.status}, body was: `, error.error);
+
+        if (error.status === 401) {
+          //TODO: add different colors for the snackbars (preferably in the service created for them)
+
+            // TODO: This is throwing undefined and needs to be fixed
+
+            // this.snackBar.open('Try logging in again', 'Unauthorized', {
+            //   duration: 2500,
+            //   horizontalPosition: 'center',
+            //   verticalPosition: 'top',
+            // });
+            // const router = injector.get(Router);
+            // router.navigate(['/login']);
+            // this.router.navigate(['/']);
+
+        }
     }
     // Return an observable with a user-facing error message.
     return of(error);

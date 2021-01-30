@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { FormGroup, FormControl, FormArray,  FormBuilder, Validators, Validator } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar} from '@angular/material/snack-bar';
-import { VideoFileValidator, AudioFileValidator, ImageFileValidator } from '@classes/validators';
 import { HttpRequestService } from '@services/http-request.service';
+import { FileService } from '@services/file.service';
 import { Observable } from 'rxjs';
 import { AppConstants } from '@constants/app-constants';
 import { Router } from '@angular/router';
@@ -43,7 +43,8 @@ export class PollyService {
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private hs: HttpRequestService,
-    private router: Router) {
+    private router: Router,
+    private fs: FileService) {
   }
 
   getTableHeaders(): Array<any> {
@@ -112,7 +113,7 @@ export class PollyService {
     });
   }
 
-  createPolly = function(): Observable<any> {
+  createPolly = function() {
 
     const payload = JSON.stringify(this.pollyFormGroup.value, undefined, 2);
 
@@ -162,12 +163,9 @@ export class PollyService {
     audio.play();
   }
 
-  // SNACKBARS / TOASTS
-  // this.snackBar.open('Slide ' + (index + 1) + ' moved', textDirection, {
-  //   duration: 2500,
-  //   horizontalPosition: 'center',
-  //   verticalPosition: 'top',
-  // });
+  downloadPolly = function(url: string): any {
+    return this.fs.downloadFile(url);
+  }
 
   getDefaultEnglishLanguageCode() {
     return this.ENGLISH_US_LANGUAGE_CODE;

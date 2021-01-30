@@ -8,9 +8,11 @@
     <app-polly [pollyFormGroup]='pollyFormGroup' ></app-polly>
 
     <div class="offset-2 col-8 submit-container text-center">
-        <div class="form-group">
+        <div class="form-group" *ngIf="!this.pollyProcessing">
             <button class="btn btn-primary" type="submit" >Create Polly</button>
         </div>
+
+        <mat-progress-bar class='loading-bar' mode="indeterminate"  *ngIf="this.pollyProcessing"></mat-progress-bar>
     </div>
 
   </form>

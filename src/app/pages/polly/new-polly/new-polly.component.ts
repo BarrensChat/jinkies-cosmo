@@ -11,6 +11,7 @@ import { PollyService } from '@services/business/polly.service';
 export class NewPollyComponent implements OnInit {
 
   pollyFormGroup: FormGroup;
+  pollyProcessing = false;
 
   payload: string;
 
@@ -31,7 +32,12 @@ export class NewPollyComponent implements OnInit {
     this.pollyFormGroup.markAllAsTouched();
 
     if (this.pollyFormGroup.valid) {
-      this.pollyService.createPolly();
+      this.pollyProcessing = true;
+
+      this.pollyService.createPolly()
+        .then(() => {
+          this.pollyProcessing = false;
+        });
     }
 
   }

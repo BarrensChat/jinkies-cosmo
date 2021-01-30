@@ -135,7 +135,7 @@ export class ArticleService {
     const textDirection = (direction > 0) ? 'Down' : 'Up';
 
     // TODO: Creating snackbars from components. Will need to do something similar like modals
-    // this._snackBar.openFromComponent(PizzaPartyComponent, {
+    // this._snackBar.openFromComponent(someComponent, {
     //   duration: this.durationInSeconds * 1000,
     // });
     this.snackBar.open('Slide ' + (index + 1) + ' moved', textDirection, {
