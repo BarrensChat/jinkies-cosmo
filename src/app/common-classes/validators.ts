@@ -57,7 +57,7 @@ export class ImageFileValidator implements Validator {
     const file = c.value;
 
     if ( file ) {
-      console.log('----', file);
+      console.log('file ->', file);
       const fileType = file.type.split('image/').pop();
 
       if (fileType && !imageFileFormats.includes(fileType.toLowerCase()) ) {

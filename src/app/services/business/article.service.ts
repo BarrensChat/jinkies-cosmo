@@ -3,7 +3,7 @@ import { FormGroup, FormControl, FormArray,  FormBuilder, Validators, Validator 
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { VideoFileValidator, AudioFileValidator, ImageFileValidator } from '@classes/validators';
 import { HttpRequestService } from '@services/http-request.service';
-import { Observable } from 'rxjs';
+import { AppConstants } from '@constants/app-constants';
 
 export interface TableElementColumns {
   created_at: string;
@@ -135,7 +135,7 @@ export class ArticleService {
     const textDirection = (direction > 0) ? 'Down' : 'Up';
 
     // TODO: Creating snackbars from components. Will need to do something similar like modals
-    // this._snackBar.openFromComponent(PizzaPartyComponent, {
+    // this._snackBar.openFromComponent(someComponent, {
     //   duration: this.durationInSeconds * 1000,
     // });
     this.snackBar.open('Slide ' + (index + 1) + ' moved', textDirection, {
@@ -158,8 +158,9 @@ export class ArticleService {
 
   };
 
+  //TODO: change the endpiont for articles to the correct one in the constants file
   getArticlesRequest() {
-    return this.hs.getRequest(this.rqArticlesPath);
+    return this.hs.getRequest(AppConstants.API_ENDPOINTS.articles.get_all);
   }
 
   getFreshSlideFormGroup(order: number) {
@@ -190,6 +191,8 @@ export class ArticleService {
   }
 
   getFreshArticleFormGroup() {
+
+    //TODO: use a uniform way of setting these controls / groups / arrays. Requires testing.
     const titleFormControl = new FormControl('title', [
       Validators.required,
       Validators.minLength(this.validArticleTitleLength),

@@ -1,87 +1,41 @@
-<div class='cover'>
-    <mat-card class="landing-card">
-        <mat-card-header>
-            <mat-card-title>To The Moon</mat-card-title>
-            <mat-card-subtitle>Domains still available!</mat-card-subtitle>
-        </mat-card-header>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar class='text-center main-toolbar-menu'>
+      <a class='home-logo-link' mat-list-item routerLink="/" routerLinkActive="active">
+          <img class='home-logo' src='assets/images/kermit.png' alt='kermit.png'>
+      </a>
+    </mat-toolbar>
+    <mat-nav-list class='main-list'>
+      <a mat-list-item  [matMenuTriggerFor]="article_menu" >Articles</a>
+      <mat-menu #article_menu="matMenu">
+        <a class="menu-link" routerLink="articles/new"  mat-menu-item>New</a>
+        <a class="menu-link" routerLink="articles/all" mat-menu-item>List</a>
+      </mat-menu>
+      <a mat-list-item  [matMenuTriggerFor]="polly_menu" >Polly</a>
+      <mat-menu #polly_menu="matMenu">
+        <a class="menu-link" routerLink="polly/new"  mat-menu-item>New</a>
+        <a class="menu-link" routerLink="polly/all" mat-menu-item>List</a>
+      </mat-menu>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Articles</span>
+    </mat-toolbar>
 
-        <mat-card-content>
-            <mat-tab-group>
-                <mat-tab label="Site Content">
-                    <h5 class='tab-info'>Web pages include</h5>
-                    <mat-list>
-                        <mat-list-item>
-                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
-                            <p matLine>List of domains available for purchase</p>
-                        </mat-list-item>
-                        <mat-list-item>
-                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
-                            <p matLine>Contact Info</p>
-                        </mat-list-item>
-                    </mat-list>
-                </mat-tab>
-                
-                <mat-tab label="Site Tech">
-                    <h5 class='tab-info'>
-                        This website contains the following tech
-                    </h5>
-                    <mat-list>
-                        <mat-list-item>
-                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
-                            <p matLine>Angular 9</p>
-                        </mat-list-item>
-                        <mat-list-item>
-                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
-                            <p matLine>Angular Material</p>
-                        </mat-list-item>
-                        <mat-list-item>
-                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
-                            <p matLine>NG Bootstrap</p>
-                        </mat-list-item>
-                        <mat-list-item>
-                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
-                            <p matLine>Font Awesome</p>
-                        </mat-list-item>
-                        <mat-list-item>
-                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
-                            <p matLine>AWS S3 (Frontend Hosting)</p>
-                        </mat-list-item>
-                    </mat-list>
-                </mat-tab>
-
-                <mat-tab label="Soon to Come">
-                    <h5 class='tab-info'>A list of functionality and tech soon to be included</h5>
-                    <mat-list>
-                        <mat-list-item>
-                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
-                            <p matLine>Automated Article Creation</p>
-                        </mat-list-item>
-                        <mat-list-item>
-                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
-                            <p matLine>AWS EC2</p>
-                        </mat-list-item>
-                        <mat-list-item>
-                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
-                            <p matLine>AWS Polly</p>
-                        </mat-list-item>
-                        <mat-list-item>
-                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
-                            <p matLine>Youtube video upload, tagging and other meta data assignments via Youtube API</p>
-                        </mat-list-item>
-                        <mat-list-item>
-                            <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
-                            <p matLine>FFMPG image, gif and video creation via AWS Lambda functionality</p>
-                        </mat-list-item>
-                    </mat-list>
-                </mat-tab>
-            </mat-tab-group>
-
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button color='primary' (click)="openDialog()" matTooltip="I don't care let me in!"
-                matTooltipPosition="below">PROCEED</button>
-        </mat-card-actions>
-    </mat-card>
-
-    <div class='gradient'></div>
-</div>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

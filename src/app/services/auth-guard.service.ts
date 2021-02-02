@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router, CanActivate, NavigationEnd, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { JwtService } from '@services/jwt.service';
+import { MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,7 @@ import { JwtService } from '@services/jwt.service';
 export class AuthGuardService implements CanActivate {
 
 
-  //TODO: implement a user jwt token or some kind of user auth
-  constructor(private router:Router, private JwtService: JwtService) {
+  constructor(private router:Router, private JwtService: JwtService, private snackBar: MatSnackBar) {
   }
 
   canActivate(
@@ -22,13 +22,18 @@ export class AuthGuardService implements CanActivate {
 
   canAccessCosmo(): boolean {
 
-    //TODO: actually validate the jwt
     if(!this.JwtService.loggedIn) {
+      this.snackBar.open('Try logging in again', 'Unauthorized', {
+        duration: 2500,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+
       this.router.navigate(['/']);
       return false;
     }
     return true;
   }
-    
+
 
 }

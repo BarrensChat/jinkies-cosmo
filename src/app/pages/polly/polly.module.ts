@@ -17,25 +17,21 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 
-import { ArticlesRoutingModule } from './articles-routing.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { PollyRoutingModule } from './polly-routing.module';
 
-import { NewArticleComponent } from './new-article/new-article.component';
-import { SlideComponent } from './common/slide/slide.component';
-import { ArticleComponent } from './common/article/article.component';
-import { FileUploadComponent } from '@components/inputs/file-upload/file-upload.component';
-import { AllArticlesComponent } from './all-articles/all-articles.component';
+import { NewPollyComponent } from './new-polly/new-polly.component';
+import { AllPollysComponent } from './all-pollys/all-pollys.component';
+import { PollyComponent } from './common/polly/polly.component';
 
 
 
 @NgModule({
   declarations: [
-    NewArticleComponent,
-    SlideComponent,
-    ArticleComponent,
-    FileUploadComponent,
-    AllArticlesComponent,
-  ],
+    NewPollyComponent,
+    AllPollysComponent,
+    PollyComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -56,7 +52,8 @@ import { AllArticlesComponent } from './all-articles/all-articles.component';
     MatNativeDateModule,
     MatTableModule,
 
-    ArticlesRoutingModule
+    PollyRoutingModule,
+    FontAwesomeModule
   ]
 })
-export class ArticlesModule { }
+export class PollyModule { }

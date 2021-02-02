@@ -8,17 +8,14 @@
   }
 
 
- for when the :host is the currently active component 
+ for when the :host is the currently active component
   :host(.active) {
     border-width: 3px;
-  } 
+  }
 
 - will apply background color to h2's only if an ancestor element contains class .theme-light
   :host-context(.theme-light) h2 {
     background-color: #eef;
   }
-  
-  */
 
-  //COLORS
-  $gold: blue;
+  */

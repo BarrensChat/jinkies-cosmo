@@ -1,31 +1,26 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {MoonQuizDialogComponent} from './moon-quiz-dialog/moon-quiz-dialog.component';
-import { MoonQuizService } from '@services/moon-quiz.service';
+import { Component, OnInit } from '@angular/core';
+
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss']
 })
+
 export class LandingComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private MoonQuizService: MoonQuizService) {}
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  .pipe(
+    map(result => result.matches),
+    shareReplay()
+  );
+
+  constructor(private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit(): void {
-  }
-
-  openDialog(): void {
-    const quizDialogWidth = this.MoonQuizService.getDialogWidth();
-    const dialogRef = this.dialog.open(MoonQuizDialogComponent, {
-      width: String(quizDialogWidth) + 'px',
-      data: {distance: 0}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('quiz dialog closed');
-      // this.animal = result;
-    });
   }
 
 }

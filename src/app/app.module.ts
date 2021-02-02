@@ -25,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatMenuModule } from '@angular/material/menu';
 
 // Stand alone files
 import { VideoFileValidator, ImageFileValidator, AudioFileValidator } from './common-classes/validators';
@@ -43,6 +44,10 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ArticlesComponent } from './pages/articles/articles.component';
 import { ConfirmModalComponent } from './common-components/modals/confirm-modal/confirm-modal.component';
+
+//interceptors
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '@interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -87,13 +92,14 @@ import { ConfirmModalComponent } from './common-components/modals/confirm-modal/
     MatGridListModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    MatMenuModule,
     NgbModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: function  tokenGetter() {
              return     localStorage.getItem('access_token');},
              allowedDomains: ['http://localhost:4200/', 'https://jinkiescosmo.com'],
-             disallowedRoutes: ['http://localhost:4200/articles']
+             disallowedRoutes: []
       }
     }),
   ],
@@ -101,6 +107,11 @@ import { ConfirmModalComponent } from './common-components/modals/confirm-modal/
     {
       provide: UrlSerializer,
       useClass: SerializerService
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

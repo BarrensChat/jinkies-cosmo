@@ -1,0 +1,94 @@
+
+<div class="row">
+  <div class="col-12">
+
+    <table mat-table
+    [dataSource]="this.pollys" multiTemplateDataRows
+    class="mat-elevation-z8" *ngIf="this.pollys.length > 0;">
+      <ng-container matColumnDef="{{column}}" *ngFor="let column of tableHeaders">
+      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+      <td class="pointer" mat-cell *matCellDef="let element"> {{(column === 'title') ? element.upload.name : ((column === 'created_at') ? (element.created_at | date: 'mediumDate') : element[column])}} </td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="tableHeaders.length">
+        <div class="table-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+          <div class="table-element-container">
+            <div class="row">
+              <div class="col-1 text-right">
+                <strong>Created At: </strong>
+              </div>
+              <div class="col-11">
+                {{element.created_at | date: 'medium'}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-1 text-right">
+                <strong>Url: </strong>
+              </div>
+              <div class="col-11">
+                {{element.upload.url}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-1 text-right">
+                <strong>Volume level:</strong>
+              </div>
+              <div class="col-11">
+                {{element.upload.volume}}
+              </div>
+            </div>
+            <div class="row polly-copy">
+              <div class="col-1 text-right">
+                <strong>Speech:</strong>
+              </div>
+              <div class="col-11">
+                {{element.text}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <!-- <button class="btn btn-primary" (click)="" >Play</button> -->
+                <button type="button" mat-raised-button color='primary'  (click)="play(element.upload.url)">
+                  <fa-icon class="piggy" [icon]="faPlay"></fa-icon>
+                </button>
+              </div>
+              <div class="col-4 text-center">
+                <!-- <button type="button" mat-raised-button color='primary' matTooltip="This action will attempt to get the file url if processing has completed."
+                  matTooltipPosition="below" (click)="download(element.upload.url)">
+                  DOWNLOAD
+                </button> -->
+                <!-- <button type="button" mat-raised-button color='primary' matTooltip="This action will attempt to get the file url if processing has completed."
+                  matTooltipPosition="below" (click)="fetch()">
+                  Fetch Clip
+                </button> -->
+              </div>
+              <div class="col-4 text-right">
+                <!-- <button type="button" class="delete-slide" mat-raised-button color='warn' matTooltip="Permanently delete the polly."
+                    matTooltipPosition="below" (click)="delete()">
+                    DELETE
+                </button> -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
+      <tr mat-row *matRowDef="let element; columns: tableHeaders;"
+        class="table-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="table-detail-row"></tr>
+    </table>
+
+
+    <mat-progress-bar class='loading-bar' mode="indeterminate"  *ngIf="!this.pollys"></mat-progress-bar>
+    <p  *ngIf="this.pollys.length === 0">No Pollys found.</p>
+  </div>
+</div>

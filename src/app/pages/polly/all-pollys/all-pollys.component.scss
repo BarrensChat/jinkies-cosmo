@@ -1,0 +1,14 @@
+// @import "../../../../sass/_mixins.scss";
+@import "../../../../sass/_mixins.scss";
+
+//TODO: get this sass directory working without having to do the above ^
+// @import "@sass/_mixins.scss";
+
+:host {
+  @include expandable-table-css;
+
+  .polly-copy {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}

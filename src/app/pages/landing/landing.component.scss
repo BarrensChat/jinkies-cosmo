@@ -1,38 +1,45 @@
-@import "../../../sass/_colors.scss";
+.home-logo-link {
+  margin: auto;
 
-.cover {
-    height: 100%;
-    background: url('../../../assets/images/moon.jpg') no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    display: flex;
-    overflow-y: auto;
-    padding-bottom: 150px;
+  .home-logo {
+      margin-top:20px;
+    height: 80px;
+  }
 }
 
-.gradient {
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(0, 0, 0));
-    height: 40%;
-    width: 100%;
-    bottom: 0;
-    position: absolute;
+.sidenav-container {
+height: 100%;
 }
 
-.landing-card {
-    z-index: 1;
-    margin-left: auto;
-    background-color: rgba($app-grey,0.9);
-    margin-right: auto;
-    margin-bottom: auto;
-    margin-top: 150px;
+.sidenav {
+width: 200px;
 }
 
-.tab-info {
-    margin-top: 25px;
+.sidenav .mat-toolbar {
+background: inherit;
 }
 
-mat-list-item {
-    height: 40px !important;
+.mat-toolbar.mat-primary {
+position: sticky;
+top: 0;
+z-index: 1;
+}
+
+.main-content {
+padding: 10px;
+}
+
+.main-list{
+  margin-top: 40px;
+
+
+}
+
+.menu-link {
+  width: 200px;
+  text-align: center;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
 }

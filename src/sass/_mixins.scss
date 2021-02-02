@@ -1,0 +1,38 @@
+@import "./_colors.scss";
+
+@mixin expandable-table-css {
+  table {
+    width: 100%;
+  }
+
+  tr.table-detail-row {
+    height: 0;
+  }
+
+  tr.table-element-row:not(.table-expanded-row):hover {
+    background: $app-primary;
+  }
+
+  tr.table-element-row:not(.table-expanded-row):active {
+    background: $app-primary;
+  }
+
+  .table-element-row td {
+    border-bottom-width: 0;
+  }
+
+  .table-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+
+  .table-element-container {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .pointer {
+    cursor: pointer;
+  }
+}

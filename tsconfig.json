@@ -7,7 +7,9 @@
       "@classes/*": ["app/common-classes/*"],
       "@services/*": ["app/services/*"],
       "@assets/*": ["assets/*"],
-      "@constants/*": ["app/constants/*"]
+      "@sass/*": ["sass/*"],
+      "@constants/*": ["app/constants/*"],
+      "@interceptors/*": ["app/interceptors/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
