@@ -3,7 +3,7 @@ import { FormGroup, FormControl, FormArray,  FormBuilder, Validators, Validator 
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { VideoFileValidator, AudioFileValidator, ImageFileValidator } from '@classes/validators';
 import { HttpRequestService } from '@services/http-request.service';
-import { Observable } from 'rxjs';
+import { AppConstants } from '@constants/app-constants';
 
 export interface TableElementColumns {
   created_at: string;
@@ -160,7 +160,7 @@ export class ArticleService {
 
   //TODO: change the endpiont for articles to the correct one in the constants file
   getArticlesRequest() {
-    return this.hs.getRequest(this.rqArticlesPath);
+    return this.hs.getRequest(AppConstants.API_ENDPOINTS.articles.get_all);
   }
 
   getFreshSlideFormGroup(order: number) {
