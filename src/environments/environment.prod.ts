@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   tracing: false,
-  api_endpoint: 'http://jinkiescosmobeanstalk-env.eba-vcfvvctp.us-east-2.elasticbeanstalk.com/api/',
+  api_endpoint: 'https://jinkiescosmo-api.com/api/',
   api_request_retry_count: 3,
   fakeCreds: {
     sonic: {
