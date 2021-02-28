@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -51,6 +52,7 @@ import { PollyComponent } from './common/polly/polly.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
+    MatPaginatorModule,
 
     PollyRoutingModule,
     FontAwesomeModule

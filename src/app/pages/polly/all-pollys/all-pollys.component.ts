@@ -22,6 +22,7 @@ export class AllPollysComponent implements OnInit {
 
   pollys: any;
   tableHeaders: Array<any>;
+  totalPages: number;
   expandedElement: TableElementColumns | null;
   faPlay = faPlay;
 
@@ -35,8 +36,11 @@ export class AllPollysComponent implements OnInit {
 
         if (data && !data['error']) {
           this.pollys = data.data;
+
+
         } else {
           this.pollys = [];
+          this.totalPages = 0;
         }
 
         console.log('Pollys ->', data);

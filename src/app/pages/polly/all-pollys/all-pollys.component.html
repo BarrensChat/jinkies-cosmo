@@ -4,7 +4,7 @@
 
     <table mat-table
     [dataSource]="this.pollys" multiTemplateDataRows
-    class="mat-elevation-z8" *ngIf="this.pollys.length > 0;">
+    class="mat-elevation-z8" *ngIf="this.pollys && this.pollys.length > 0;">
       <ng-container matColumnDef="{{column}}" *ngFor="let column of tableHeaders">
       <th mat-header-cell *matHeaderCellDef> {{column}} </th>
       <td class="pointer" mat-cell *matCellDef="let element"> {{(column === 'title') ? element.upload.name : ((column === 'created_at') ? (element.created_at | date: 'mediumDate') : element[column])}} </td>
@@ -66,10 +66,10 @@
                 </button> -->
               </div>
               <div class="col-4 text-right">
-                <!-- <button type="button" class="delete-slide" mat-raised-button color='warn' matTooltip="Permanently delete the polly."
+                <button type="button" class="delete-slide" mat-raised-button color='warn' matTooltip="Permanently delete the polly."
                     matTooltipPosition="below" (click)="delete()">
                     DELETE
-                </button> -->
+                </button>
               </div>
             </div>
           </div>
@@ -89,6 +89,20 @@
 
 
     <mat-progress-bar class='loading-bar' mode="indeterminate"  *ngIf="!this.pollys"></mat-progress-bar>
-    <p  *ngIf="this.pollys.length === 0">No Pollys found.</p>
+    <p  *ngIf="this.pollys && this.pollys.length === 0">No Pollys found.</p>
   </div>
 </div>
+
+<!--
+<mat-paginator [length]="length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="pageEvent = $event">
+</mat-paginator>
+
+<div *ngIf="pageEvent">
+  <h5>Page Change Event Properties</h5>
+  <div>List length: {{pageEvent.length}}</div>
+  <div>Page size: {{pageEvent.pageSize}}</div>
+  <div>Page index: {{pageEvent.pageIndex}}</div>
+</div> -->
