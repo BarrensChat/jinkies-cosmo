@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { HttpRequestService } from '@services/http-request.service';
 import { FileService } from '@services/file.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AppConstants } from '@constants/app-constants';
 import { Router } from '@angular/router';
 
@@ -144,8 +144,45 @@ export class PollyService {
     });
   }
 
-  deletePolly = function() {
-    return this.hs.postRequest(AppConstants.API_ENDPOINTS.polly.delete);
+  deletePolly = function(fileID: number, fileName: string) {
+    const tmpObj = {
+      file_id: fileID,
+      file_name: fileName
+    }
+    const payload = JSON.stringify(tmpObj, undefined, 2);
+
+    return this.hs.postRequest(AppConstants.API_ENDPOINTS.polly.delete, payload)
+    .subscribe(data => {
+
+      if (data && !data['errors']) {
+
+          this.snackBar.open('Polly has been deleted', 'Success', {
+            duration: 2500,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['success-snackbar']
+          });
+
+        return data;
+      } else {
+
+        if (data['errors']) {
+
+          this.snackBar.open('Polly was NOT deleted', 'Error', {
+            duration: 2500,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['danger-snackbar']
+          });
+
+          this.router.navigate(['jinkies/polly/all']);
+          console.error(data['errors']);
+        }
+
+        return data;
+      }
+
+    });
   }
 
   getVoices = function() {

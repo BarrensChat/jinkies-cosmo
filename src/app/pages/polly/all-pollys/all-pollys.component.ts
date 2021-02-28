@@ -35,7 +35,7 @@ export class AllPollysComponent implements OnInit {
       .subscribe(data => {
 
         if (data && !data['error']) {
-          this.pollys = data.data;
+          this.pollys = data;
 
 
         } else {
@@ -47,7 +47,7 @@ export class AllPollysComponent implements OnInit {
       });
   }
 
-  delete(): void {
+  delete(fileID: number, fileName: string) {
 
     const dialogRef = this.md.open(ConfirmModalComponent, {
       data: {
@@ -60,8 +60,14 @@ export class AllPollysComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result) {
-        this.ps.deletePolly().then(data => {
 
+        //TODO: this isnt being treated as an observable
+        const jaja = this.ps.deletePolly(fileID, fileName);
+
+        this.pollys = this.pollys.filter(polly =>{
+          if (polly.id !== fileID) {
+            return polly;
+          }
         });
       }
     });

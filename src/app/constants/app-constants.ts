@@ -14,7 +14,7 @@ export class AppConstants {
       get_voices: 'polly/voices',
       create: 'polly/create-polly',
       get_all: 'polly/all',
-      delete: 'polly/delete'
+      delete: 'polly/delete-polly'
     }
   }
 

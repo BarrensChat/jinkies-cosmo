@@ -40,6 +40,14 @@
                 {{element.upload.volume}}
               </div>
             </div>
+            <div class="row">
+              <div class="col-1 text-right">
+                <strong>Filename:</strong>
+              </div>
+              <div class="col-11">
+                {{element.upload.filename}}
+              </div>
+            </div>
             <div class="row polly-copy">
               <div class="col-1 text-right">
                 <strong>Speech:</strong>
@@ -67,7 +75,7 @@
               </div>
               <div class="col-4 text-right">
                 <button type="button" class="delete-slide" mat-raised-button color='warn' matTooltip="Permanently delete the polly."
-                    matTooltipPosition="below" (click)="delete()">
+                    matTooltipPosition="below" (click)="delete(element.id, element.upload.filename)">
                     DELETE
                 </button>
               </div>
