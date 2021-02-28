@@ -25,25 +25,29 @@ export class AllPollysComponent implements OnInit {
   totalPages: number;
   expandedElement: TableElementColumns | null;
   faPlay = faPlay;
+  showTable = false;
 
   constructor(private ps: PollyService, private md: MatDialog, private fileService: FileService) { }
 
   ngOnInit(): void {
     this.tableHeaders = this.ps.getTableHeaders();
+    console.log('table headers ->', this.tableHeaders);
 
     this.pollys = this.ps.getPollysRequest()
       .subscribe(data => {
 
         if (data && !data['error']) {
-          this.pollys = data;
 
+          //TODO: to handle paging this data structure will be different and will need to be changed
+          this.pollys = data;
 
         } else {
           this.pollys = [];
           this.totalPages = 0;
         }
+        this.showTable = true;
 
-        console.log('Pollys ->', data);
+        console.log('Pollys ->', this.pollys);
       });
   }
 
