@@ -24,6 +24,7 @@ export class AllPollysComponent implements OnInit {
   tableHeaders: Array<any>;
   expandedElement: TableElementColumns | null;
   faPlay = faPlay;
+  showTable = false;
 
   constructor(private ps: PollyService, private md: MatDialog, private fileService: FileService) { }
 
@@ -35,12 +36,14 @@ export class AllPollysComponent implements OnInit {
       .subscribe(data => {
 
         if (data && !data['error']) {
-          this.pollys = data.data;
+          //TODO: to handle paging this data structure will be different and will need to be changed
+          this.pollys = data;
         } else {
           this.pollys = [];
         }
+        this.showTable = true;
 
-        console.log('Pollys ->', data);
+        console.log('Pollys ->', this.pollys);
       });
   }
 
