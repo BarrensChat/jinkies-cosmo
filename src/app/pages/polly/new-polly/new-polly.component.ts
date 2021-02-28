@@ -34,6 +34,7 @@ export class NewPollyComponent implements OnInit {
     if (this.pollyFormGroup.valid) {
       this.pollyProcessing = true;
 
+      //TODO: this then() isnt a function
       this.pollyService.createPolly()
         .then(() => {
           this.pollyProcessing = false;

@@ -4,7 +4,9 @@
 
     <table mat-table
     [dataSource]="this.pollys" multiTemplateDataRows
+
     class="mat-elevation-z8" *ngIf="this.showTable && this.pollys && this.pollys.length && this.pollys.length > 0;">
+
       <ng-container matColumnDef="{{column}}" *ngFor="let column of tableHeaders">
       <th mat-header-cell *matHeaderCellDef> {{column}} </th>
       <td class="pointer" mat-cell *matCellDef="let element"> {{(column === 'title') ? element.upload.name : ((column === 'created_at') ? (element.created_at | date: 'mediumDate') : element[column])}} </td>
@@ -40,6 +42,14 @@
                 {{element.upload.volume}}
               </div>
             </div>
+            <div class="row">
+              <div class="col-1 text-right">
+                <strong>Filename:</strong>
+              </div>
+              <div class="col-11">
+                {{element.upload.filename}}
+              </div>
+            </div>
             <div class="row polly-copy">
               <div class="col-1 text-right">
                 <strong>Speech:</strong>
@@ -66,10 +76,10 @@
                 </button> -->
               </div>
               <div class="col-4 text-right">
-                <!-- <button type="button" class="delete-slide" mat-raised-button color='warn' matTooltip="Permanently delete the polly."
-                    matTooltipPosition="below" (click)="delete()">
+                <button type="button" class="delete-slide" mat-raised-button color='warn' matTooltip="Permanently delete the polly."
+                    matTooltipPosition="below" (click)="delete(element.id, element.upload.filename)">
                     DELETE
-                </button> -->
+                </button>
               </div>
             </div>
           </div>
@@ -92,3 +102,17 @@
     <p  *ngIf="this.pollys && this.pollys.length === 0">No Pollys found.</p>
   </div>
 </div>
+
+<!--
+<mat-paginator [length]="length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="pageEvent = $event">
+</mat-paginator>
+
+<div *ngIf="pageEvent">
+  <h5>Page Change Event Properties</h5>
+  <div>List length: {{pageEvent.length}}</div>
+  <div>Page size: {{pageEvent.pageSize}}</div>
+  <div>Page index: {{pageEvent.pageIndex}}</div>
+</div> -->
