@@ -4,7 +4,7 @@
 
     <table mat-table
     [dataSource]="this.pollys" multiTemplateDataRows
-    class="mat-elevation-z8" *ngIf="this.pollys.length > 0;">
+    class="mat-elevation-z8" *ngIf="this.pollys && this.pollys.length && this.pollys.length > 0;">
       <ng-container matColumnDef="{{column}}" *ngFor="let column of tableHeaders">
       <th mat-header-cell *matHeaderCellDef> {{column}} </th>
       <td class="pointer" mat-cell *matCellDef="let element"> {{(column === 'title') ? element.upload.name : ((column === 'created_at') ? (element.created_at | date: 'mediumDate') : element[column])}} </td>
@@ -89,6 +89,6 @@
 
 
     <mat-progress-bar class='loading-bar' mode="indeterminate"  *ngIf="!this.pollys"></mat-progress-bar>
-    <p  *ngIf="this.pollys.length === 0">No Pollys found.</p>
+    <p  *ngIf="this.pollys && this.pollys.length === 0">No Pollys found.</p>
   </div>
 </div>

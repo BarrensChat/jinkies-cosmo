@@ -29,6 +29,7 @@ export class AllPollysComponent implements OnInit {
 
   ngOnInit(): void {
     this.tableHeaders = this.ps.getTableHeaders();
+    console.log('table headers ->', this.tableHeaders);
 
     this.pollys = this.ps.getPollysRequest()
       .subscribe(data => {
