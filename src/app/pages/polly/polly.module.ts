@@ -27,7 +27,6 @@ import { AllPollysComponent } from './all-pollys/all-pollys.component';
 import { PollyComponent } from './common/polly/polly.component';
 
 
-
 @NgModule({
   declarations: [
     NewPollyComponent,
