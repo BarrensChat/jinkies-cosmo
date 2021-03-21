@@ -4,6 +4,7 @@ import { MatSnackBar} from '@angular/material/snack-bar';
 import { VideoFileValidator, AudioFileValidator, ImageFileValidator } from '@classes/validators';
 import { HttpRequestService } from '@services/http-request.service';
 import { AppConstants } from '@constants/app-constants';
+import { Pagination } from '@classes/pagination';
 
 export interface TableElementColumns {
   created_at: string;
@@ -158,9 +159,8 @@ export class ArticleService {
 
   };
 
-  //TODO: change the endpiont for articles to the correct one in the constants file
-  getArticlesRequest() {
-    return this.hs.getRequest(AppConstants.API_ENDPOINTS.articles.get_all);
+  getArticlesRequest(pagination: Pagination) {
+    return this.hs.getRequest(AppConstants.API_ENDPOINTS.articles.get_all + pagination.getQueryParams());
   }
 
   getFreshSlideFormGroup(order: number) {

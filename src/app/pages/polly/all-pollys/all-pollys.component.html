@@ -1,4 +1,8 @@
 
+<mat-card class="mb-3 mt-2  text-center">
+  <h2>All Pollys</h2>
+</mat-card>
+
 <div class="row">
   <div class="col-12">
 
@@ -103,16 +107,15 @@
   </div>
 </div>
 
-<!--
-<mat-paginator [length]="length"
-               [pageSize]="pageSize"
-               [pageSizeOptions]="pageSizeOptions"
-               (page)="pageEvent = $event">
+
+<mat-paginator *ngIf="this.showTable && this.pollys && this.pollys.length && this.pollys.length > 0;"
+    (page)="this.fetchPolliesPaginated($event)"
+    [length]="this.pagination.total"
+    [pageSize]="this.pagination.per_page"
+    [showFirstLastButtons]="true"
+    [pageSizeOptions]="[10, 25, 100]"
+    [pageIndex]="this.pagination.current_page - 1">
 </mat-paginator>
 
-<div *ngIf="pageEvent">
-  <h5>Page Change Event Properties</h5>
-  <div>List length: {{pageEvent.length}}</div>
-  <div>Page size: {{pageEvent.pageSize}}</div>
-  <div>Page index: {{pageEvent.pageIndex}}</div>
-</div> -->
+
+

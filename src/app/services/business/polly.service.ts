@@ -7,6 +7,7 @@ import { FileService } from '@services/file.service';
 import { Observable, of } from 'rxjs';
 import { AppConstants } from '@constants/app-constants';
 import { Router } from '@angular/router';
+import { Pagination } from '@classes/pagination';
 
 export interface TableElementColumns {
   id: number;
@@ -189,8 +190,8 @@ export class PollyService {
     return this.voices;
   }
 
-  getPollysRequest = function(){
-    return this.hs.getRequest(AppConstants.API_ENDPOINTS.polly.get_all);
+  getPollysRequest = function(pagination: Pagination){
+    return this.hs.getRequest(AppConstants.API_ENDPOINTS.polly.get_all + pagination.getQueryParams());
   }
 
   playPolly = function(url: string): void {
