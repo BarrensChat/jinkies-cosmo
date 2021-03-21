@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { ArticlesRoutingModule } from './articles-routing.module';
 
@@ -55,6 +56,7 @@ import { AllArticlesComponent } from './all-articles/all-articles.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
+    MatPaginatorModule,
 
     ArticlesRoutingModule
   ]

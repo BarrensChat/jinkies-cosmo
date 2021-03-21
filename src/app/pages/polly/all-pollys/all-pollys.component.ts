@@ -22,7 +22,6 @@ import { Pagination } from '@classes/pagination';
 export class AllPollysComponent implements OnInit {
 
   pollys: Array<any>;
-  allPollyData: Object;
   tableHeaders: Array<any>;
   expandedElement: TableElementColumns | null;
   faPlay = faPlay;
@@ -55,10 +54,8 @@ export class AllPollysComponent implements OnInit {
 
           //TODO: to handle paging this data structure will be different and will need to be changed
           this.pollys = data.data;
-          this.allPollyData = data;
 
           this.pagination = new Pagination(data);
-          console.log('page data ->>', this.pagination, data);
           this.showTable = true;
 
         } else {
@@ -109,7 +106,7 @@ export class AllPollysComponent implements OnInit {
 			//window.open(url);
       //window.location.href = response.url;
       console.log('response from file ->', response);
-			fileSaver.saveAs(blob, 'employees.json');
+			// fileSaver.saveAs(blob, 'employees.json');
 		}), error => console.log('Error downloading the file'),
                  () => console.info('File downloaded successfully');
   }

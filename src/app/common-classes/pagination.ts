@@ -25,26 +25,17 @@ export class Pagination {
     this.links = requestResponse.links || [];
   }
 
-  // public function handlePageEvent(): void;
+  public getQueryParams = function (): string {
+    let params = new URLSearchParams();
+
+    for (const key in this){
+      if(!(this[key] instanceof Function)) {
+        params.set(key, this[key]);
+      }
+    }
+
+    return '?' + params;
+  }
 }
 
 
-// <!-- {
-//   "current_page": 4,
-//   "data": [
-//   "first_page_url": "http://jinkies-cosmo-backend.test/api/polly/all?page=1",
-//   "from": 4,
-//   "last_page": 18,
-//   "last_page_url": "http://jinkies-cosmo-backend.test/api/polly/all?page=18",
-//   "links": [
-//       {
-//           "url": "http://jinkies-cosmo-backend.test/api/polly/all?page=3",
-//           "label": "&laquo; Previous",
-//           "active": false
-//       },
-//   "next_page_url": "http://jinkies-cosmo-backend.test/api/polly/all?page=5",
-//   "path": "http://jinkies-cosmo-backend.test/api/polly/all",
-//   "per_page": "1",
-//   "prev_page_url": "http://jinkies-cosmo-backend.test/api/polly/all?page=3",
-//   "to": 4,
-//   "total": 18 -->

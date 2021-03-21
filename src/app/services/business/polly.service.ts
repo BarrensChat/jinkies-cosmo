@@ -191,12 +191,7 @@ export class PollyService {
   }
 
   getPollysRequest = function(pagination: Pagination){
-    let params = new URLSearchParams();
-    for (let key in pagination){
-        params.set(key, pagination[key])
-    }
-
-    return this.hs.getRequest(AppConstants.API_ENDPOINTS.polly.get_all + '?' + params);
+    return this.hs.getRequest(AppConstants.API_ENDPOINTS.polly.get_all + pagination.getQueryParams());
   }
 
   playPolly = function(url: string): void {
