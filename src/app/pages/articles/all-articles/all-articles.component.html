@@ -20,11 +20,27 @@
               [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
           <!-- TODO make this dynamic and pretty -->
-          <div class="table-element-diagram">
+          <div class="table-element-diagram m-3">
             <div class="table-element-position">Created At: {{element.created_at | date: 'medium'}} </div>
             <div class="table-element-symbol">User: {{element.user_id}} </div>
             <div class="table-element-name">Url: {{element.url}} </div>
             <div class="table-element-weight">Category Name: {{element.category.name}} </div>
+
+            <div class="row mb-2" *ngFor="let slide of element.slides">
+              <div class="col-2">
+                <strong>Slide:</strong> {{slide.order}}
+              </div>
+              <div class="col-10">
+                Text: {{slide.media_text}}
+              </div>
+              <div class="col-12">
+                Media ID: {{slide.media_upload_id}}
+              </div>
+              <div class="col-12">
+                Audio ID: {{slide.audio_upload_id}}
+                <mat-divider class="mt-2"></mat-divider>
+              </div>
+            </div>
           </div>
 
 
