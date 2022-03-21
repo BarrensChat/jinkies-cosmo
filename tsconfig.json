@@ -3,13 +3,13 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@components/*": ["app/common-components/*"],
       "@classes/*": ["app/common-classes/*"],
       "@services/*": ["app/services/*"],
       "@assets/*": ["assets/*"],
       "@sass/*": ["sass/*"],
       "@constants/*": ["app/constants/*"],
-      "@interceptors/*": ["app/interceptors/*"]
+      "@interceptors/*": ["app/interceptors/*"],
+      "@modules/*":["app/modules"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
